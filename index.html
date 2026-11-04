@@ -24,13 +24,13 @@
             theme: {
                 extend: {
                     colors: {
-                        burgundyBase: '#1a0105',
-                        burgundyDeep: '#2b020a',
-                        burgundyCard: '#3d0612',
-                        burgundyHover: '#520818',
-                        antiqueGold: '#d4af37',
-                        brightGold: '#f7e28b',
-                        goldBorder: 'rgba(212, 175, 55, 0.45)'
+                        burgundyBase: '#6b000d',
+                        burgundyDeep: '#800010',
+                        burgundyCard: '#9e081b',
+                        burgundyHover: '#bd0d24',
+                        antiqueGold: '#f3cf65',
+                        brightGold: '#fff2b8',
+                        goldBorder: 'rgba(243, 207, 101, 0.55)'
                     },
                     fontFamily: {
                         bengali: ['Noto Serif Bengali', 'Hind Siliguri', 'serif'],
@@ -45,35 +45,44 @@
     </script>
 
     <style>
+        /* Pure Royal Red Rich Velvet Background */
         body {
             font-family: 'Noto Serif Bengali', 'Playfair Display', serif;
-            background-color: #1a0105;
-            color: #fdf6e2;
+            background-color: #8f0616;
+            background-image: 
+                radial-gradient(circle at 50% 15%, #c40a20 0%, transparent 65%),
+                radial-gradient(circle at 15% 75%, #a3081a 0%, transparent 55%),
+                radial-gradient(circle at 85% 85%, #7a0310 0%, transparent 55%),
+                linear-gradient(180deg, #780410 0%, #9e081b 50%, #66020c 100%);
+            background-attachment: fixed;
+            color: #fff9ea;
             overflow-x: hidden;
         }
 
         .gold-shimmer-text {
-            background: linear-gradient(135deg, #fff7d6 0%, #f7e28b 35%, #d4af37 65%, #997316 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #fff2b8 30%, #f3cf65 70%, #d49e1e 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
         }
 
         .luxury-card {
-            background: linear-gradient(155deg, rgba(61, 6, 18, 0.95) 0%, rgba(26, 1, 5, 0.98) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(212, 175, 55, 0.08);
+            background: linear-gradient(155deg, rgba(143, 8, 26, 0.92) 0%, rgba(102, 3, 14, 0.96) 100%);
+            border: 1px solid rgba(243, 207, 101, 0.45);
+            box-shadow: 0 15px 40px -5px rgba(50, 0, 6, 0.8), inset 0 0 25px rgba(255, 235, 160, 0.12);
+            backdrop-filter: blur(8px);
         }
 
         /* 3D Wax Seal Styles */
         .wax-seal {
-            background: radial-gradient(circle at 35% 35%, #b21e35, #700617 75%, #42020b 100%);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.85), inset 0 3px 6px rgba(255,255,255,0.4), inset 0 -4px 8px rgba(0,0,0,0.8);
-            border: 3px double rgba(247, 226, 139, 0.5);
+            background: radial-gradient(circle at 35% 35%, #e61d36, #a8071a 75%, #63020c 100%);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7), inset 0 3px 6px rgba(255,255,255,0.45), inset 0 -4px 8px rgba(0,0,0,0.7);
+            border: 3px double rgba(255, 242, 184, 0.7);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .wax-seal:hover {
             transform: scale(1.08) rotate(3deg);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5), inset 0 3px 8px rgba(255,255,255,0.6);
+            box-shadow: 0 15px 35px rgba(243, 207, 101, 0.6), inset 0 3px 8px rgba(255,255,255,0.7);
         }
 
         /* Ken Burns Cinematic Pan & Zoom for Photo Reel */
@@ -94,9 +103,9 @@
             transform: translateY(-50%);
             width: 24px;
             height: 24px;
-            background: #1a0105;
+            background: #8f0616;
             border-radius: 50%;
-            border-right: 1px solid rgba(212, 175, 55, 0.5);
+            border-right: 1px solid rgba(243, 207, 101, 0.55);
         }
         .ticket-cut-r {
             position: absolute;
@@ -105,16 +114,16 @@
             transform: translateY(-50%);
             width: 24px;
             height: 24px;
-            background: #1a0105;
+            background: #8f0616;
             border-radius: 50%;
-            border-left: 1px solid rgba(212, 175, 55, 0.5);
+            border-left: 1px solid rgba(243, 207, 101, 0.55);
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 7px; }
-        ::-webkit-scrollbar-track { background: #1a0105; }
-        ::-webkit-scrollbar-thumb { background: #520818; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.3); }
-        ::-webkit-scrollbar-thumb:hover { background: #d4af37; }
+        ::-webkit-scrollbar-track { background: #66020c; }
+        ::-webkit-scrollbar-thumb { background: #a3081a; border-radius: 4px; border: 1px solid rgba(243, 207, 101, 0.4); }
+        ::-webkit-scrollbar-thumb:hover { background: #f3cf65; }
     </style>
 </head>
 <body class="min-h-screen relative selection:bg-antiqueGold selection:text-burgundyBase">
@@ -126,7 +135,7 @@
          3D WAX SEAL UNBOXING MODAL
          ============================================== -->
     <div id="unboxingModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl transition-all duration-700">
-        <div class="relative w-full max-w-lg luxury-card rounded-3xl p-8 sm:p-12 text-center border-2 border-antiqueGold shadow-[0_0_60px_rgba(212,175,55,0.4)]">
+        <div class="relative w-full max-w-lg luxury-card rounded-3xl p-8 sm:p-12 text-center border-2 border-antiqueGold shadow-[0_0_60px_rgba(243,207,101,0.4)]">
             
             <div class="inline-block text-xs uppercase tracking-[0.35em] text-antiqueGold font-bold border-b border-antiqueGold/40 pb-1 mb-4">
                 ॥ শ্রী শ্রী প্রজাপতয়ে নমঃ ॥
@@ -135,8 +144,8 @@
             <h2 class="text-2xl sm:text-3xl font-bold gold-shimmer-text mb-2 font-bengali">
                 শুভ পরিণয় নিমন্ত্রণপত্র
             </h2>
-            <p class="text-xs sm:text-sm text-brightGold/80 italic mb-8 font-serif">
-                "সুমন্ত ও পিয়ালীর যুগ্ম জীবনের শুভ সূচনায় আপনার সপরিবার উপস্থিতি একান্ত কাম্য"
+            <p class="text-xs sm:text-sm text-brightGold/90 italic mb-8 font-serif">
+                "সুমন্ত ও পিয়ালীর যুগ্ম জীবনের শুভ সূচনায় আপনার সপরিবার উপস্থিতি একান্ত কাম্য"
             </p>
 
             <!-- Wax Seal Button -->
@@ -148,14 +157,14 @@
                     <span class="text-[12px] font-bold text-brightGold font-bengali tracking-wider">
                         শুভ বিবাহ
                     </span>
-                    <span class="text-[9px] uppercase tracking-widest text-brightGold/80 font-cinzel mt-0.5">
+                    <span class="text-[9px] uppercase tracking-widest text-brightGold/90 font-cinzel mt-0.5">
                         OPEN SEAL
                     </span>
                 </button>
             </div>
 
-            <p class="text-xs text-antiqueGold/80 animate-pulse font-mono tracking-wider">
-                ▲ স্বর্ণমুদ্রায় স্পর্শ করে নিমন্ত্রণপত্র উন্মোচন করুন ▲
+            <p class="text-xs text-brightGold animate-pulse font-mono tracking-wider">
+                ▲ স্বর্ণমুদ্রায় স্পর্শ করে নিমন্ত্রণপত্র উন্মোচন করুন ▲
             </p>
         </div>
     </div>
@@ -163,12 +172,12 @@
     <!-- ==============================================
          STICKY TOP BAR
          ============================================== -->
-    <header class="sticky top-0 z-40 bg-burgundyDeep/90 backdrop-blur-md border-b border-antiqueGold/35 px-4 sm:px-8 py-3.5 transition-all">
+    <header class="sticky top-0 z-40 bg-[#7a0410]/95 backdrop-blur-md border-b border-antiqueGold/40 px-4 sm:px-8 py-3.5 transition-all shadow-lg">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
             
             <!-- Monogram -->
             <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-full border border-antiqueGold/70 bg-burgundyCard flex items-center justify-center text-brightGold font-cinzel font-black text-sm shadow-[0_0_15px_rgba(212,175,55,0.25)] group-hover:scale-105 transition-transform">
+                <div class="w-10 h-10 rounded-full border border-antiqueGold/80 bg-burgundyCard flex items-center justify-center text-brightGold font-cinzel font-black text-sm shadow-[0_0_15px_rgba(243,207,101,0.35)] group-hover:scale-105 transition-transform">
                     S&P
                 </div>
                 <div>
@@ -189,19 +198,19 @@
                     <span class="hidden sm:inline">সানাই</span>
                 </button>
 
-                <!-- Shankhadhwani (Conch) Sound Button -->
+                <!-- Shankhadhwani Sound Button -->
                 <button onclick="playShankhaSound()" class="px-3 py-1.5 rounded-full bg-burgundyCard hover:bg-burgundyHover border border-antiqueGold/40 text-xs font-semibold text-brightGold flex items-center gap-1.5 transition active:scale-95" title="Play Conch Shell">
                     <i class="fa-solid fa-bullhorn text-antiqueGold text-xs"></i>
                     <span class="hidden sm:inline">শঙ্খধ্বনি</span>
                 </button>
 
                 <!-- Bilingual Switcher -->
-                <button onclick="toggleLanguage()" class="px-3 py-1.5 rounded-full bg-antiqueGold text-burgundyBase font-bold text-xs hover:brightness-110 transition active:scale-95 shadow">
+                <button onclick="toggleLanguage()" class="px-3 py-1.5 rounded-full bg-antiqueGold text-[#66020c] font-bold text-xs hover:brightness-110 transition active:scale-95 shadow">
                     <span id="langToggleLabel">EN</span>
                 </button>
 
                 <!-- Quick RSVP Nav Button -->
-                <a href="#rsvpSection" class="px-4 py-1.5 rounded-full bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-burgundyBase text-xs font-bold shadow-md hover:brightness-110 active:scale-95 transition flex items-center gap-1">
+                <a href="#rsvpSection" class="px-4 py-1.5 rounded-full bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-[#66020c] text-xs font-bold shadow-md hover:brightness-110 active:scale-95 transition flex items-center gap-1">
                     <i class="fa-solid fa-id-card"></i>
                     <span id="navRsvpText">RSVP পাস</span>
                 </a>
@@ -222,32 +231,31 @@
                 ॥ ওঁ প্রজাপতয়ে নমঃ ॥
             </div>
             
-            <p class="text-xs sm:text-sm text-brightGold/80 tracking-widest uppercase font-cinzel mb-4 sm:mb-6">
+            <p class="text-xs sm:text-sm text-brightGold/90 tracking-widest uppercase font-cinzel mb-4 sm:mb-6">
                 We Joyfully Invite You To Celebrate The Wedding Of
             </p>
 
-            <!-- Increased top and bottom margin/padding to shift the couple's name lower with balanced breathing room -->
             <div class="pt-6 pb-4 sm:pt-10 sm:pb-6 my-2">
                 <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold font-bengali gold-shimmer-text tracking-wide leading-tight">
                     সুমন্ত <span class="font-cursive text-brightGold text-3xl sm:text-5xl mx-1 sm:mx-2">&</span> পিয়ালী
                 </h1>
             </div>
 
-            <p class="text-sm sm:text-base text-brightGold/90 max-w-2xl mx-auto italic font-serif mt-4 mb-10 leading-relaxed">
+            <p class="text-sm sm:text-base text-brightGold max-w-2xl mx-auto italic font-serif mt-4 mb-10 leading-relaxed drop-shadow-sm">
                 "আকাশ ও মাটির মেলবন্ধনে রচিত হলো আমাদের নতুন পথচলা। জীবনের এই শুভ লগ্নে আপনার সস্নেহ আশীর্বাদ ও উপস্থিতি আমাদের পরম সৌভাগ্য।"
             </p>
 
             <!-- Parent dedications -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto py-5 border-y border-antiqueGold/25 text-xs sm:text-sm">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto py-5 border-y border-antiqueGold/35 text-xs sm:text-sm">
                 <div>
                     <span class="text-antiqueGold uppercase font-semibold text-[11px] tracking-wider block mb-1">বর (Groom)</span>
                     <p class="font-bold text-brightGold text-base">শ্রী সুমন্ত মুখার্জী</p>
-                    <p class="text-brightGold/70">সুযোগ্য পুত্র: শ্রী স্বপন মুখার্জী ও শ্রীমতি গীতা মুখার্জী</p>
+                    <p class="text-brightGold/80">সুযোগ্য পুত্র: শ্রী স্বপন মুখার্জী ও শ্রীমতি গীতা মুখার্জী</p>
                 </div>
                 <div>
                     <span class="text-antiqueGold uppercase font-semibold text-[11px] tracking-wider block mb-1">কনে (Bride)</span>
                     <p class="font-bold text-brightGold text-base">শ্রীমতি পিয়ালী ব্যানার্জী</p>
-                    <p class="text-brightGold/70">সুযোগ্যা কন্যা: শ্রী অশোক ব্যানার্জী ও শ্রীমতি রীতা ব্যানার্জী</p>
+                    <p class="text-brightGold/80">সুযোগ্যা কন্যা: শ্রী অশোক ব্যানার্জী ও শ্রীমতি রীতা ব্যানার্জী</p>
                 </div>
             </div>
 
@@ -257,21 +265,21 @@
                     ॥ শুভ বিবাহ লগ্ন গণনা (Lagna Countdown) ॥
                 </span>
                 <div class="flex justify-center items-center gap-3 sm:gap-6 text-center">
-                    <div class="w-16 sm:w-20 p-2.5 rounded-2xl bg-black/50 border border-antiqueGold/35">
+                    <div class="w-16 sm:w-20 p-2.5 rounded-2xl bg-black/45 border border-antiqueGold/40 shadow-inner">
                         <span id="cdDays" class="block text-2xl sm:text-3xl font-bold text-brightGold font-mono">00</span>
-                        <span class="text-[10px] uppercase text-antiqueGold/80">দিন</span>
+                        <span class="text-[10px] uppercase text-antiqueGold/90">দিন</span>
                     </div>
-                    <div class="w-16 sm:w-20 p-2.5 rounded-2xl bg-black/50 border border-antiqueGold/35">
+                    <div class="w-16 sm:w-20 p-2.5 rounded-2xl bg-black/45 border border-antiqueGold/40 shadow-inner">
                         <span id="cdHours" class="block text-2xl sm:text-3xl font-bold text-brightGold font-mono">00</span>
-                        <span class="text-[10px] uppercase text-antiqueGold/80">ঘণ্টা</span>
+                        <span class="text-[10px] uppercase text-antiqueGold/90">ঘণ্টা</span>
                     </div>
-                    <div class="w-16 sm:w-20 p-2.5 rounded-2xl bg-black/50 border border-antiqueGold/35">
+                    <div class="w-16 sm:w-20 p-2.5 rounded-2xl bg-black/45 border border-antiqueGold/40 shadow-inner">
                         <span id="cdMins" class="block text-2xl sm:text-3xl font-bold text-brightGold font-mono">00</span>
-                        <span class="text-[10px] uppercase text-antiqueGold/80">মিনিট</span>
+                        <span class="text-[10px] uppercase text-antiqueGold/90">মিনিট</span>
                     </div>
-                    <div class="w-16 sm:w-20 p-2.5 rounded-2xl bg-black/50 border border-antiqueGold/35">
+                    <div class="w-16 sm:w-20 p-2.5 rounded-2xl bg-black/45 border border-antiqueGold/40 shadow-inner">
                         <span id="cdSecs" class="block text-2xl sm:text-3xl font-bold text-brightGold font-mono">00</span>
-                        <span class="text-[10px] uppercase text-antiqueGold/80">সেকেন্ড</span>
+                        <span class="text-[10px] uppercase text-antiqueGold/90">সেকেন্ড</span>
                     </div>
                 </div>
             </div>
@@ -297,18 +305,18 @@
                 <div id="videoContainer" class="w-full h-full">
                     <video id="nativePlayer" controls class="w-full h-full object-cover">
                         <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-bride-with-henna-and-bracelets-43093-large.mp4" type="video/mp4">
-                        আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
+                        আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
                     </video>
                     <iframe id="iframePlayer" class="w-full h-full hidden" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                 </div>
             </div>
-            <p class="text-xs text-brightGold/60 italic mt-3 font-serif">
-                "ভালোবাসার এক অপূর্ব উপাখ্যান — সুমন্ত ও পিয়ালী"
+            <p class="text-xs text-brightGold/70 italic mt-3 font-serif">
+                "ভালোবাসার এক অপূর্ব উপাখ্যান — সুমন্ত ও পিয়ালী"
             </p>
         </section>
 
         <!-- ==============================================
-             NEW: CINEMATIC VIDEO-STYLE PHOTO REEL SHOWCASE
+             CINEMATIC VIDEO-STYLE PHOTO REEL SHOWCASE
              ============================================== -->
         <section class="mb-14 luxury-card rounded-3xl p-6 sm:p-10 border border-antiqueGold/40 text-center">
             <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-3 border-b border-antiqueGold/25 text-left">
@@ -317,7 +325,7 @@
                     <h3 class="text-xl sm:text-2xl font-bold gold-shimmer-text">চলচ্চিত্র রূপকথা ও ফটো রিল (Love Story Reel)</h3>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="openUploadModal()" class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-burgundyBase font-bold text-xs shadow hover:brightness-110 active:scale-95 transition flex items-center gap-1.5">
+                    <button onclick="openUploadModal()" class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-[#66020c] font-bold text-xs shadow hover:brightness-110 active:scale-95 transition flex items-center gap-1.5">
                         <i class="fa-solid fa-plus-circle"></i>
                         <span>নতুন ছবি দিন</span>
                     </button>
@@ -325,19 +333,16 @@
             </div>
 
             <!-- Video-Style Screen Frame Container -->
-            <div class="relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[580px] rounded-2xl overflow-hidden border-2 border-antiqueGold/60 shadow-[0_0_40px_rgba(212,175,55,0.25)] bg-black select-none group">
+            <div class="relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[580px] rounded-2xl overflow-hidden border-2 border-antiqueGold/60 shadow-[0_0_40px_rgba(243,207,101,0.25)] bg-black select-none group">
                 
                 <!-- Main Image with Auto-Pan Ken Burns animation -->
                 <img id="reelMainImg" src="" alt="Cinematic Photo Reel" class="w-full h-full object-cover ken-burns transition-opacity duration-700 ease-in-out cursor-pointer" onclick="toggleReelPlay()">
 
-                <!-- Top Story Bar (Segmented Progress Bars like Instagram/Film Reel) -->
-                <div class="absolute top-3 left-4 right-4 z-20 flex items-center gap-1.5" id="reelProgressBars">
-                    <!-- Injected dynamically -->
-                </div>
+                <!-- Top Story Bar -->
+                <div class="absolute top-3 left-4 right-4 z-20 flex items-center gap-1.5" id="reelProgressBars"></div>
 
                 <!-- Overlay Vignette & Captions -->
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/30 pointer-events-none flex flex-col justify-between p-5 sm:p-8">
-                    <!-- Top Category Label -->
                     <div class="flex items-center justify-between mt-4">
                         <span id="reelCategoryBadge" class="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-black/60 border border-antiqueGold/40 text-brightGold backdrop-blur-sm">
                             শুভ বিবাহ
@@ -347,14 +352,13 @@
                         </span>
                     </div>
 
-                    <!-- Bottom Titles & Date -->
                     <div class="text-left max-w-2xl">
                         <h4 id="reelTitle" class="text-lg sm:text-2xl font-bold text-brightGold font-serif drop-shadow-md"></h4>
                         <p id="reelDate" class="text-xs text-antiqueGold font-mono mt-1"></p>
                     </div>
                 </div>
 
-                <!-- Left / Right Video Skip Arrows -->
+                <!-- Skip Arrows -->
                 <button onclick="prevReelSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 border border-antiqueGold/50 text-brightGold hover:scale-110 active:scale-95 transition flex items-center justify-center text-sm z-30 shadow-lg">
                     ❮
                 </button>
@@ -362,18 +366,16 @@
                     ❯
                 </button>
 
-                <!-- Floating Play/Pause Center Indicator (When Paused) -->
+                <!-- Floating Play/Pause Center Indicator -->
                 <div id="reelPlayIndicator" class="hidden absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center z-20 pointer-events-none">
-                    <div class="w-16 h-16 rounded-full bg-antiqueGold/90 text-burgundyBase flex items-center justify-center text-2xl shadow-xl">
+                    <div class="w-16 h-16 rounded-full bg-antiqueGold text-[#66020c] flex items-center justify-center text-2xl shadow-xl">
                         <i class="fa-solid fa-play ml-1"></i>
                     </div>
                 </div>
             </div>
 
-            <!-- Video Reel Controls Bar & Thumbnails Strip -->
+            <!-- Controls Bar & Thumbnails Strip -->
             <div class="mt-4 flex flex-wrap items-center justify-between gap-3 px-2">
-                
-                <!-- Play / Pause Button & Speed -->
                 <div class="flex items-center gap-3">
                     <button onclick="toggleReelPlay()" id="reelPlayBtn" class="px-4 py-1.5 rounded-full bg-burgundyCard hover:bg-burgundyHover border border-antiqueGold/40 text-xs font-semibold text-brightGold flex items-center gap-2 transition active:scale-95">
                         <i id="reelPlayIcon" class="fa-solid fa-pause text-antiqueGold"></i>
@@ -386,10 +388,7 @@
                     </button>
                 </div>
 
-                <!-- Mini Filmstrip Thumbnails -->
-                <div id="reelFilmstrip" class="flex items-center gap-2 overflow-x-auto py-1 max-w-full">
-                    <!-- Injected dynamically -->
-                </div>
+                <div id="reelFilmstrip" class="flex items-center gap-2 overflow-x-auto py-1 max-w-full"></div>
             </div>
         </section>
 
@@ -400,25 +399,24 @@
             <div class="text-center mb-8">
                 <span class="text-xs uppercase tracking-[0.3em] text-antiqueGold font-semibold">Wedding Schedule</span>
                 <h3 class="text-2xl sm:text-4xl font-bold gold-shimmer-text mt-1">মাঙ্গলিক অনুষ্ঠানের নির্ঘণ্ট</h3>
-                <p class="text-xs text-brightGold/70 italic mt-1 font-serif">প্রতিটি অনুষ্ঠানে আপনার সানন্দ উপস্থিতি বিনীতভাবে প্রার্থনা করি</p>
+                <p class="text-xs text-brightGold/80 italic mt-1 font-serif">প্রতিটি অনুষ্ঠানে আপনার সানন্দ উপস্থিতি বিনীতভাবে প্রার্থনা করি</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
                 <!-- 1. Gaye Holud -->
                 <div class="luxury-card rounded-2xl p-6 border border-antiqueGold/35 hover:border-antiqueGold transition duration-300 flex flex-col justify-between">
                     <div>
-                        <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-300 text-xl mb-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-500/25 border border-amber-400/60 flex items-center justify-center text-amber-200 text-xl mb-4">
                             <i class="fa-solid fa-sun"></i>
                         </div>
                         <span class="text-[10px] uppercase font-bold tracking-widest text-antiqueGold">প্রথম পর্ব</span>
-                        <h4 class="text-xl font-bold text-brightGold mt-1">গায়ে হলুদ ও আশীর্বাদ</h4>
+                        <h4 class="text-xl font-bold text-brightGold mt-1">গায়ে হলুদ ও আশীর্বাদ</h4>
                         <p class="text-xs text-brightGold/80 mt-2">
                             সোনালী হলুদের স্নিগ্ধ স্পর্শে নবজীবনের মঙ্গলকামনা।
                         </p>
-                        <div class="mt-4 pt-4 border-t border-antiqueGold/20 text-xs text-brightGold/90 space-y-1 font-mono">
+                        <div class="mt-4 pt-4 border-t border-antiqueGold/25 text-xs text-brightGold/90 space-y-1 font-mono">
                             <p><i class="fa-regular fa-calendar-check text-antiqueGold mr-2"></i>২৩শে নভেম্বর ২০২৬ (সোমবার)</p>
-                            <p><i class="fa-regular fa-clock text-antiqueGold mr-2"></i>সকাল ৯:০০ ঘটিকায়</p>
+                            <p><i class="fa-regular fa-clock text-antiqueGold mr-2"></i>সকাল ৯:০০ ঘটিকায়</p>
                             <p><i class="fa-solid fa-location-dot text-antiqueGold mr-2"></i>ব্যানার্জী ভবন, সল্টলেক, কলকাতা</p>
                         </div>
                     </div>
@@ -429,26 +427,26 @@
                 </div>
 
                 <!-- 2. Subho Bibaho (Saat Paak) -->
-                <div class="luxury-card rounded-2xl p-6 border-2 border-antiqueGold shadow-[0_0_30px_rgba(212,175,55,0.25)] flex flex-col justify-between relative">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-antiqueGold text-burgundyBase font-bold text-[10px] uppercase tracking-wider">
+                <div class="luxury-card rounded-2xl p-6 border-2 border-antiqueGold shadow-[0_0_30px_rgba(243,207,101,0.3)] flex flex-col justify-between relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-antiqueGold text-[#66020c] font-bold text-[10px] uppercase tracking-wider">
                         মূল আকর্ষণ • শুভ লগ্ন
                     </div>
                     <div>
-                        <div class="w-12 h-12 rounded-full bg-rose-600/20 border border-rose-400/50 flex items-center justify-center text-rose-300 text-xl mb-4 mt-2">
+                        <div class="w-12 h-12 rounded-full bg-rose-500/25 border border-rose-400/60 flex items-center justify-center text-rose-200 text-xl mb-4 mt-2">
                             <i class="fa-solid fa-heart"></i>
                         </div>
-                        <span class="text-[10px] uppercase font-bold tracking-widest text-antiqueGold">দ্বিতীয় পর্ব</span>
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-antiqueGold">দ্বিতীয় পর্ব</span>
                         <h4 class="text-xl font-bold text-brightGold mt-1">শুভ বিবাহ ও সাতপাক</h4>
                         <p class="text-xs text-brightGold/80 mt-2">
                             শুভদৃষ্টি, মালাবদল, সিঁদুরদান ও অগ্নিসাক্ষী রেখে সপ্তপদী গ্রহণ।
                         </p>
-                        <div class="mt-4 pt-4 border-t border-antiqueGold/20 text-xs text-brightGold/90 space-y-1 font-mono">
+                        <div class="mt-4 pt-4 border-t border-antiqueGold/25 text-xs text-brightGold/90 space-y-1 font-mono">
                             <p><i class="fa-regular fa-calendar-check text-antiqueGold mr-2"></i>২৪শে নভেম্বর ২০২৬ (মঙ্গলবার)</p>
-                            <p><i class="fa-regular fa-clock text-antiqueGold mr-2"></i>সন্ধ্যা ৭:৩০ ঘটিকায়</p>
-                            <p><i class="fa-solid fa-location-dot text-antiqueGold mr-2"></i>রয়েল প্যালেস ব্যাঙ্কুয়েট, ই.এম বাইপাস</p>
+                            <p><i class="fa-regular fa-clock text-antiqueGold mr-2"></i>সন্ধ্যা ৭:৩০ ঘটিকায়</p>
+                            <p><i class="fa-solid fa-location-dot text-antiqueGold mr-2"></i>রয়েল প্যালেস ব্যাঙ্কুয়েট, ই.এম বাইপাস</p>
                         </div>
                     </div>
-                    <a href="https://maps.google.com/?q=EM+Bypass+Kolkata" target="_blank" class="mt-5 w-full py-2 rounded-xl bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-burgundyBase font-bold text-xs flex items-center justify-center gap-2 transition hover:brightness-110 shadow">
+                    <a href="https://maps.google.com/?q=EM+Bypass+Kolkata" target="_blank" class="mt-5 w-full py-2 rounded-xl bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-[#66020c] font-bold text-xs flex items-center justify-center gap-2 transition hover:brightness-110 shadow">
                         <i class="fa-solid fa-map-location-dot"></i>
                         <span>ম্যারিজ ভেন্যু রুট ম্যাপ</span>
                     </a>
@@ -457,7 +455,7 @@
                 <!-- 3. Bou Bhaat -->
                 <div class="luxury-card rounded-2xl p-6 border border-antiqueGold/35 hover:border-antiqueGold transition duration-300 flex flex-col justify-between">
                     <div>
-                        <div class="w-12 h-12 rounded-full bg-purple-600/20 border border-purple-400/50 flex items-center justify-center text-purple-300 text-xl mb-4">
+                        <div class="w-12 h-12 rounded-full bg-purple-500/25 border border-purple-400/60 flex items-center justify-center text-purple-200 text-xl mb-4">
                             <i class="fa-solid fa-champagne-glasses"></i>
                         </div>
                         <span class="text-[10px] uppercase font-bold tracking-widest text-antiqueGold">তৃতীয় পর্ব</span>
@@ -465,10 +463,10 @@
                         <p class="text-xs text-brightGold/80 mt-2">
                             ভাত-কাপড়ের পবিত্র সংকল্প ও নবদম্পতির প্রীতিসম্মেলন।
                         </p>
-                        <div class="mt-4 pt-4 border-t border-antiqueGold/20 text-xs text-brightGold/90 space-y-1 font-mono">
+                        <div class="mt-4 pt-4 border-t border-antiqueGold/25 text-xs text-brightGold/90 space-y-1 font-mono">
                             <p><i class="fa-regular fa-calendar-check text-antiqueGold mr-2"></i>২৬শে নভেম্বর ২০২৬ (বৃহস্পতিবার)</p>
-                            <p><i class="fa-regular fa-clock text-antiqueGold mr-2"></i>সন্ধ্যা ৭:০০ ঘটিকায়</p>
-                            <p><i class="fa-solid fa-location-dot text-antiqueGold mr-2"></i>গ্র্যান্ড ওবেরয় কনভেনশন, কলকাতা</p>
+                            <p><i class="fa-regular fa-clock text-antiqueGold mr-2"></i>সন্ধ্যা ৭:০০ ঘটিকায়</p>
+                            <p><i class="fa-solid fa-location-dot text-antiqueGold mr-2"></i>গ্র্যান্ড ওবেরয় কনভেনশন, কলকাতা</p>
                         </div>
                     </div>
                     <a href="https://maps.google.com/?q=The+Oberoi+Grand+Kolkata" target="_blank" class="mt-5 w-full py-2 rounded-xl bg-burgundyCard hover:bg-burgundyHover border border-antiqueGold/40 text-xs font-semibold text-brightGold flex items-center justify-center gap-2 transition">
@@ -476,12 +474,11 @@
                         <span>গুগল ম্যাপে লোকেশন দেখুন</span>
                     </a>
                 </div>
-
             </div>
         </section>
 
         <!-- ==============================================
-             INTERACTIVE GOOGLE MAPS & VENUE LOCATION SECTION
+             INTERACTIVE GOOGLE MAPS SECTION
              ============================================== -->
         <section class="mb-14 luxury-card rounded-3xl p-6 sm:p-10 border border-antiqueGold/40">
             <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-antiqueGold/25">
@@ -498,22 +495,22 @@
 
             <!-- Venue Switcher Tabs -->
             <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-6">
-                <button onclick="switchMapVenue('wedding')" id="mapTab-wedding" class="px-4 py-2 rounded-full bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-burgundyBase font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
-                    <i class="fa-solid fa-heart text-burgundyBase"></i>
-                    <span>শুভ বিবাহ ভেন্যু (রয়েল প্যালেস)</span>
+                <button onclick="switchMapVenue('wedding')" id="mapTab-wedding" class="px-4 py-2 rounded-full bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-[#66020c] font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
+                    <i class="fa-solid fa-heart text-[#66020c]"></i>
+                    <span>শুভ বিবাহ ভেন্যু (রয়েল প্যালেস)</span>
                 </button>
                 <button onclick="switchMapVenue('reception')" id="mapTab-reception" class="px-4 py-2 rounded-full bg-burgundyCard hover:bg-burgundyHover border border-antiqueGold/40 text-brightGold text-xs font-semibold transition active:scale-95 flex items-center gap-1.5">
                     <i class="fa-solid fa-champagne-glasses text-antiqueGold"></i>
-                    <span>বৌভাত সভা (গ্র্যান্ড ওবেরয়)</span>
+                    <span>বৌভাত সভা (গ্র্যান্ড ওবেরয়)</span>
                 </button>
                 <button onclick="switchMapVenue('haldi')" id="mapTab-haldi" class="px-4 py-2 rounded-full bg-burgundyCard hover:bg-burgundyHover border border-antiqueGold/40 text-brightGold text-xs font-semibold transition active:scale-95 flex items-center gap-1.5">
                     <i class="fa-solid fa-sun text-antiqueGold"></i>
-                    <span>গায়ে হলুদ (ব্যানার্জী ভবন)</span>
+                    <span>গায়ে হলুদ (ব্যানার্জী ভবন)</span>
                 </button>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                <!-- Interactive Embedded Google Map Frame -->
+                <!-- Map Frame -->
                 <div class="lg:col-span-8 relative w-full h-[360px] sm:h-[430px] rounded-2xl overflow-hidden border-2 border-antiqueGold/50 shadow-2xl bg-black">
                     <iframe 
                         id="embeddedGoogleMap"
@@ -524,9 +521,8 @@
                         src="https://maps.google.com/maps?q=ITC+Royal+Bengal,+Kolkata&t=&z=15&ie=UTF8&iwloc=&output=embed">
                     </iframe>
 
-                    <!-- Floating Open in App Button -->
                     <div class="absolute bottom-3 right-3 z-10">
-                        <a id="openInAppDirectBtn" href="https://maps.google.com/?q=ITC+Royal+Bengal+Kolkata" target="_blank" class="px-4 py-2 rounded-xl bg-black/85 backdrop-blur-md border border-antiqueGold/60 text-brightGold text-xs font-bold hover:bg-antiqueGold hover:text-burgundyBase transition flex items-center gap-1.5 shadow-lg">
+                        <a id="openInAppDirectBtn" href="https://maps.google.com/?q=ITC+Royal+Bengal+Kolkata" target="_blank" class="px-4 py-2 rounded-xl bg-black/85 backdrop-blur-md border border-antiqueGold/60 text-brightGold text-xs font-bold hover:bg-antiqueGold hover:text-[#66020c] transition flex items-center gap-1.5 shadow-lg">
                             <i class="fa-solid fa-diamond-turn-right text-antiqueGold"></i>
                             <span>Google Maps অ্যাপে খুলুন</span>
                         </a>
@@ -534,29 +530,28 @@
                 </div>
 
                 <!-- Venue Info & Transit Card -->
-                <div class="lg:col-span-4 flex flex-col justify-between rounded-2xl bg-black/50 border border-antiqueGold/30 p-5 sm:p-6 text-left">
+                <div class="lg:col-span-4 flex flex-col justify-between rounded-2xl bg-black/45 border border-antiqueGold/35 p-5 sm:p-6 text-left">
                     <div>
-                        <div class="flex items-center justify-between pb-3 border-b border-antiqueGold/20 mb-3">
+                        <div class="flex items-center justify-between pb-3 border-b border-antiqueGold/25 mb-3">
                             <span id="venueCategoryTag" class="text-[10px] uppercase tracking-widest font-bold text-antiqueGold">শুভ বিবাহ মহালগ্ন</span>
-                            <span class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+                            <span class="text-[10px] text-emerald-300 font-semibold flex items-center gap-1">
                                 <i class="fa-solid fa-circle-check text-[8px]"></i> পার্কিং সুব্যবস্থা আছে
                             </span>
                         </div>
 
-                        <h4 id="venueTitleText" class="text-lg font-bold text-brightGold font-bengali">রয়েল প্যালেস ব্যাঙ্কুয়েট হল</h4>
+                        <h4 id="venueTitleText" class="text-lg font-bold text-brightGold font-bengali">রয়েল প্যালেস ব্যাঙ্কুয়েট হল</h4>
                         <p id="venueAddressText" class="text-xs text-brightGold/85 mt-2 leading-relaxed font-sans">
                             ১ নং ই.এম বাইপাস কানেক্টর, প্রগতি ময়দান সংলগ্ন, কলকাতা — ৭০০১০৫
                         </p>
 
-                        <!-- Highlights & Landmark -->
-                        <div class="mt-4 space-y-2.5 text-xs text-brightGold/80">
+                        <div class="mt-4 space-y-2.5 text-xs text-brightGold/85">
                             <div class="flex items-start gap-2">
                                 <i class="fa-solid fa-compass text-antiqueGold mt-0.5 text-xs"></i>
-                                <span><strong>ল্যান্ডমার্ক:</strong> <span id="venueLandmarkText">সায়েন্স সিটির নিকটবর্তী এবং মেট্রো স্টেশন থেকে ৫ মিনিট</span></span>
+                                <span><strong>ল্যান্ডমার্ক:</strong> <span id="venueLandmarkText">সায়েন্স সিটির নিকটবর্তী এবং হেমন্ত মুখোপাধ্যায় মেট্রো স্টেশন থেকে ৫ মিনিট</span></span>
                             </div>
                             <div class="flex items-start gap-2">
                                 <i class="fa-solid fa-square-parking text-antiqueGold mt-0.5 text-xs"></i>
-                                <span><strong>পার্কিং:</strong> <span id="venueParkingText">বিনামূল্যে ভ্যালেট পার্কিং ও পর্যাপ্ত গাড়ির স্থান বিদ্যমান</span></span>
+                                <span><strong>পার্কিং:</strong> <span id="venueParkingText">বিনামূল্যে ভ্যালেট পার্কিং ও ২০০+ গাড়ির নিরাপদ স্থান বিদ্যমান</span></span>
                             </div>
                             <div class="flex items-start gap-2">
                                 <i class="fa-solid fa-taxi text-antiqueGold mt-0.5 text-xs"></i>
@@ -565,9 +560,8 @@
                         </div>
                     </div>
 
-                    <!-- Direct Navigation CTA Button -->
-                    <div class="mt-6 pt-4 border-t border-antiqueGold/20">
-                        <a id="venueDirectDirectionBtn" href="https://maps.google.com/?q=ITC+Royal+Bengal+Kolkata" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-burgundyBase font-bold text-xs flex items-center justify-center gap-2 shadow-lg hover:brightness-110 active:scale-95 transition">
+                    <div class="mt-6 pt-4 border-t border-antiqueGold/25">
+                        <a id="venueDirectDirectionBtn" href="https://maps.google.com/?q=ITC+Royal+Bengal+Kolkata" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-[#66020c] font-bold text-xs flex items-center justify-center gap-2 shadow-lg hover:brightness-110 active:scale-95 transition">
                             <i class="fa-solid fa-location-arrow text-sm"></i>
                             <span>টার্ন-বাই-টার্ন ডিরেকশন শুরু করুন</span>
                         </a>
@@ -577,39 +571,35 @@
         </section>
 
         <!-- ==============================================
-             RESTORED: RSVP REGISTRATION FORM
+             RSVP REGISTRATION FORM
              ============================================== -->
         <section id="rsvpSection" class="mb-14 luxury-card rounded-3xl p-6 sm:p-10 border-2 border-antiqueGold shadow-2xl">
             <div class="text-center mb-8">
                 <span class="text-xs uppercase tracking-[0.3em] text-antiqueGold font-bold">Online RSVP & Digital Invitation Pass</span>
                 <h3 class="text-2xl sm:text-4xl font-bold gold-shimmer-text mt-1">উপস্থিতি নিশ্চিতকরণ (RSVP)</h3>
-                <p class="text-xs sm:text-sm text-brightGold/80 max-w-xl mx-auto italic mt-1 font-serif">
+                <p class="text-xs sm:text-sm text-brightGold/90 max-w-xl mx-auto italic mt-1 font-serif">
                     অনুগ্রহ করে ফর্মটি পূরণ করে সরাসরি আপনার নামের কিউআর (QR) কোডযুক্ত ডিজিটাল ভিআইপি ইনভিটেশন পাস সংগ্রহ করুন।
                 </p>
             </div>
 
-            <!-- The Form -->
             <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)" class="max-w-2xl mx-auto space-y-5">
-                
-                <!-- Guest Name -->
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-antiqueGold mb-1.5" for="guestName">
-                        আপনার নাম (Full Name) <span class="text-rose-400">*</span>
+                        আপনার নাম (Full Name) <span class="text-rose-300">*</span>
                     </label>
-                    <input type="text" id="guestName" required placeholder="উদাঃ অমিতাভ ভট্টাচার্য" class="w-full px-4 py-3 rounded-xl bg-black/60 border border-antiqueGold/40 text-brightGold text-sm focus:border-antiqueGold outline-none transition">
+                    <input type="text" id="guestName" required placeholder="উদাঃ অমিতাভ ভট্টাচার্য" class="w-full px-4 py-3 rounded-xl bg-black/55 border border-antiqueGold/40 text-brightGold text-sm focus:border-antiqueGold outline-none transition">
                 </div>
 
-                <!-- Phone / WhatsApp & Guest Count -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-antiqueGold mb-1.5" for="guestPhone">
-                            হোয়াটসঅ্যাপ নম্বর (WhatsApp) <span class="text-rose-400">*</span>
+                            হোয়াটসঅ্যাপ নম্বর (WhatsApp) <span class="text-rose-300">*</span>
                         </label>
-                        <input type="tel" id="guestPhone" required placeholder="+91 98300 XXXXX" class="w-full px-4 py-3 rounded-xl bg-black/60 border border-antiqueGold/40 text-brightGold text-sm focus:border-antiqueGold outline-none transition">
+                        <input type="tel" id="guestPhone" required placeholder="+91 98300 XXXXX" class="w-full px-4 py-3 rounded-xl bg-black/55 border border-antiqueGold/40 text-brightGold text-sm focus:border-antiqueGold outline-none transition">
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-antiqueGold mb-1.5" for="guestCount">
-                            মোট অতিথি সংখ্যা (Guests Attending) <span class="text-rose-400">*</span>
+                            মোট অতিথি সংখ্যা (Guests Attending) <span class="text-rose-300">*</span>
                         </label>
                         <select id="guestCount" class="w-full px-4 py-3 rounded-xl bg-black/80 border border-antiqueGold/40 text-brightGold text-sm focus:border-antiqueGold outline-none cursor-pointer">
                             <option value="1">১ জন (Single)</option>
@@ -621,90 +611,80 @@
                     </div>
                 </div>
 
-                <!-- Ceremonies Attending -->
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-antiqueGold mb-1.5">
                         আমন্ত্রিত পর্ব (Attending Ceremonies)
                     </label>
                     <select id="ceremonySelect" class="w-full px-4 py-3 rounded-xl bg-black/80 border border-antiqueGold/40 text-brightGold text-sm focus:border-antiqueGold outline-none cursor-pointer">
                         <option value="সবগুলি পর্ব (All Ceremonies)">🌸 সবগুলি অনুষ্ঠানেই উপস্থিত থাকব (All Ceremonies)</option>
-                        <option value="গায়ে হলুদ (Gaye Holud)">গায়ে হলুদ ও আশীর্বাদ (Gaye Holud)</option>
+                        <option value="গায়ে হলুদ (Gaye Holud)">গায়ে হলুদ ও আশীর্বাদ (Gaye Holud)</option>
                         <option value="শুভ বিবাহ (Saat Paak)">শুভ বিবাহ ও সাতপাক (Wedding Only)</option>
                         <option value="বৌভাত (Reception)">বৌভাত ও প্রীতিভোজ (Reception Only)</option>
                     </select>
                 </div>
 
-                <!-- Blessings Note -->
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-antiqueGold mb-1.5" for="guestBlessing">
                         নবদম্পতির উদ্দেশ্যে শুভেচ্ছা বা আশীর্বাদ (Blessing)
                     </label>
-                    <textarea id="guestBlessing" rows="3" placeholder="সুমন্ত ও পিয়ালীর দাম্পত্য জীবনের মঙ্গল কামনায় কিছু লিখুন..." class="w-full px-4 py-3 rounded-xl bg-black/60 border border-antiqueGold/40 text-brightGold text-sm focus:border-antiqueGold outline-none transition"></textarea>
+                    <textarea id="guestBlessing" rows="3" placeholder="সুমন্ত ও পিয়ালীর দাম্পত্য জীবনের মঙ্গল কামনায় কিছু লিখুন..." class="w-full px-4 py-3 rounded-xl bg-black/55 border border-antiqueGold/40 text-brightGold text-sm focus:border-antiqueGold outline-none transition"></textarea>
                 </div>
 
-                <!-- Submit Button -->
                 <div class="pt-2 text-center">
-                    <button type="submit" class="w-full sm:w-auto px-10 py-3.5 rounded-full bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-burgundyBase font-bold text-sm tracking-wide shadow-xl hover:brightness-110 active:scale-95 transition flex items-center justify-center gap-2 mx-auto">
+                    <button type="submit" class="w-full sm:w-auto px-10 py-3.5 rounded-full bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-[#66020c] font-bold text-sm tracking-wide shadow-xl hover:brightness-110 active:scale-95 transition flex items-center justify-center gap-2 mx-auto">
                         <i class="fa-solid fa-address-card text-base"></i>
                         <span>উপস্থিতি নিশ্চিত করুন ও পাস তৈরি করুন</span>
                     </button>
                 </div>
             </form>
 
-            <!-- ==============================================
-                 GENERATED VIP GOLDEN INVITATION PASS CARD
-                 ============================================== -->
-            <div id="passDisplayContainer" class="hidden mt-10 pt-10 border-t border-antiqueGold/30">
+            <!-- VIP INVITATION PASS CARD -->
+            <div id="passDisplayContainer" class="hidden mt-10 pt-10 border-t border-antiqueGold/35">
                 <div class="text-center mb-6">
-                    <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block">
-                        ✓ আপনার RSVP সফল হয়েছে!
+                    <span class="text-xs font-bold text-emerald-300 uppercase tracking-widest block">
+                        ✓ আপনার RSVP সফল হয়েছে!
                     </span>
                     <h4 class="text-xl font-bold gold-shimmer-text">আপনার ডিজিটাল ইনভিটেশন এন্ট্রি পাস</h4>
                 </div>
 
-                <!-- Physical-look Ticket Card -->
-                <div id="printablePass" class="relative max-w-xl mx-auto rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-[#2e050f] via-[#1a0105] to-[#3a0614] border-2 border-antiqueGold shadow-[0_0_40px_rgba(212,175,55,0.35)] overflow-hidden">
+                <div id="printablePass" class="relative max-w-xl mx-auto rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-[#8f0616] via-[#66020c] to-[#9e081b] border-2 border-antiqueGold shadow-[0_0_40px_rgba(243,207,101,0.35)] overflow-hidden">
                     <div class="ticket-cut-l"></div>
                     <div class="ticket-cut-r"></div>
 
-                    <!-- Pass Header -->
-                    <div class="flex items-center justify-between pb-4 border-b border-dashed border-antiqueGold/40 mb-4">
+                    <div class="flex items-center justify-between pb-4 border-b border-dashed border-antiqueGold/50 mb-4">
                         <div>
-                            <span class="text-[9px] uppercase tracking-widest text-antiqueGold font-bold">Royal VIP Entry Pass</span>
+                            <span class="text-[9px] uppercase tracking-widest text-brightGold font-bold">Royal VIP Entry Pass</span>
                             <h5 class="text-lg font-bold text-brightGold font-bengali">সুমন্ত ও পিয়ালী</h5>
                         </div>
                         <div class="text-right">
-                            <span class="text-[9px] uppercase tracking-widest text-antiqueGold/80">Pass ID</span>
+                            <span class="text-[9px] uppercase tracking-widest text-brightGold/80">Pass ID</span>
                             <p id="ticketPassId" class="text-xs font-mono font-bold text-brightGold">#SP-8821</p>
                         </div>
                     </div>
 
-                    <!-- Pass Body with Dynamic QR & Details -->
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-5">
                         <div class="space-y-1.5 text-xs text-left">
                             <p><span class="text-antiqueGold font-semibold">অতিথির নাম:</span> <strong id="ticketName" class="text-brightGold text-sm font-bold"></strong></p>
                             <p><span class="text-antiqueGold font-semibold">মোট অতিথি:</span> <span id="ticketCount" class="text-brightGold font-mono"></span></p>
                             <p><span class="text-antiqueGold font-semibold">আমন্ত্রিত পর্ব:</span> <span id="ticketCeremony" class="text-brightGold"></span></p>
                             <p><span class="text-antiqueGold font-semibold">তারিখ:</span> <span class="text-brightGold">২৪শে নভেম্বর ২০২৬</span></p>
-                            <p><span class="text-antiqueGold font-semibold">স্থান:</span> <span class="text-brightGold">রয়েল প্যালেস ব্যাঙ্কুয়েট, কলকাতা</span></p>
+                            <p><span class="text-antiqueGold font-semibold">স্থান:</span> <span class="text-brightGold">রয়েল প্যালেস ব্যাঙ্কুয়েট, কলকাতা</span></p>
                         </div>
 
-                        <!-- Generated Dynamic QR Code -->
                         <div class="p-2.5 rounded-2xl bg-white flex flex-col items-center justify-center shadow-md">
                             <canvas id="qrCodeCanvas" width="105" height="105"></canvas>
                             <span class="text-[8px] font-mono text-gray-800 font-bold mt-1 tracking-wider">GATE SCAN VERIFIED</span>
                         </div>
                     </div>
 
-                    <!-- Pass Actions -->
-                    <div class="mt-6 pt-4 border-t border-dashed border-antiqueGold/40 flex flex-wrap items-center justify-center gap-3">
+                    <div class="mt-6 pt-4 border-t border-dashed border-antiqueGold/50 flex flex-wrap items-center justify-center gap-3">
                         <button onclick="window.print()" class="px-5 py-2 rounded-full bg-burgundyCard hover:bg-burgundyHover border border-antiqueGold/40 text-xs font-bold text-brightGold flex items-center gap-1.5 transition active:scale-95">
                             <i class="fa-solid fa-print text-antiqueGold"></i>
                             <span>পাস প্রিন্ট / সেভ করুন</span>
                         </button>
-                        <button onclick="sharePassWhatsApp()" class="px-5 py-2 rounded-full bg-emerald-700 hover:bg-emerald-600 border border-emerald-400 text-xs font-bold text-white flex items-center gap-1.5 transition active:scale-95 shadow">
+                        <button onclick="sharePassWhatsApp()" class="px-5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 border border-emerald-400 text-xs font-bold text-white flex items-center gap-1.5 transition active:scale-95 shadow">
                             <i class="fa-brands fa-whatsapp text-sm"></i>
-                            <span>হোয়াটসঅ্যাপে পাঠান</span>
+                            <span>হোয়াটসঅ্যাপে পাঠান</span>
                         </button>
                     </div>
                 </div>
@@ -718,25 +698,21 @@
             <div class="text-center mb-8">
                 <span class="text-xs uppercase tracking-[0.3em] text-antiqueGold font-semibold">Guestbook & Love</span>
                 <h3 class="text-2xl sm:text-3xl font-bold gold-shimmer-text mt-1">শুভেচ্ছা ও আশীর্বাদ প্রাচীর</h3>
-                <p class="text-xs text-brightGold/70 italic mt-1 font-serif">আত্মীয়স্বজন ও বন্ধুদের অমূল্য ভালোবাসা</p>
+                <p class="text-xs text-brightGold/80 italic mt-1 font-serif">আত্মীয়স্বজন ও বন্ধুদের অমূল্য ভালোবাসা</p>
             </div>
 
-            <div id="blessingsWallGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Injected via JS -->
-            </div>
+            <div id="blessingsWallGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         </section>
 
     </main>
 
     <!-- Footer -->
-    <footer class="relative z-10 border-t border-antiqueGold/30 bg-black/60 py-8 text-center text-xs text-antiqueGold/70">
-        <p class="font-bengali text-sm text-brightGold mb-1">॥ শুভ পরিণয় • সুমন্ত ও পিয়ালী ॥</p>
-        <p class="font-cinzel text-[10px] tracking-widest">© 2026 ROYAL BENGALI WEDDING • ALL RIGHTS RESERVED</p>
+    <footer class="relative z-10 border-t border-antiqueGold/35 bg-[#66020c]/80 py-8 text-center text-xs text-brightGold/80">
+        <p class="font-bengali text-sm text-brightGold mb-1">॥ শুভ পরিণয় • সুমন্ত ও পিয়ালী ॥</p>
+        <p class="font-cinzel text-[10px] tracking-widest text-antiqueGold">© 2026 ROYAL BENGALI WEDDING • ALL RIGHTS RESERVED</p>
     </footer>
 
-    <!-- ==============================================
-         MODAL 1: CHANGE / ADD VIDEO
-         ============================================== -->
+    <!-- MODAL 1: CHANGE / ADD VIDEO -->
     <div id="videoModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
         <div class="relative w-full max-w-lg luxury-card rounded-3xl p-6 sm:p-8 border-2 border-antiqueGold shadow-2xl text-left">
             <div class="flex items-center justify-between pb-3 border-b border-antiqueGold/30 mb-4">
@@ -747,7 +723,6 @@
                 <button onclick="closeVideoModal()" class="w-8 h-8 rounded-full bg-black/60 text-antiqueGold flex items-center justify-center border border-antiqueGold/30">✕</button>
             </div>
 
-            <!-- YouTube / Vimeo / MP4 URL -->
             <div class="mb-4">
                 <label class="block text-xs font-bold uppercase text-antiqueGold mb-1">ভিডিও লিংক (YouTube / MP4 URL):</label>
                 <input type="url" id="videoUrlInput" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-antiqueGold/40 text-brightGold text-xs focus:border-antiqueGold outline-none">
@@ -759,7 +734,6 @@
                 <div class="flex-1 h-px bg-antiqueGold/20"></div>
             </div>
 
-            <!-- Device Video File -->
             <div class="mb-5">
                 <label class="block text-xs font-bold uppercase text-antiqueGold mb-1">ডিভাইস থেকে ফাইল নির্বাচন করুন:</label>
                 <label class="flex flex-col items-center justify-center p-4 border-2 border-dashed border-antiqueGold/40 rounded-xl cursor-pointer bg-black/40 hover:border-antiqueGold">
@@ -771,14 +745,12 @@
 
             <div class="flex justify-end gap-2">
                 <button onclick="closeVideoModal()" class="px-4 py-1.5 rounded-full bg-black/60 border border-antiqueGold/30 text-brightGold text-xs">বাতিল</button>
-                <button onclick="applyNewVideo()" class="px-5 py-1.5 rounded-full bg-antiqueGold text-burgundyBase font-bold text-xs shadow hover:brightness-110">প্রয়োগ করুন</button>
+                <button onclick="applyNewVideo()" class="px-5 py-1.5 rounded-full bg-antiqueGold text-[#66020c] font-bold text-xs shadow hover:brightness-110">প্রয়োগ করুন</button>
             </div>
         </div>
     </div>
 
-    <!-- ==============================================
-         MODAL 2: ADD PHOTO TO REEL
-         ============================================== -->
+    <!-- MODAL 2: ADD PHOTO TO REEL -->
     <div id="uploadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
         <div class="relative w-full max-w-lg luxury-card rounded-3xl p-6 sm:p-8 border-2 border-antiqueGold shadow-2xl text-left">
             <div class="flex items-center justify-between pb-3 border-b border-antiqueGold/30 mb-4">
@@ -789,7 +761,6 @@
                 <button onclick="closeUploadModal()" class="w-8 h-8 rounded-full bg-black/60 text-antiqueGold flex items-center justify-center border border-antiqueGold/30">✕</button>
             </div>
 
-            <!-- Choose Device Image -->
             <div class="mb-4">
                 <label class="block text-xs font-bold uppercase text-antiqueGold mb-1">ডিভাইস থেকে ফটো বাছুন:</label>
                 <label class="flex flex-col items-center justify-center p-4 border-2 border-dashed border-antiqueGold/40 rounded-xl cursor-pointer bg-black/40 hover:border-antiqueGold">
@@ -805,13 +776,11 @@
                 <div class="flex-1 h-px bg-antiqueGold/20"></div>
             </div>
 
-            <!-- Image URL -->
             <div class="mb-4">
                 <label class="block text-xs font-bold uppercase text-antiqueGold mb-1">ছবির অনলাইন লিংক (Image URL):</label>
                 <input type="url" id="photoUrlInput" placeholder="https://images.unsplash.com/..." class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-antiqueGold/40 text-brightGold text-xs focus:border-antiqueGold outline-none">
             </div>
 
-            <!-- Caption -->
             <div class="mb-5">
                 <label class="block text-xs font-bold uppercase text-antiqueGold mb-1">ক্যাপশন / বিবরণ:</label>
                 <input type="text" id="photoCaptionInput" placeholder="উদাঃ শুভদৃষ্টি ও অগ্নিসাক্ষী" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-antiqueGold/40 text-brightGold text-xs focus:border-antiqueGold outline-none">
@@ -819,14 +788,12 @@
 
             <div class="flex justify-end gap-2">
                 <button onclick="closeUploadModal()" class="px-4 py-1.5 rounded-full bg-black/60 border border-antiqueGold/30 text-brightGold text-xs">বাতিল</button>
-                <button onclick="saveNewReelPhoto()" class="px-5 py-1.5 rounded-full bg-antiqueGold text-burgundyBase font-bold text-xs shadow hover:brightness-110">যোগ করুন</button>
+                <button onclick="saveNewReelPhoto()" class="px-5 py-1.5 rounded-full bg-antiqueGold text-[#66020c] font-bold text-xs shadow hover:brightness-110">যোগ করুন</button>
             </div>
         </div>
     </div>
 
-    <!-- ==============================================
-         MODAL 3: CUSTOMIZE GOOGLE MAP LOCATION
-         ============================================== -->
+    <!-- MODAL 3: CUSTOMIZE GOOGLE MAP LOCATION -->
     <div id="customMapModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
         <div class="relative w-full max-w-lg luxury-card rounded-3xl p-6 sm:p-8 border-2 border-antiqueGold shadow-2xl text-left">
             <div class="flex items-center justify-between pb-3 border-b border-antiqueGold/30 mb-4">
@@ -837,30 +804,24 @@
                 <button onclick="closeCustomMapModal()" class="w-8 h-8 rounded-full bg-black/60 text-antiqueGold flex items-center justify-center border border-antiqueGold/30">✕</button>
             </div>
 
-            <!-- Venue Name or Search query -->
             <div class="mb-4">
                 <label class="block text-xs font-bold uppercase text-antiqueGold mb-1">ভেন্যুর নাম বা গুগল ম্যাপ ঠিকানা:</label>
                 <input type="text" id="mapCustomSearchInput" placeholder="উদাঃ ITC Sonar Kolkata বা Science City Kolkata" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-antiqueGold/40 text-brightGold text-xs focus:border-antiqueGold outline-none">
             </div>
 
-            <p class="text-[11px] text-brightGold/70 italic mb-5">
-                যে কোনো ল্যান্ডমার্ক, ব্যাঙ্কুয়েট হল বা এলাকার নাম লিখলেই লাইভ গুগল ম্যাপ ও সরাসরি নেভিগেশন লিংক আপডেট হয়ে যাবে।
+            <p class="text-[11px] text-brightGold/80 italic mb-5">
+                যে কোনো ল্যান্ডমার্ক, ব্যাঙ্কুয়েট হল বা এলাকার নাম লিখলেই লাইভ গুগল ম্যাপ ও সরাসরি নেভিগেশন লিংক আপডেট হয়ে যাবে।
             </p>
 
             <div class="flex justify-end gap-2">
                 <button onclick="closeCustomMapModal()" class="px-4 py-1.5 rounded-full bg-black/60 border border-antiqueGold/30 text-brightGold text-xs">বাতিল</button>
-                <button onclick="applyCustomMapLocation()" class="px-5 py-1.5 rounded-full bg-antiqueGold text-burgundyBase font-bold text-xs shadow hover:brightness-110">ম্যাপ আপডেট করুন</button>
+                <button onclick="applyCustomMapLocation()" class="px-5 py-1.5 rounded-full bg-antiqueGold text-[#66020c] font-bold text-xs shadow hover:brightness-110">ম্যাপ আপডেট করুন</button>
             </div>
         </div>
     </div>
 
-    <!-- ==============================================
-         COMPLETE JAVASCRIPT LOGIC
-         ============================================== -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        /* ------------------------------------------------
-           1. INITIAL DEFAULT PHOTOS FOR VIDEO REEL
-           ------------------------------------------------ */
         const defaultReelPhotos = [
             {
                 id: 1,
@@ -881,8 +842,8 @@
             {
                 id: 3,
                 url: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80",
-                caption: "সোনালী হলুদের ছোঁয়ায় গায়ে হলুদের আনন্দ উৎসব",
-                category: "গায়ে হলুদ",
+                caption: "সোনালী হলুদের ছোঁয়ায় গায়ে হলুদের আনন্দ উৎসব",
+                category: "গায়ে হলুদ",
                 date: "২৩শে নভেম্বর ২০২৬",
                 likes: 45
             },
@@ -897,15 +858,15 @@
             {
                 id: 5,
                 url: "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1400&q=80",
-                caption: "গোধূলির আলোয় হাত ধরে অনন্তের পথে চলা",
-                category: "প্রি-ওয়েডিং",
+                caption: "গোধূলির আলোয় হাত ধরে অনন্তের পথে চলা",
+                category: "প্রি-ওয়েডিং",
                 date: "১২ই অক্টোবর ২০২৬",
                 likes: 63
             },
             {
                 id: 6,
                 url: "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1400&q=80",
-                caption: "ভাত-কাপড়ের পবিত্র অঙ্গীকার ও রাজকীয় বৌভাত সভা",
+                caption: "ভাত-কাপড়ের পবিত্র অঙ্গীকার ও রাজকীয় বৌভাত সভা",
                 category: "বৌভাত",
                 date: "২৬শে নভেম্বর ২০২৬",
                 likes: 41
@@ -916,11 +877,8 @@
         let currentReelIdx = 0;
         let isReelPlaying = true;
         let reelTimer = null;
-        const REEL_DURATION = 4800; // ms per slide
+        const REEL_DURATION = 4800;
 
-        /* ------------------------------------------------
-           2. CINEMATIC PHOTO REEL ENGINE
-           ------------------------------------------------ */
         function initPhotoReel() {
             renderReelProgressBars();
             renderReelFilmstrip();
@@ -940,7 +898,7 @@
         function renderReelFilmstrip() {
             const strip = document.getElementById('reelFilmstrip');
             strip.innerHTML = reelPhotos.map((p, i) => `
-                <button onclick="jumpToReelSlide(${i})" class="w-12 h-10 sm:w-14 sm:h-11 rounded-lg overflow-hidden border ${i === currentReelIdx ? 'border-brightGold scale-105' : 'border-antiqueGold/30 opacity-60'} flex-shrink-0 transition-all">
+                <button onclick="jumpToReelSlide(${i})" class="w-12 h-10 sm:w-14 sm:h-11 rounded-lg overflow-hidden border ${i === currentReelIdx ? 'border-brightGold scale-105' : 'border-antiqueGold/40 opacity-60'} flex-shrink-0 transition-all">
                     <img src="${p.url}" class="w-full h-full object-cover">
                 </button>
             `).join('');
@@ -951,25 +909,21 @@
             const photo = reelPhotos[currentReelIdx];
             const img = document.getElementById('reelMainImg');
 
-            // Quick fade transition
             img.style.opacity = '0.3';
             setTimeout(() => {
                 img.src = photo.url;
                 img.style.opacity = '1';
-                // Trigger CSS Ken Burns replay
                 img.classList.remove('ken-burns');
                 void img.offsetWidth;
                 img.classList.add('ken-burns');
             }, 180);
 
-            // Update captions & counts
             document.getElementById('reelCategoryBadge').innerText = photo.category;
             document.getElementById('reelIndexCounter').innerText = `${currentReelIdx + 1} / ${reelPhotos.length}`;
             document.getElementById('reelTitle').innerText = photo.caption;
             document.getElementById('reelDate').innerText = photo.date;
             document.getElementById('reelLikeCount').innerText = photo.likes;
 
-            // Update progress bars
             reelPhotos.forEach((_, i) => {
                 const bar = document.getElementById(`progBar-${i}`);
                 if (!bar) return;
@@ -1034,7 +988,6 @@
                 playIcon.className = "fa-solid fa-play text-antiqueGold";
                 indicator.classList.remove('hidden');
                 clearInterval(reelTimer);
-                // Pause active progress bar
                 const currentBar = document.getElementById(`progBar-${currentReelIdx}`);
                 if (currentBar) currentBar.style.width = '50%';
             }
@@ -1051,13 +1004,10 @@
                 particleCount: 25,
                 spread: 45,
                 origin: { y: 0.65 },
-                colors: ['#ff3366', '#d4af37', '#ffffff']
+                colors: ['#ff3366', '#f3cf65', '#ffffff']
             });
         }
 
-        /* ------------------------------------------------
-           3. ADD PHOTO TO REEL MODAL LOGIC
-           ------------------------------------------------ */
         let localSelectedPhotoUrl = null;
         function openUploadModal() {
             document.getElementById('uploadModal').classList.remove('hidden');
@@ -1100,13 +1050,10 @@
                 particleCount: 60,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#d4af37', '#f7e28b', '#700617']
+                colors: ['#f3cf65', '#fff2b8', '#8f0616']
             });
         }
 
-        /* ------------------------------------------------
-           4. WAX SEAL UNBOXING MODAL
-           ------------------------------------------------ */
         function openWeddingInvitation() {
             const modal = document.getElementById('unboxingModal');
             modal.style.opacity = '0';
@@ -1118,16 +1065,13 @@
                 particleCount: 90,
                 spread: 90,
                 origin: { y: 0.5 },
-                colors: ['#d4af37', '#f7e28b', '#b21e35']
+                colors: ['#f3cf65', '#fff2b8', '#e61d36']
             });
 
             playShankhaSound();
             toggleShehnai();
         }
 
-        /* ------------------------------------------------
-           5. WEB AUDIO SHEHNAI & SHANKHADHWANI (CONCH)
-           ------------------------------------------------ */
         let audioCtx = null;
         let isShehnaiPlaying = false;
         let shehnaiLoopTimeout = null;
@@ -1141,7 +1085,6 @@
             return audioCtx;
         }
 
-        // Shankhadhwani Conch Shell Synthesizer
         function playShankhaSound() {
             const ctx = getAudioContext();
             const now = ctx.currentTime;
@@ -1151,7 +1094,6 @@
             const filter = ctx.createBiquadFilter();
 
             osc.type = 'sawtooth';
-            // Characteristic pitch rise and hold of a Shankha
             osc.frequency.setValueAtTime(220, now);
             osc.frequency.exponentialRampToValueAtTime(440, now + 0.4);
             osc.frequency.setValueAtTime(440, now + 1.2);
@@ -1176,18 +1118,17 @@
                 particleCount: 35,
                 spread: 60,
                 origin: { y: 0.4 },
-                colors: ['#f7e28b', '#d4af37']
+                colors: ['#fff2b8', '#f3cf65']
             });
         }
 
-        // Shehnai Bridal Raga Melody
         const shehnaiNotes = [
-            { f: 587.33, dur: 0.9 }, // D5
-            { f: 659.25, dur: 0.6 }, // E5
-            { f: 783.99, dur: 1.1 }, // G5
-            { f: 880.00, dur: 0.8 }, // A5
-            { f: 783.99, dur: 0.7 }, // G5
-            { f: 659.25, dur: 1.2 }  // E5
+            { f: 587.33, dur: 0.9 },
+            { f: 659.25, dur: 0.6 },
+            { f: 783.99, dur: 1.1 },
+            { f: 880.00, dur: 0.8 },
+            { f: 783.99, dur: 0.7 },
+            { f: 659.25, dur: 1.2 }
         ];
 
         function playShehnaiNote(freq, duration, delay) {
@@ -1202,7 +1143,6 @@
             osc.type = 'sawtooth';
             osc.frequency.setValueAtTime(freq, startTime);
 
-            // Reedy vibrato
             const vib = ctx.createOscillator();
             const vibGain = ctx.createGain();
             vib.frequency.value = 6.0;
@@ -1253,9 +1193,6 @@
             }
         }
 
-        /* ------------------------------------------------
-           6. LIVE LAGNA COUNTDOWN TIMER
-           ------------------------------------------------ */
         const lagnaDate = new Date("November 24, 2026 19:30:00").getTime();
 
         function updateCountdown() {
@@ -1283,9 +1220,6 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        /* ------------------------------------------------
-           7. CINEMATIC MOMENTS VIDEO PLAYER MODAL LOGIC
-           ------------------------------------------------ */
         function openVideoModal() {
             document.getElementById('videoModal').classList.remove('hidden');
         }
@@ -1328,15 +1262,12 @@
             closeVideoModal();
         }
 
-        /* ------------------------------------------------
-           7.1 INTERACTIVE GOOGLE MAPS VENUE DATA & LOGIC
-           ------------------------------------------------ */
         const weddingVenues = {
             wedding: {
                 category: "শুভ বিবাহ মহালগ্ন ( Saat Paak )",
-                title: "রয়েল প্যালেস ব্যাঙ্কুয়েট হল",
+                title: "রয়েল প্যালেস ব্যাঙ্কুয়েট হল",
                 address: "১ নং ই.এম বাইপাস কানেক্টর, প্রগতি ময়দান সংলগ্ন, কলকাতা — ৭০০১০৫",
-                landmark: "সায়েন্স সিটির নিকটবর্তী এবং হেমন্ত মুখোপাধ্যায় মেট্রো স্টেশন থেকে ৫ মিনিট",
+                landmark: "সায়েন্স সিটির নিকটবর্তী এবং হেমন্ত মুখোপাধ্যায় মেট্রো স্টেশন থেকে ৫ মিনিট",
                 parking: "বিনামূল্যে ভ্যালেট পার্কিং ও ২০০+ গাড়ির নিরাপদ স্থান বিদ্যমান",
                 cab: "Uber, Ola ও হলুদ ট্যাক্সি সরাসরি মূল প্রবেশদ্বার পর্যন্ত উপলব্ধ",
                 mapEmbedUrl: "https://maps.google.com/maps?q=ITC+Royal+Bengal,+Kolkata&t=&z=15&ie=UTF8&iwloc=&output=embed",
@@ -1344,7 +1275,7 @@
             },
             reception: {
                 category: "বৌভাত ও প্রীতিভোজ সভা ( Bou Bhaat )",
-                title: "গ্র্যান্ড ওবেরয় কনভেনশন সেন্টার",
+                title: "গ্র্যান্ড ওবেরয় কনভেনশন সেন্টার",
                 address: "১৫ জওহরলাল নেহেরু রোড, ধর্মতলা, এসপ্ল্যানেড, কলকাতা — ৭০০০০৩",
                 landmark: "এসপ্ল্যানেড মেট্রো স্টেশনের বিপরীতে ও ধর্মতলা বাস টার্মিনাস সংলগ্ন",
                 parking: "হোটেলের ইনডোর বেসমেন্ট পার্কিং ও ভ্যালেট ব্যবস্থা",
@@ -1353,12 +1284,12 @@
                 directNavUrl: "https://maps.google.com/?q=The+Oberoi+Grand+Kolkata"
             },
             haldi: {
-                category: "গায়ে হলুদ ও আশীর্বাদ ( Gaye Holud )",
+                category: "গায়ে হলুদ ও আশীর্বাদ ( Gaye Holud )",
                 title: "ব্যানার্জী ভবন (কনে বাড়ি)",
                 address: "ব্লক-সিডি, সেক্টর-১, সল্টলেক সিটি, বিধাননগর, কলকাতা — ৭০০০৬৪",
                 landmark: "সিটি সেন্টার ১ (City Centre 1) সল্টলেকের কাছে",
                 parking: "রাস্তার দুই পাশে সংরক্ষিত গেস্ট পার্কিং লট",
-                cab: "সল্টলেক মেট্রো গেট বা অ্যাপ ক্যাবে সহজেই পৌঁছানো যায়",
+                cab: "সল্টলেক মেট্রো গেট বা অ্যাপ ক্যাবে সহজেই পৌঁছানো যায়",
                 mapEmbedUrl: "https://maps.google.com/maps?q=City+Centre+1+Salt+Lake+Kolkata&t=&z=15&ie=UTF8&iwloc=&output=embed",
                 directNavUrl: "https://maps.google.com/?q=City+Centre+1+Salt+Lake+Kolkata"
             }
@@ -1371,12 +1302,10 @@
             if (!venue) return;
             currentActiveVenueKey = venueKey;
 
-            // Update Map Iframe & Links
             document.getElementById('embeddedGoogleMap').src = venue.mapEmbedUrl;
             document.getElementById('openInAppDirectBtn').href = venue.directNavUrl;
             document.getElementById('venueDirectDirectionBtn').href = venue.directNavUrl;
 
-            // Update Text Details
             document.getElementById('venueCategoryTag').innerText = venue.category;
             document.getElementById('venueTitleText').innerText = venue.title;
             document.getElementById('venueAddressText').innerText = venue.address;
@@ -1384,12 +1313,11 @@
             document.getElementById('venueParkingText').innerText = venue.parking;
             document.getElementById('venueCabText').innerText = venue.cab;
 
-            // Update Tab Highlight Styling
             ['wedding', 'reception', 'haldi'].forEach(k => {
                 const tab = document.getElementById(`mapTab-${k}`);
                 if (!tab) return;
                 if (k === venueKey) {
-                    tab.className = "px-4 py-2 rounded-full bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-burgundyBase font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5";
+                    tab.className = "px-4 py-2 rounded-full bg-gradient-to-r from-antiqueGold via-brightGold to-antiqueGold text-[#66020c] font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5";
                 } else {
                     tab.className = "px-4 py-2 rounded-full bg-burgundyCard hover:bg-burgundyHover border border-antiqueGold/40 text-brightGold text-xs font-semibold transition active:scale-95 flex items-center gap-1.5";
                 }
@@ -1420,9 +1348,6 @@
             closeCustomMapModal();
         }
 
-        /* ------------------------------------------------
-           8. RSVP SUBMISSION & DYNAMIC QR PASS GENERATION
-           ------------------------------------------------ */
         let activePassData = null;
 
         function handleRsvpSubmit(e) {
@@ -1437,16 +1362,13 @@
 
             activePassData = { name, phone, count, ceremony, passId };
 
-            // Fill Pass Elements
             document.getElementById('ticketPassId').innerText = passId;
             document.getElementById('ticketName').innerText = name;
             document.getElementById('ticketCount').innerText = `${count} জন`;
             document.getElementById('ticketCeremony').innerText = ceremony;
 
-            // Generate Crisp Canvas QR Code
             generateQrCode(passId, name);
 
-            // If user wrote a blessing, append to wall
             if (blessing) {
                 blessingsList.unshift({ name, text: blessing, time: "এখনই" });
                 renderBlessings();
@@ -1458,14 +1380,12 @@
                 particleCount: 80,
                 spread: 70,
                 origin: { y: 0.7 },
-                colors: ['#d4af37', '#f7e28b', '#2e050f']
+                colors: ['#f3cf65', '#fff2b8', '#8f0616']
             });
 
-            // Smooth scroll down to pass
             document.getElementById('passDisplayContainer').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Draw an authentic stylized QR Code on HTML5 Canvas
         function generateQrCode(id, name) {
             const canvas = document.getElementById('qrCodeCanvas');
             const ctx = canvas.getContext('2d');
@@ -1475,9 +1395,8 @@
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, size, size);
 
-            ctx.fillStyle = '#1a0105';
+            ctx.fillStyle = '#8f0616';
 
-            // Corner marker generator helper
             function drawMarker(x, y, dim) {
                 ctx.fillRect(x, y, dim, dim);
                 ctx.clearRect(x + 5, y + 5, dim - 10, dim - 10);
@@ -1488,7 +1407,6 @@
             drawMarker(size - 32, 5, 27);
             drawMarker(5, size - 32, 27);
 
-            // Deterministic randomized QR grid based on guest name & id
             let seed = 0;
             for (let i = 0; i < (name + id).length; i++) {
                 seed += (name + id).charCodeAt(i);
@@ -1496,7 +1414,6 @@
 
             for (let r = 0; r < 19; r++) {
                 for (let c = 0; c < 19; c++) {
-                    // Skip the 3 corner finder patterns
                     if ((r < 7 && c < 7) || (r < 7 && c > 11) || (r > 11 && c < 7)) continue;
                     seed = (seed * 9301 + 49297) % 233280;
                     if (seed / 233280 > 0.48) {
@@ -1509,32 +1426,29 @@
         function sharePassWhatsApp() {
             if (!activePassData) return;
             const text = encodeURIComponent(
-                `⚜️ শ্রী শ্রী প্রজাপতয়ে নমঃ ⚜️\n\nসুমন্ত ও পিয়ালীর শুভ বিবাহে আমার ডিজিটাল ভিআইপি ইনভিটেশন পাস:\n` +
+                `⚜️ শ্রী শ্রী প্রজাপতয়ে নমঃ ⚜️\n\nসুমন্ত ও পিয়ালীর শুভ বিবাহে আমার ডিজিটাল ভিআইপি ইনভিটেশন পাস:\n` +
                 `👤 অতিথি: ${activePassData.name}\n` +
                 `🎫 পাস আইডি: ${activePassData.passId}\n` +
                 `👥 উপস্থিতি: ${activePassData.count} জন\n` +
                 `🌸 পর্ব: ${activePassData.ceremony}\n` +
-                `📅 তারিখ: ২৪শে নভেম্বর ২০২৬\n📍 স্থান: রয়েল প্যালেস ব্যাঙ্কুয়েট, কলকাতা`
+                `📅 তারিখ: ২৪শে নভেম্বর ২০২৬\n📍 স্থান: রয়েল প্যালেস ব্যাঙ্কুয়েট, কলকাতা`
             );
             window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
         }
 
-        /* ------------------------------------------------
-           9. BLESSINGS WALL LIST & RENDER
-           ------------------------------------------------ */
         const blessingsList = [
             {
                 name: "কাকলি ও দেবাশীষ চ্যাটার্জী",
-                text: "দুজনের আগামী দিনগুলি সুখ, শান্তি ও অনাবিল ভালোবাসায় ভরে উঠুক। অনেক শুভকামনা!",
+                text: "দুজনের আগামী দিনগুলি সুখ, শান্তি ও অনাবিল ভালোবাসায় ভরে উঠুক। অনেক শুভকামনা!",
                 time: "গতকাল"
             },
             {
                 name: "অরিন্দম সেনগুপ্ত",
-                text: "সুমন্ত ও পিয়ালীর শুভ পরিণয়ে এক অনন্ত আনন্দময় জীবনের শুভেচ্ছা রইল। খুব ভালো থেকো!",
+                text: "সুমন্ত ও পিয়ালীর শুভ পরিণয়ে এক অনন্ত আনন্দময় জীবনের শুভেচ্ছা রইল। খুব ভালো থেকো!",
                 time: "২ দিন আগে"
             },
             {
-                name: "পুষ্পিতা ও সুব্রত রায়",
+                name: "পুষ্পিতা ও সুব্রত রায়",
                 text: "সাতপাকের পবিত্র বন্ধন সারাজীবন অটুট থাকুক। পরমেশ্বর তোমাদের সকল স্বপ্ন পূর্ণ করুন।",
                 time: "৩ দিন আগে"
             }
@@ -1543,21 +1457,18 @@
         function renderBlessings() {
             const grid = document.getElementById('blessingsWallGrid');
             grid.innerHTML = blessingsList.map(b => `
-                <div class="luxury-card rounded-2xl p-4 sm:p-5 border border-antiqueGold/30 text-left">
+                <div class="luxury-card rounded-2xl p-4 sm:p-5 border border-antiqueGold/35 text-left">
                     <div class="flex items-center gap-2 mb-2 text-antiqueGold">
-                        <i class="fa-solid fa-quote-left text-xs opacity-60"></i>
+                        <i class="fa-solid fa-quote-left text-xs opacity-70"></i>
                         <span class="text-xs font-bold text-brightGold">${b.name}</span>
                     </div>
-                    <p class="text-xs text-brightGold/85 italic font-serif leading-relaxed">"${b.text}"</p>
-                    <span class="text-[10px] text-antiqueGold/50 font-mono block mt-3">${b.time}</span>
+                    <p class="text-xs text-brightGold/90 italic font-serif leading-relaxed">"${b.text}"</p>
+                    <span class="text-[10px] text-antiqueGold/70 font-mono block mt-3">${b.time}</span>
                 </div>
             `).join('');
         }
         renderBlessings();
 
-        /* ------------------------------------------------
-           10. BILINGUAL LANGUAGE TOGGLE
-           ------------------------------------------------ */
         let currentLang = 'bn';
         function toggleLanguage() {
             currentLang = (currentLang === 'bn') ? 'en' : 'bn';
@@ -1565,9 +1476,6 @@
             document.getElementById('navRsvpText').innerText = (currentLang === 'bn') ? 'RSVP পাস' : 'RSVP Pass';
         }
 
-        /* ------------------------------------------------
-           11. AMBIENT GOLD SPARKLE CANVAS
-           ------------------------------------------------ */
         const canvas = document.getElementById('ambientCanvas');
         const ctx = canvas.getContext('2d');
         let sparkles = [];
@@ -1596,7 +1504,7 @@
             }
             draw() {
                 ctx.save();
-                ctx.fillStyle = '#f7e28b';
+                ctx.fillStyle = '#fff2b8';
                 ctx.globalAlpha = this.alpha;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -1614,7 +1522,6 @@
         }
         animSparkles();
 
-        // Initialize Photo Reel on Page Load
         window.addEventListener('DOMContentLoaded', () => {
             initPhotoReel();
         });
