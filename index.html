@@ -44,7 +44,7 @@
     </script>
 
     <style>
-        /* 1. Deep Maroon Background */
+        /* Deep Maroon Background */
         body {
             font-family: 'Noto Serif Bengali', 'Playfair Display', serif;
             background-color: #33020a;
@@ -58,7 +58,7 @@
             overflow-x: hidden;
         }
 
-        /* 2. Vibrant Red Cards */
+        /* Vibrant Red Cards */
         .luxury-card {
             background: linear-gradient(155deg, rgba(145, 10, 27, 0.94) 0%, rgba(110, 5, 18, 0.96) 100%);
             border: 1px solid rgba(243, 207, 101, 0.45);
@@ -66,7 +66,7 @@
             backdrop-filter: blur(8px);
         }
 
-        /* 3. Solid Royal Gold Names (No Gradient) */
+        /* Solid Royal Gold Names */
         .solid-gold-text {
             color: #f3cf65 !important;
             filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
@@ -84,7 +84,7 @@
             box-shadow: 0 15px 35px rgba(243, 207, 101, 0.6), inset 0 3px 8px rgba(255,255,255,0.7);
         }
 
-        /* Ken Burns Cinematic Pan & Zoom for Photo Reel */
+        /* Ken Burns Cinematic Pan & Zoom */
         @keyframes kenBurnsEffect {
             0% { transform: scale(1) translate(0, 0); }
             50% { transform: scale(1.08) translate(-1.5%, -1%); }
@@ -127,15 +127,18 @@
 </head>
 <body class="min-h-screen relative selection:bg-solidGold selection:text-maroonBg">
 
+    <!-- GitHub Hosted Sanai Audio -->
+    <audio id="weddingShehnaiAudio" loop preload="auto">
+        <source src="./sanai.mp3" type="audio/mpeg">
+        <source src="sanai.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- Ambient Sparkle Canvas -->
     <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-0 w-full h-full"></canvas>
 
-    <!-- ==============================================
-         3D WAX SEAL UNBOXING MODAL
-         ============================================== -->
+    <!-- 3D WAX SEAL UNBOXING MODAL -->
     <div id="unboxingModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl transition-all duration-700">
         <div class="relative w-full max-w-lg luxury-card rounded-3xl p-8 sm:p-12 text-center border-2 border-solidGold shadow-[0_0_60px_rgba(243,207,101,0.35)]">
-            
             <div class="inline-block text-xs uppercase tracking-[0.35em] text-solidGold font-bold border-b border-solidGold/40 pb-1 mb-4">
                 ॥ শ্রী শ্রী প্রজাপতয়ে নমঃ ॥
             </div>
@@ -147,7 +150,6 @@
                 "সুমন্ত ও পিয়ালীর যুগ্ম জীবনের শুভ সূচনায় আপনার সপরিবার উপস্থিতি একান্ত কাম্য"
             </p>
 
-            <!-- Wax Seal Button -->
             <div class="my-6 flex justify-center">
                 <button onclick="openWeddingInvitation()" class="wax-seal w-28 h-28 rounded-full flex flex-col items-center justify-center cursor-pointer group active:scale-95">
                     <span class="text-lightGold text-xl mb-1 group-hover:scale-110 transition-transform">
@@ -168,13 +170,10 @@
         </div>
     </div>
 
-    <!-- ==============================================
-         STICKY TOP BAR
-         ============================================== -->
+    <!-- STICKY TOP BAR -->
     <header class="sticky top-0 z-40 bg-[#42040f]/95 backdrop-blur-md border-b border-solidGold/35 px-4 sm:px-8 py-3.5 transition-all shadow-lg">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
             
-            <!-- Monogram -->
             <a href="#" class="flex items-center gap-3 group">
                 <div class="w-10 h-10 rounded-full border border-solidGold/70 bg-[#8f0a1b] flex items-center justify-center text-solidGold font-cinzel font-black text-sm shadow-[0_0_15px_rgba(243,207,101,0.3)] group-hover:scale-105 transition-transform">
                     S&P
@@ -189,7 +188,6 @@
                 </div>
             </a>
 
-            <!-- Sound & Language Controls -->
             <div class="flex items-center gap-2 sm:gap-3">
                 <button onclick="toggleShehnai()" id="shehnaiBtn" class="px-3 py-1.5 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/40 text-xs font-semibold text-solidGold flex items-center gap-2 transition active:scale-95" title="Shehnai Bridal Melody">
                     <i id="shehnaiIcon" class="fa-solid fa-music text-solidGold text-xs"></i>
@@ -213,14 +211,10 @@
         </div>
     </header>
 
-    <!-- ==============================================
-         MAIN INVITATION CONTENT
-         ============================================== -->
+    <!-- MAIN CONTENT -->
     <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-24">
 
-        <!-- ==============================================
-             HERO SECTION
-             ============================================== -->
+        <!-- HERO SECTION -->
         <section class="text-center py-12 sm:py-16 luxury-card rounded-3xl p-6 sm:p-12 mb-14 border border-solidGold/40">
             <div class="inline-block text-xs uppercase tracking-[0.4em] text-solidGold font-bold border-b border-solidGold/40 pb-1 mb-6">
                 ॥ ওঁ প্রজাপতয়ে নমঃ ॥
@@ -230,7 +224,6 @@
                 We Joyfully Invite You To Celebrate The Wedding Of
             </p>
 
-            <!-- Couple Name (Solid Gold, No Gradient) -->
             <div class="pt-6 pb-4 sm:pt-10 sm:pb-6 my-2">
                 <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold font-bengali solid-gold-text tracking-wide leading-tight">
                     সুমন্ত <span class="font-cursive text-lightGold text-3xl sm:text-5xl mx-1 sm:mx-2">&</span> পিয়ালী
@@ -241,7 +234,6 @@
                 "আকাশ ও মাটির মেলবন্ধনে রচিত হলো আমাদের নতুন পথচলা। জীবনের এই শুভ লগ্নে আপনার সস্নেহ আশীর্বাদ ও উপস্থিতি আমাদের পরম সৌভাগ্য।"
             </p>
 
-            <!-- Parent dedications -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto py-5 border-y border-solidGold/30 text-xs sm:text-sm">
                 <div>
                     <span class="text-solidGold uppercase font-semibold text-[11px] tracking-wider block mb-1">বর (Groom)</span>
@@ -255,7 +247,6 @@
                 </div>
             </div>
 
-            <!-- Auspicious Lagna Live Countdown -->
             <div class="mt-10">
                 <span class="text-xs uppercase tracking-[0.25em] text-solidGold font-semibold block mb-4">
                     ॥ শুভ বিবাহ লগ্ন গণনা (Lagna Countdown) ॥
@@ -281,9 +272,77 @@
             </div>
         </section>
 
-        <!-- ==============================================
-             CINEMATIC VIDEO PLAYER SECTION
-             ============================================== -->
+        <!-- LIVE VENUE & GUEST WEATHER WIDGET SECTION -->
+        <section class="mb-14 luxury-card rounded-3xl p-6 sm:p-8 border border-solidGold/40 text-center relative overflow-hidden">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-3 border-b border-solidGold/25 text-left">
+                <div>
+                    <span class="text-[11px] uppercase tracking-widest text-solidGold font-semibold">Live Real-Time Weather</span>
+                    <h3 class="text-xl sm:text-2xl font-bold solid-gold-text">লাইভ আবহাওয়া বার্তা</h3>
+                    <p class="text-xs text-lightGold/80 italic mt-0.5 font-serif">অনুষ্ঠানস্থল কিংবা আপনার নিজস্ব অবস্থানের তাৎক্ষণিক আবহাওয়া পূর্বাভাস</p>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-2">
+                    <select id="weatherVenueSelect" onchange="changeWeatherVenue(this.value)" class="px-3.5 py-1.5 rounded-full bg-black/70 border border-solidGold/50 text-solidGold text-xs font-semibold focus:outline-none cursor-pointer">
+                        <option value="kolkata">বিবাহ ভেন্যু (কলকাতা)</option>
+                        <option value="saltlake">সল্টলেক (কনে বাড়ি)</option>
+                        <option value="user_geo">📍 আমার বর্তমান অবস্থান</option>
+                    </select>
+
+                    <button onclick="detectGuestLocation()" class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-solidGold via-lightGold to-solidGold text-[#36030c] font-bold text-xs shadow hover:brightness-110 active:scale-95 transition flex items-center gap-1.5" title="আপনার বর্তমান অবস্থান সনাক্ত করুন">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                        <span class="hidden sm:inline">আমার অবস্থান</span>
+                    </button>
+
+                    <button onclick="fetchWeatherData()" class="p-2 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/40 text-solidGold text-xs transition active:rotate-180" title="রিফ্রেশ করুন">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Weather Details Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="p-4 rounded-2xl bg-black/50 border border-solidGold/30 flex flex-col items-center justify-center">
+                    <div id="weatherIconContainer" class="text-3xl text-amber-300 mb-2">
+                        <i class="fa-solid fa-cloud-sun"></i>
+                    </div>
+                    <span id="weatherTemp" class="text-2xl sm:text-3xl font-bold text-solidGold font-mono">--°C</span>
+                    <span id="weatherDesc" class="text-[11px] text-lightGold/90 font-medium mt-1">লোড হচ্ছে...</span>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-black/50 border border-solidGold/30 flex flex-col items-center justify-center">
+                    <div class="text-2xl text-rose-300 mb-2">
+                        <i class="fa-solid fa-temperature-half"></i>
+                    </div>
+                    <span id="weatherFeels" class="text-xl sm:text-2xl font-bold text-lightGold font-mono">--°C</span>
+                    <span class="text-[11px] text-lightGold/70 mt-1 font-sans">অনুভূত তাপমাত্রা</span>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-black/50 border border-solidGold/30 flex flex-col items-center justify-center">
+                    <div class="text-2xl text-cyan-300 mb-2">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <span id="weatherHumidity" class="text-xl sm:text-2xl font-bold text-lightGold font-mono">--%</span>
+                    <span class="text-[11px] text-lightGold/70 mt-1 font-sans">বাতাসের আর্দ্রতা</span>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-black/50 border border-solidGold/30 flex flex-col items-center justify-center">
+                    <div class="text-2xl text-emerald-300 mb-2">
+                        <i class="fa-solid fa-wind"></i>
+                    </div>
+                    <span id="weatherWind" class="text-xl sm:text-2xl font-bold text-lightGold font-mono">-- km/h</span>
+                    <span class="text-[11px] text-lightGold/70 mt-1 font-sans">বাতাসের গতিবেগ</span>
+                </div>
+            </div>
+
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-[11px] text-lightGold/80 font-mono">
+                <i class="fa-solid fa-location-dot text-solidGold text-xs"></i>
+                <span id="weatherLocationName">কলকাতা, পশ্চিমবঙ্গ</span> • 
+                <span>সর্বশেষ আপডেট: <span id="weatherUpdateTime">--:--</span></span>
+                <span id="locationSourceBadge" class="hidden ml-2 px-2 py-0.5 rounded-full bg-emerald-700/80 text-white text-[9px] uppercase tracking-wider">GPS Live</span>
+            </div>
+        </section>
+
+        <!-- CINEMATIC VIDEO PLAYER SECTION (GOOGLE DRIVE) -->
         <section class="mb-14 luxury-card rounded-3xl p-6 sm:p-8 border border-solidGold/40 text-center">
             <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-3 border-b border-solidGold/25">
                 <div class="text-left">
@@ -298,11 +357,12 @@
 
             <div class="relative w-full aspect-video rounded-2xl overflow-hidden border-2 border-solidGold/50 shadow-2xl bg-black">
                 <div id="videoContainer" class="w-full h-full">
-                    <video id="nativePlayer" controls class="w-full h-full object-cover">
-                        <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-bride-with-henna-and-bracelets-43093-large.mp4" type="video/mp4">
+                    <video id="nativePlayer" controls class="w-full h-full object-cover hidden">
+                        <source src="" type="video/mp4">
                         আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
                     </video>
-                    <iframe id="iframePlayer" class="w-full h-full hidden" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    <!-- Google Drive Embed -->
+                    <iframe id="iframePlayer" class="w-full h-full border-0" src="https://drive.google.com/file/d/1lE6aiehtxLQ6i3huk8ITkOmgGTfejv7G/preview" allow="autoplay; fullscreen" allowfullscreen></iframe>
                 </div>
             </div>
             <p class="text-xs text-lightGold/80 italic mt-3 font-serif">
@@ -310,9 +370,7 @@
             </p>
         </section>
 
-        <!-- ==============================================
-             CINEMATIC PHOTO REEL SHOWCASE
-             ============================================== -->
+        <!-- CINEMATIC PHOTO REEL SHOWCASE (SLIDER) -->
         <section class="mb-14 luxury-card rounded-3xl p-6 sm:p-10 border border-solidGold/40 text-center">
             <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-3 border-b border-solidGold/25 text-left">
                 <div>
@@ -338,7 +396,7 @@
                             শুভ বিবাহ
                         </span>
                         <span id="reelIndexCounter" class="text-xs font-mono text-lightGold/80 px-2.5 py-0.5 rounded-full bg-black/50 border border-solidGold/30">
-                            ১ / ৮
+                            ১ / ২
                         </span>
                     </div>
 
@@ -371,7 +429,7 @@
 
                     <button onclick="likeReelPhoto()" class="px-3.5 py-1.5 rounded-full bg-black/50 border border-rose-500/40 text-rose-300 text-xs flex items-center gap-1.5 hover:scale-105 active:scale-95 transition">
                         <i class="fa-solid fa-heart text-rose-500"></i>
-                        <span id="reelLikeCount">48</span>
+                        <span id="reelLikeCount">54</span>
                     </button>
                 </div>
 
@@ -379,9 +437,7 @@
             </div>
         </section>
 
-        <!-- ==============================================
-             CEREMONIAL ITINERARY
-             ============================================== -->
+        <!-- CEREMONIAL ITINERARY -->
         <section class="mb-14">
             <div class="text-center mb-8">
                 <span class="text-xs uppercase tracking-[0.3em] text-solidGold font-semibold">Wedding Schedule</span>
@@ -464,9 +520,7 @@
             </div>
         </section>
 
-        <!-- ==============================================
-             INTERACTIVE GOOGLE MAPS SECTION
-             ============================================== -->
+        <!-- INTERACTIVE GOOGLE MAPS SECTION -->
         <section class="mb-14 luxury-card rounded-3xl p-6 sm:p-10 border border-solidGold/40">
             <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-solidGold/25">
                 <div class="text-left">
@@ -554,9 +608,7 @@
             </div>
         </section>
 
-        <!-- ==============================================
-             RSVP REGISTRATION FORM
-             ============================================== -->
+        <!-- RSVP REGISTRATION FORM -->
         <section id="rsvpSection" class="mb-14 luxury-card rounded-3xl p-6 sm:p-10 border-2 border-solidGold shadow-2xl">
             <div class="text-center mb-8">
                 <span class="text-xs uppercase tracking-[0.3em] text-solidGold font-bold">Online RSVP & Digital Invitation Pass</span>
@@ -675,9 +727,7 @@
             </div>
         </section>
 
-        <!-- ==============================================
-             BLESSINGS WALL (GUESTBOOK)
-             ============================================== -->
+        <!-- BLESSINGS WALL (GUESTBOOK) -->
         <section class="luxury-card rounded-3xl p-6 sm:p-10 border border-solidGold/40">
             <div class="text-center mb-8">
                 <span class="text-xs uppercase tracking-[0.3em] text-solidGold font-semibold">Guestbook & Love</span>
@@ -696,7 +746,7 @@
         <p class="font-cinzel text-[10px] tracking-widest text-solidGold/70">© 2026 ROYAL BENGALI WEDDING • ALL RIGHTS RESERVED</p>
     </footer>
 
-    <!-- MODAL 1: CHANGE / ADD VIDEO -->
+    <!-- MODAL: VIDEO CHANGE -->
     <div id="videoModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
         <div class="relative w-full max-w-lg luxury-card rounded-3xl p-6 sm:p-8 border-2 border-solidGold shadow-2xl text-left">
             <div class="flex items-center justify-between pb-3 border-b border-solidGold/30 mb-4">
@@ -706,18 +756,15 @@
                 </h4>
                 <button onclick="closeVideoModal()" class="w-8 h-8 rounded-full bg-black/60 text-solidGold flex items-center justify-center border border-solidGold/30">✕</button>
             </div>
-
             <div class="mb-4">
-                <label class="block text-xs font-bold uppercase text-solidGold mb-1">ভিডিও লিংক (YouTube / MP4 URL):</label>
-                <input type="url" id="videoUrlInput" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
+                <label class="block text-xs font-bold uppercase text-solidGold mb-1">ভিডিও লিংক (YouTube / Drive Preview / MP4 URL):</label>
+                <input type="url" id="videoUrlInput" placeholder="https://drive.google.com/file/d/.../preview বা YouTube লিংক" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
             </div>
-
             <div class="flex items-center gap-3 my-3">
                 <div class="flex-1 h-px bg-solidGold/20"></div>
                 <span class="text-xs uppercase text-solidGold font-bold">অথবা</span>
                 <div class="flex-1 h-px bg-solidGold/20"></div>
             </div>
-
             <div class="mb-5">
                 <label class="block text-xs font-bold uppercase text-solidGold mb-1">ডিভাইস থেকে ফাইল নির্বাচন করুন:</label>
                 <label class="flex flex-col items-center justify-center p-4 border-2 border-dashed border-solidGold/40 rounded-xl cursor-pointer bg-black/40 hover:border-solidGold">
@@ -726,7 +773,6 @@
                     <input type="file" id="localVideoFileInput" accept="video/*" class="hidden" onchange="handleLocalVideo(event)">
                 </label>
             </div>
-
             <div class="flex justify-end gap-2">
                 <button onclick="closeVideoModal()" class="px-4 py-1.5 rounded-full bg-black/60 border border-solidGold/30 text-solidGold text-xs">বাতিল</button>
                 <button onclick="applyNewVideo()" class="px-5 py-1.5 rounded-full bg-solidGold text-[#36030c] font-bold text-xs shadow hover:brightness-110">প্রয়োগ করুন</button>
@@ -734,7 +780,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2: ADD PHOTO TO REEL -->
+    <!-- MODAL: ADD PHOTO -->
     <div id="uploadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
         <div class="relative w-full max-w-lg luxury-card rounded-3xl p-6 sm:p-8 border-2 border-solidGold shadow-2xl text-left">
             <div class="flex items-center justify-between pb-3 border-b border-solidGold/30 mb-4">
@@ -744,7 +790,6 @@
                 </h4>
                 <button onclick="closeUploadModal()" class="w-8 h-8 rounded-full bg-black/60 text-solidGold flex items-center justify-center border border-solidGold/30">✕</button>
             </div>
-
             <div class="mb-4">
                 <label class="block text-xs font-bold uppercase text-solidGold mb-1">ডিভাইস থেকে ফটো বাছুন:</label>
                 <label class="flex flex-col items-center justify-center p-4 border-2 border-dashed border-solidGold/40 rounded-xl cursor-pointer bg-black/40 hover:border-solidGold">
@@ -753,23 +798,19 @@
                     <input type="file" id="localPhotoInput" accept="image/*" class="hidden" onchange="handleLocalPhoto(event)">
                 </label>
             </div>
-
             <div class="flex items-center gap-3 my-2">
                 <div class="flex-1 h-px bg-solidGold/20"></div>
                 <span class="text-xs uppercase text-solidGold font-bold">অথবা</span>
                 <div class="flex-1 h-px bg-solidGold/20"></div>
             </div>
-
             <div class="mb-4">
                 <label class="block text-xs font-bold uppercase text-solidGold mb-1">ছবির অনলাইন লিংক (Image URL):</label>
-                <input type="url" id="photoUrlInput" placeholder="https://images.unsplash.com/..." class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
+                <input type="url" id="photoUrlInput" placeholder="https://drive.google.com/file/d/... বা ইমেজ লিংক" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
             </div>
-
             <div class="mb-5">
                 <label class="block text-xs font-bold uppercase text-solidGold mb-1">ক্যাপশন / বিবরণ:</label>
                 <input type="text" id="photoCaptionInput" placeholder="উদাঃ শুভদৃষ্টি ও অগ্নিসাক্ষী" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
             </div>
-
             <div class="flex justify-end gap-2">
                 <button onclick="closeUploadModal()" class="px-4 py-1.5 rounded-full bg-black/60 border border-solidGold/30 text-solidGold text-xs">বাতিল</button>
                 <button onclick="saveNewReelPhoto()" class="px-5 py-1.5 rounded-full bg-solidGold text-[#36030c] font-bold text-xs shadow hover:brightness-110">যোগ করুন</button>
@@ -777,7 +818,7 @@
         </div>
     </div>
 
-    <!-- MODAL 3: CUSTOMIZE GOOGLE MAP LOCATION -->
+    <!-- MODAL: CUSTOM MAP -->
     <div id="customMapModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
         <div class="relative w-full max-w-lg luxury-card rounded-3xl p-6 sm:p-8 border-2 border-solidGold shadow-2xl text-left">
             <div class="flex items-center justify-between pb-3 border-b border-solidGold/30 mb-4">
@@ -787,16 +828,13 @@
                 </h4>
                 <button onclick="closeCustomMapModal()" class="w-8 h-8 rounded-full bg-black/60 text-solidGold flex items-center justify-center border border-solidGold/30">✕</button>
             </div>
-
             <div class="mb-4">
                 <label class="block text-xs font-bold uppercase text-solidGold mb-1">ভেন্যুর নাম বা গুগল ম্যাপ ঠিকানা:</label>
                 <input type="text" id="mapCustomSearchInput" placeholder="উদাঃ ITC Sonar Kolkata বা Science City Kolkata" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
             </div>
-
             <p class="text-[11px] text-lightGold/80 italic mb-5">
                 যে কোনো ল্যান্ডমার্ক, ব্যাঙ্কুয়েট হল বা এলাকার নাম লিখলেই লাইভ গুগল ম্যাপ ও সরাসরি নেভিগেশন লিংক আপডেট হয়ে যাবে।
             </p>
-
             <div class="flex justify-end gap-2">
                 <button onclick="closeCustomMapModal()" class="px-4 py-1.5 rounded-full bg-black/60 border border-solidGold/30 text-solidGold text-xs">বাতিল</button>
                 <button onclick="applyCustomMapLocation()" class="px-5 py-1.5 rounded-full bg-solidGold text-[#36030c] font-bold text-xs shadow hover:brightness-110">ম্যাপ আপডেট করুন</button>
@@ -806,10 +844,140 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        // ================= WEATHER MODULE LOGIC WITH GEOLOCATION =================
+        const venueCoordinates = {
+            kolkata: { name: "কলকাতা, পশ্চিমবঙ্গ (EM Bypass)", lat: 22.5411, lon: 88.3964 },
+            saltlake: { name: "সল্টলেক, কলকাতা (সেক্টর ১)", lat: 22.5867, lon: 88.4178 }
+        };
+
+        let currentActiveWeatherVenue = 'kolkata';
+        let userGeolocation = null;
+
+        const weatherCodeMap = {
+            0: { desc: "পরিষ্কার আকাশ ☀️", icon: "fa-solid fa-sun text-amber-300" },
+            1: { desc: "প্রধানত পরিষ্কার 🌤️", icon: "fa-solid fa-cloud-sun text-amber-200" },
+            2: { desc: "আংশিক মেঘলা ⛅", icon: "fa-solid fa-cloud-sun text-amber-100" },
+            3: { desc: "মেঘাচ্ছন্ন ☁️", icon: "fa-solid fa-cloud text-gray-300" },
+            45: { desc: "কুয়াশাচ্ছন্ন 🌫️", icon: "fa-solid fa-smog text-gray-400" },
+            48: { desc: "ঘন কুয়াশা 🌫️", icon: "fa-solid fa-smog text-gray-400" },
+            51: { desc: "হালকা গুঁড়ি গুঁড়ি বৃষ্টি 🌦️", icon: "fa-solid fa-cloud-rain text-cyan-300" },
+            61: { desc: "হালকা বৃষ্টিপাত 🌧️", icon: "fa-solid fa-cloud-rain text-cyan-400" },
+            63: { desc: "মাঝারি বৃষ্টিপাত 🌧️", icon: "fa-solid fa-cloud-showers-heavy text-cyan-500" },
+            80: { desc: "বৃষ্টির সম্ভাবনা 🌧️", icon: "fa-solid fa-cloud-showers-heavy text-blue-400" },
+            95: { desc: "বজ্রবিদ্যুৎ সহ ঝড় ⛈️", icon: "fa-solid fa-cloud-bolt text-amber-400" }
+        };
+
+        async function fetchWeatherData() {
+            let lat, lon, locationDisplayName;
+            const badge = document.getElementById('locationSourceBadge');
+
+            if (currentActiveWeatherVenue === 'user_geo' && userGeolocation) {
+                lat = userGeolocation.lat;
+                lon = userGeolocation.lon;
+                locationDisplayName = userGeolocation.name;
+                badge.classList.remove('hidden');
+            } else {
+                const venue = venueCoordinates[currentActiveWeatherVenue] || venueCoordinates.kolkata;
+                lat = venue.lat;
+                lon = venue.lon;
+                locationDisplayName = venue.name;
+                badge.classList.add('hidden');
+            }
+
+            document.getElementById('weatherLocationName').innerText = locationDisplayName;
+            document.getElementById('weatherDesc').innerText = "আপডেট হচ্ছে...";
+
+            try {
+                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&timezone=auto`);
+                const data = await response.json();
+                const current = data.current;
+
+                document.getElementById('weatherTemp').innerText = `${Math.round(current.temperature_2m)}°C`;
+                document.getElementById('weatherFeels').innerText = `${Math.round(current.apparent_temperature)}°C`;
+                document.getElementById('weatherHumidity').innerText = `${current.relative_humidity_2m}%`;
+                document.getElementById('weatherWind').innerText = `${Math.round(current.wind_speed_10m)} km/h`;
+
+                const codeInfo = weatherCodeMap[current.weather_code] || { desc: "স্নিগ্ধ আবহাওয়া", icon: "fa-solid fa-cloud-sun text-amber-300" };
+                document.getElementById('weatherDesc').innerText = codeInfo.desc;
+                document.getElementById('weatherIconContainer').innerHTML = `<i class="${codeInfo.icon}"></i>`;
+
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                document.getElementById('weatherUpdateTime').innerText = `${hours}:${minutes}`;
+            } catch (err) {
+                console.error("Weather fetch failed:", err);
+                document.getElementById('weatherDesc').innerText = "আবহাওয়া দেখাচ্ছে না";
+            }
+        }
+
+        function detectGuestLocation() {
+            if (!navigator.geolocation) {
+                alert("আপনার ব্রাউজারে জিওলোকেশন (Location) সাপোর্ট নেই।");
+                return;
+            }
+
+            document.getElementById('weatherDesc').innerText = "লোকেশন খোঁজা হচ্ছে...";
+            document.getElementById('weatherLocationName').innerText = "আপনার জিপিএস সনাক্তকরণ চলছে...";
+
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    let resolvedName = `আপনার অবস্থান (${lat.toFixed(2)}°N, ${lon.toFixed(2)}°E)`;
+
+                    try {
+                        const geoRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=bn`);
+                        const geoData = await geoRes.json();
+                        const city = geoData.locality || geoData.city || geoData.principalSubdivision;
+                        if (city) {
+                            resolvedName = `${city}, আপনার অবস্থান`;
+                        }
+                    } catch (e) {
+                        console.log("Reverse geocode skip:", e);
+                    }
+
+                    userGeolocation = { lat, lon, name: resolvedName };
+                    currentActiveWeatherVenue = 'user_geo';
+                    document.getElementById('weatherVenueSelect').value = 'user_geo';
+
+                    fetchWeatherData();
+
+                    confetti({
+                        particleCount: 30,
+                        spread: 50,
+                        origin: { y: 0.3 },
+                        colors: ['#4ade80', '#f3cf65']
+                    });
+                },
+                (error) => {
+                    let errMsg = "লোকেশন অনুমতি পাওয়া যায়নি।";
+                    if (error.code === error.PERMISSION_DENIED) {
+                        errMsg = "আপনি লোকেশন অনুমতি দেননি। ভেন্যু আবহাওয়া প্রদর্শিত হচ্ছে।";
+                    }
+                    alert(errMsg);
+                    currentActiveWeatherVenue = 'kolkata';
+                    document.getElementById('weatherVenueSelect').value = 'kolkata';
+                    fetchWeatherData();
+                },
+                { timeout: 10000, enableHighAccuracy: true }
+            );
+        }
+
+        function changeWeatherVenue(val) {
+            if (val === 'user_geo') {
+                detectGuestLocation();
+            } else {
+                currentActiveWeatherVenue = val;
+                fetchWeatherData();
+            }
+        }
+
+        // ================= CINEMATIC PHOTO REEL LOGIC =================
         const defaultReelPhotos = [
             {
                 id: 1,
-                url: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1400&q=80",
+                url: "https://lh3.googleusercontent.com/d/1LlBGIr1RzKifdPb4oXQiB_6Rg-otESOy",
                 caption: "শুভদৃষ্টির মাহেন্দ্রক্ষণে লাজুক চোখের প্রথম দৃষ্টি",
                 category: "শুভ বিবাহ",
                 date: "২৪শে নভেম্বর ২০২৬",
@@ -817,47 +985,15 @@
             },
             {
                 id: 2,
-                url: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1400&q=80",
-                caption: "লাল বেনারসী, চন্দনের মঙ্গল কল্কা ও শঙ্খের ধ্বনি",
-                category: "শুভ বিবাহ",
-                date: "২৪শে নভেম্বর ২০২৬",
-                likes: 72
-            },
-            {
-                id: 3,
-                url: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80",
-                caption: "সোনালী হলুদের ছোঁয়ায় গায়ে হলুদের আনন্দ উৎসব",
-                category: "গায়ে হলুদ",
-                date: "২৩শে নভেম্বর ২০২৬",
-                likes: 45
-            },
-            {
-                id: 4,
-                url: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1400&q=80",
-                caption: "সাতপাকের পবিত্র বন্ধনে জীবনের নতুন সংকল্প",
-                category: "সাতপাক ও সিঁদুরদান",
-                date: "২৪শে নভেম্বর ২০২৬",
-                likes: 89
-            },
-            {
-                id: 5,
-                url: "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1400&q=80",
-                caption: "গোধূলির আলোয় হাত ধরে অনন্তের পথে চলা",
+                url: "https://lh3.googleusercontent.com/d/1QqDTqFtZbihQXe7Mm9KKdEb440mhGnRC",
+                caption: "ভালোবাসার এক অপূর্ব মুহূর্ত ও নবজীবনের অঙ্গীকার",
                 category: "প্রি-ওয়েডিং",
                 date: "১২ই অক্টোবর ২০২৬",
-                likes: 63
-            },
-            {
-                id: 6,
-                url: "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1400&q=80",
-                caption: "ভাত-কাপড়ের পবিত্র অঙ্গীকার ও রাজকীয় বৌভাত সভা",
-                category: "বৌভাত",
-                date: "২৬শে নভেম্বর ২০২৬",
-                likes: 41
+                likes: 54
             }
         ];
 
-        let reelPhotos = JSON.parse(localStorage.getItem('bengali_reel_photos')) || defaultReelPhotos;
+        let reelPhotos = defaultReelPhotos;
         let currentReelIdx = 0;
         let isReelPlaying = true;
         let reelTimer = null;
@@ -934,7 +1070,7 @@
 
         function startReelAutoplay() {
             clearInterval(reelTimer);
-            if (!isReelPlaying) return;
+            if (!isReelPlaying || reelPhotos.length <= 1) return;
             reelTimer = setInterval(() => {
                 nextReelSlide();
             }, REEL_DURATION);
@@ -982,7 +1118,6 @@
             if (!photo) return;
             photo.likes += 1;
             document.getElementById('reelLikeCount').innerText = photo.likes;
-            localStorage.setItem('bengali_reel_photos', JSON.stringify(reelPhotos));
 
             confetti({
                 particleCount: 25,
@@ -1006,9 +1141,16 @@
             document.getElementById('photoUrlInput').value = localSelectedPhotoUrl;
         }
         function saveNewReelPhoto() {
-            const url = document.getElementById('photoUrlInput').value.trim() || localSelectedPhotoUrl;
+            let url = document.getElementById('photoUrlInput').value.trim() || localSelectedPhotoUrl;
             const caption = document.getElementById('photoCaptionInput').value.trim() || "আমাদের সুন্দর স্মৃতি";
             if (!url) return;
+
+            if (url.includes('drive.google.com')) {
+                const matchId = url.match(/\/d\/([^/]+)/) || url.match(/id=([^&]+)/);
+                if (matchId) {
+                    url = `https://lh3.googleusercontent.com/d/${matchId[1]}`;
+                }
+            }
 
             const newPhoto = {
                 id: Date.now(),
@@ -1020,7 +1162,6 @@
             };
 
             reelPhotos.unshift(newPhoto);
-            localStorage.setItem('bengali_reel_photos', JSON.stringify(reelPhotos));
 
             document.getElementById('photoUrlInput').value = '';
             document.getElementById('photoCaptionInput').value = '';
@@ -1038,6 +1179,7 @@
             });
         }
 
+        // ================= WAX SEAL, SOUND & COUNTDOWN =================
         function openWeddingInvitation() {
             const modal = document.getElementById('unboxingModal');
             modal.style.opacity = '0';
@@ -1053,12 +1195,10 @@
             });
 
             playShankhaSound();
-            toggleShehnai();
+            startShehnaiDirectly();
         }
 
         let audioCtx = null;
-        let isShehnaiPlaying = false;
-        let shehnaiLoopTimeout = null;
 
         function getAudioContext() {
             if (!audioCtx) {
@@ -1106,76 +1246,50 @@
             });
         }
 
-        const shehnaiNotes = [
-            { f: 587.33, dur: 0.9 },
-            { f: 659.25, dur: 0.6 },
-            { f: 783.99, dur: 1.1 },
-            { f: 880.00, dur: 0.8 },
-            { f: 783.99, dur: 0.7 },
-            { f: 659.25, dur: 1.2 }
-        ];
+        let isShehnaiPlaying = false;
 
-        function playShehnaiNote(freq, duration, delay) {
-            if (!isShehnaiPlaying) return;
-            const ctx = getAudioContext();
-            const startTime = ctx.currentTime + delay;
-
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            const filter = ctx.createBiquadFilter();
-
-            osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(freq, startTime);
-
-            const vib = ctx.createOscillator();
-            const vibGain = ctx.createGain();
-            vib.frequency.value = 6.0;
-            vibGain.gain.value = 7.0;
-            vib.connect(osc.frequency);
-            vib.start(startTime);
-            vib.stop(startTime + duration);
-
-            filter.type = 'lowpass';
-            filter.frequency.value = 2400;
-
-            gain.gain.setValueAtTime(0.0001, startTime);
-            gain.gain.linearRampToValueAtTime(0.06, startTime + 0.1);
-            gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
-
-            osc.connect(filter);
-            filter.connect(gain);
-            gain.connect(ctx.destination);
-
-            osc.start(startTime);
-            osc.stop(startTime + duration);
-        }
-
-        function loopShehnaiMelody() {
-            if (!isShehnaiPlaying) return;
-            let offset = 0;
-            shehnaiNotes.forEach(n => {
-                playShehnaiNote(n.f, n.dur, offset);
-                offset += n.dur * 0.95;
-            });
-            shehnaiLoopTimeout = setTimeout(() => {
-                if (isShehnaiPlaying) loopShehnaiMelody();
-            }, (offset + 1.2) * 1000);
+        function startShehnaiDirectly() {
+            const audio = document.getElementById('weddingShehnaiAudio');
+            const icon = document.getElementById('shehnaiIcon');
+            if (audio) {
+                audio.play().then(() => {
+                    isShehnaiPlaying = true;
+                    if (icon) icon.className = "fa-solid fa-volume-high text-solidGold text-xs";
+                }).catch(err => {
+                    console.log("Audio autoplay waiting for user interaction:", err);
+                });
+            }
         }
 
         function toggleShehnai() {
-            const btn = document.getElementById('shehnaiBtn');
+            const audio = document.getElementById('weddingShehnaiAudio');
             const icon = document.getElementById('shehnaiIcon');
 
             if (!isShehnaiPlaying) {
-                isShehnaiPlaying = true;
-                icon.className = "fa-solid fa-volume-high text-solidGold text-xs";
-                loopShehnaiMelody();
+                audio.play().then(() => {
+                    isShehnaiPlaying = true;
+                    if (icon) icon.className = "fa-solid fa-volume-high text-solidGold text-xs";
+                }).catch(err => {
+                    console.log("Audio play blocked by browser:", err);
+                });
             } else {
+                audio.pause();
                 isShehnaiPlaying = false;
-                clearTimeout(shehnaiLoopTimeout);
-                icon.className = "fa-solid fa-volume-xmark text-solidGold text-xs";
+                if (icon) icon.className = "fa-solid fa-volume-xmark text-solidGold text-xs";
             }
         }
+
+        // Automatic fallback on first touch/click anywhere on page
+        window.addEventListener('click', function initFirstAudio() {
+            if (!isShehnaiPlaying) {
+                const audio = document.getElementById('weddingShehnaiAudio');
+                audio.play().then(() => {
+                    isShehnaiPlaying = true;
+                    const icon = document.getElementById('shehnaiIcon');
+                    if (icon) icon.className = "fa-solid fa-volume-high text-solidGold text-xs";
+                }).catch(() => {});
+            }
+        }, { once: true });
 
         const lagnaDate = new Date("November 24, 2026 19:30:00").getTime();
 
@@ -1204,6 +1318,7 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
+        // ================= VIDEO MODAL LOGIC =================
         function openVideoModal() {
             document.getElementById('videoModal').classList.remove('hidden');
         }
@@ -1226,7 +1341,19 @@
             const native = document.getElementById('nativePlayer');
             const iframe = document.getElementById('iframePlayer');
 
-            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+            if (url.includes('drive.google.com')) {
+                let previewUrl = url;
+                if (url.includes('/view')) {
+                    previewUrl = url.replace(/\/view(\?.*)?$/, '/preview');
+                } else if (url.includes('open?id=')) {
+                    const match = url.match(/id=([^&]+)/);
+                    if (match) previewUrl = `https://drive.google.com/file/d/${match[1]}/preview`;
+                }
+                native.classList.add('hidden');
+                native.pause();
+                iframe.src = previewUrl;
+                iframe.classList.remove('hidden');
+            } else if (url.includes('youtube.com') || url.includes('youtu.be')) {
                 let videoId = "";
                 if (url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1].split('?')[0];
                 else if (url.includes('v=')) videoId = url.split('v=')[1].split('&')[0];
@@ -1246,6 +1373,7 @@
             closeVideoModal();
         }
 
+        // ================= VENUE MAP SWITCHER =================
         const weddingVenues = {
             wedding: {
                 category: "শুভ বিবাহ মহালগ্ন ( Saat Paak )",
@@ -1332,6 +1460,7 @@
             closeCustomMapModal();
         }
 
+        // ================= RSVP & PASS GENERATION =================
         let activePassData = null;
 
         function handleRsvpSubmit(e) {
@@ -1460,6 +1589,7 @@
             document.getElementById('navRsvpText').innerText = (currentLang === 'bn') ? 'RSVP পাস' : 'RSVP Pass';
         }
 
+        // ================= BACKGROUND SPARKLES =================
         const canvas = document.getElementById('ambientCanvas');
         const ctx = canvas.getContext('2d');
         let sparkles = [];
@@ -1508,6 +1638,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             initPhotoReel();
+            fetchWeatherData();
         });
     </script>
 </body>
