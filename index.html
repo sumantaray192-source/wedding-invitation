@@ -89,26 +89,6 @@
             animation: kenBurnsEffect 7s ease-in-out infinite alternate;
         }
 
-        /* Responsive Video Container Fix */
-        .video-player-frame {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%; /* 16:9 ratio */
-            overflow: hidden;
-            background-color: #000;
-        }
-
-        .video-player-frame iframe,
-        .video-player-frame video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
         .ticket-cut-l {
             position: absolute;
             left: -12px;
@@ -140,16 +120,16 @@
 </head>
 <body class="min-h-screen relative selection:bg-solidGold selection:text-maroonBg">
 
-    <!-- GitHub Hosted Sanai Audio -->
+    <!-- Audio -->
     <audio id="weddingShehnaiAudio" loop preload="auto">
         <source src="./sanai.mp3" type="audio/mpeg">
         <source src="sanai.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Ambient Sparkle Canvas -->
+    <!-- Canvas -->
     <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-0 w-full h-full"></canvas>
 
-    <!-- 3D WAX SEAL UNBOXING MODAL -->
+    <!-- UNBOXING MODAL -->
     <div id="unboxingModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl transition-all duration-700">
         <div class="relative w-full max-w-lg luxury-card rounded-3xl p-6 sm:p-12 text-center border-2 border-solidGold shadow-[0_0_60px_rgba(243,207,101,0.35)]">
             <div class="inline-block text-[11px] sm:text-xs uppercase tracking-[0.35em] text-solidGold font-bold border-b border-solidGold/40 pb-1 mb-4">
@@ -183,7 +163,7 @@
         </div>
     </div>
 
-    <!-- STICKY TOP BAR -->
+    <!-- HEADER -->
     <header class="sticky top-0 z-40 bg-[#42040f]/95 backdrop-blur-md border-b border-solidGold/35 px-3 sm:px-8 py-2.5 sm:py-3.5 transition-all shadow-lg">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3">
             <a href="#" class="flex items-center gap-2 sm:gap-3 group">
@@ -255,7 +235,6 @@
                 </div>
             </div>
 
-            <!-- COUNTDOWN -->
             <div class="mt-8 sm:mt-10">
                 <span class="text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-solidGold font-semibold block mb-3 sm:mb-4">
                     ॥ শুভ বিবাহ লগ্ন গণনা (Lagna Countdown) ॥
@@ -281,7 +260,7 @@
             </div>
         </section>
 
-        <!-- CINEMATIC VIDEO PLAYER SECTION (FIXED FOR MOBILE WITHOUT BLACK BOXES) -->
+        <!-- CINEMATIC VIDEO PLAYER (FIXED: GITHUB DIRECT VIDEO) -->
         <section class="mb-8 sm:mb-14 luxury-card rounded-3xl p-4 sm:p-8 border border-solidGold/40 text-center">
             <div class="flex items-center justify-between gap-2 mb-4 pb-2.5 border-b border-solidGold/25 text-left">
                 <div>
@@ -294,30 +273,30 @@
                 </button>
             </div>
 
-            <!-- Auto-fixing video player container -->
-            <div class="relative w-full max-w-3xl mx-auto rounded-2xl overflow-hidden border-2 border-solidGold/60 shadow-2xl bg-black">
-                <div class="video-player-frame">
-                    
-                    <!-- HTML5 Direct Video: Works smoothly if wedding.mp4 exists in repo or through direct source -->
-                    <video 
-                        id="nativePlayer" 
-                        controls 
-                        playsinline 
-                        preload="metadata"
-                        class="hidden w-full h-full object-contain bg-black">
-                        <source src="./wedding.mp4" type="video/mp4">
-                        <source src="https://drive.google.com/uc?export=download&id=1lE6aiehtxLQ6i3huk8ITkOmgGTfejv7G" type="video/mp4">
-                        আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
-                    </video>
+            <!-- 16:9 Aspect Video Container -->
+            <div class="relative w-full max-w-3xl mx-auto aspect-video rounded-2xl overflow-hidden border-2 border-solidGold/60 shadow-2xl bg-black">
+                <!-- HTML5 Native Player -->
+                <video 
+                    id="nativePlayer" 
+                    controls 
+                    playsinline 
+                    preload="metadata"
+                    class="w-full h-full object-contain bg-black">
+                    <!-- GitHub Repository Video File Paths -->
+                    <source src="./wedding.mp4" type="video/mp4">
+                    <source src="wedding.mp4" type="video/mp4">
+                    <source src="./video.mp4" type="video/mp4">
+                    আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
+                </video>
 
-                    <!-- Google Drive Embed with zero spacing & auto full height/width -->
-                    <iframe 
-                        id="iframePlayer" 
-                        src="https://drive.google.com/file/d/1lE6aiehtxLQ6i3huk8ITkOmgGTfejv7G/preview" 
-                        allow="autoplay; fullscreen" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
+                <!-- Fallback iframe container -->
+                <iframe 
+                    id="iframePlayer" 
+                    class="hidden w-full h-full border-0 absolute inset-0"
+                    src="" 
+                    allow="autoplay; fullscreen" 
+                    allowfullscreen>
+                </iframe>
             </div>
             
             <p class="text-[11px] sm:text-xs text-lightGold/80 italic mt-3 font-serif">
@@ -325,7 +304,7 @@
             </p>
         </section>
 
-        <!-- CINEMATIC PHOTO REEL SHOWCASE (MOBILE IMAGE FIX) -->
+        <!-- CINEMATIC PHOTO REEL SHOWCASE -->
         <section class="mb-8 sm:mb-14 luxury-card rounded-3xl p-4 sm:p-10 border border-solidGold/40 text-center">
             <div class="flex items-center justify-between gap-2 mb-4 pb-2.5 border-b border-solidGold/25 text-left">
                 <div>
@@ -338,7 +317,6 @@
                 </button>
             </div>
 
-            <!-- Controlled Mobile Photo Box: Never cuts off or shrinks into tiny spaces -->
             <div class="relative w-full max-w-3xl mx-auto h-[260px] sm:h-[420px] md:h-[480px] rounded-2xl overflow-hidden border-2 border-solidGold/60 shadow-[0_0_30px_rgba(243,207,101,0.25)] bg-black select-none group">
                 <img id="reelMainImg" src="" alt="Cinematic Photo Reel" class="w-full h-full object-cover ken-burns transition-opacity duration-500 ease-in-out cursor-pointer" onclick="toggleReelPlay()" onerror="handleImageError(this)">
 
@@ -416,7 +394,6 @@
                 </div>
             </div>
 
-            <!-- Weather Details Grid -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 max-w-4xl mx-auto">
                 <div class="p-3 sm:p-4 rounded-2xl bg-black/50 border border-solidGold/30 flex flex-col items-center justify-center">
                     <div id="weatherIconContainer" class="text-2xl sm:text-3xl text-amber-300 mb-1">
@@ -740,7 +717,7 @@
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="relative z-10 border-t border-solidGold/30 bg-[#2b0208]/85 py-6 text-center text-xs text-solidGold/80">
         <p class="font-bengali text-xs sm:text-sm text-solidGold mb-1">॥ শুভ পরিণয় • সুমন্ত ও পিয়ালী ॥</p>
         <p class="font-cinzel text-[9px] sm:text-[10px] tracking-widest text-solidGold/70">© 2026 ROYAL BENGALI WEDDING • ALL RIGHTS RESERVED</p>
@@ -757,8 +734,8 @@
                 <button onclick="closeVideoModal()" class="w-7 h-7 rounded-full bg-black/60 text-solidGold flex items-center justify-center border border-solidGold/30">✕</button>
             </div>
             <div class="mb-3">
-                <label class="block text-xs font-bold uppercase text-solidGold mb-1">ভিডিও লিংক (Drive Preview / YouTube / MP4):</label>
-                <input type="url" id="videoUrlInput" placeholder="Drive / YouTube / MP4 URL" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
+                <label class="block text-xs font-bold uppercase text-solidGold mb-1">ভিডিও ফাইল নেম বা অনলাইন লিঙ্ক:</label>
+                <input type="text" id="videoUrlInput" placeholder="./wedding.mp4 বা YouTube/Drive লিঙ্ক" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
             </div>
             <div class="flex justify-end gap-2 mt-4">
                 <button onclick="closeVideoModal()" class="px-3.5 py-1.5 rounded-full bg-black/60 border border-solidGold/30 text-solidGold text-xs">বাতিল</button>
@@ -1260,6 +1237,7 @@
                     if (match) previewUrl = `https://drive.google.com/file/d/${match[1]}/preview`;
                 }
                 native.classList.add('hidden');
+                native.pause();
                 iframe.src = previewUrl;
                 iframe.classList.remove('hidden');
             } else if (url.includes('youtube.com') || url.includes('youtu.be')) {
@@ -1268,13 +1246,16 @@
                 else if (url.includes('v=')) videoId = url.split('v=')[1].split('&')[0];
 
                 native.classList.add('hidden');
+                native.pause();
                 iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
                 iframe.classList.remove('hidden');
             } else {
                 iframe.classList.add('hidden');
+                iframe.src = "";
                 native.src = url;
                 native.classList.remove('hidden');
-                native.play();
+                native.load();
+                native.play().catch(() => {});
             }
             closeVideoModal();
         }
