@@ -44,7 +44,6 @@
     </script>
 
     <style>
-        /* Deep Maroon Background */
         body {
             font-family: 'Noto Serif Bengali', 'Playfair Display', serif;
             background-color: #33020a;
@@ -58,7 +57,6 @@
             overflow-x: hidden;
         }
 
-        /* Vibrant Red Cards */
         .luxury-card {
             background: linear-gradient(155deg, rgba(145, 10, 27, 0.94) 0%, rgba(110, 5, 18, 0.96) 100%);
             border: 1px solid rgba(243, 207, 101, 0.45);
@@ -66,13 +64,11 @@
             backdrop-filter: blur(8px);
         }
 
-        /* Solid Royal Gold Names */
         .solid-gold-text {
             color: #f3cf65 !important;
             filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
         }
 
-        /* 3D Wax Seal Styles */
         .wax-seal {
             background: radial-gradient(circle at 35% 35%, #d9142d, #940718 75%, #52020b 100%);
             box-shadow: 0 10px 25px rgba(0,0,0,0.8), inset 0 3px 6px rgba(255,255,255,0.4), inset 0 -4px 8px rgba(0,0,0,0.7);
@@ -84,7 +80,6 @@
             box-shadow: 0 15px 35px rgba(243, 207, 101, 0.6), inset 0 3px 8px rgba(255,255,255,0.7);
         }
 
-        /* Ken Burns Cinematic Pan & Zoom */
         @keyframes kenBurnsEffect {
             0% { transform: scale(1) translate(0, 0); }
             50% { transform: scale(1.08) translate(-1.5%, -1%); }
@@ -94,17 +89,18 @@
             animation: kenBurnsEffect 7s ease-in-out infinite alternate;
         }
 
-        /* Video Frame Fix: Keeps perfect 16:9 responsive frame and fills container */
-        .video-responsive-wrapper {
+        /* Responsive Video Container Fix */
+        .video-player-frame {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 ratio */
             height: 0;
+            padding-bottom: 56.25%; /* 16:9 ratio */
             overflow: hidden;
-            background: #000;
+            background-color: #000;
         }
-        .video-responsive-wrapper iframe,
-        .video-responsive-wrapper video {
+
+        .video-player-frame iframe,
+        .video-player-frame video {
             position: absolute;
             top: 0;
             left: 0;
@@ -113,7 +109,6 @@
             border: 0;
         }
 
-        /* Ticket Notch & Perforation */
         .ticket-cut-l {
             position: absolute;
             left: -12px;
@@ -137,7 +132,6 @@
             border-left: 1px solid rgba(243, 207, 101, 0.5);
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 7px; }
         ::-webkit-scrollbar-track { background: #2b0208; }
         ::-webkit-scrollbar-thumb { background: #8f0a1b; border-radius: 4px; border: 1px solid rgba(243, 207, 101, 0.35); }
@@ -207,12 +201,12 @@
             </a>
 
             <div class="flex items-center gap-1.5 sm:gap-2">
-                <button onclick="toggleShehnai()" id="shehnaiBtn" class="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/40 text-[11px] sm:text-xs font-semibold text-solidGold flex items-center gap-1.5 transition active:scale-95" title="Shehnai Bridal Melody">
+                <button onclick="toggleShehnai()" id="shehnaiBtn" class="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/40 text-[11px] sm:text-xs font-semibold text-solidGold flex items-center gap-1.5 transition active:scale-95">
                     <i id="shehnaiIcon" class="fa-solid fa-music text-solidGold text-xs"></i>
                     <span class="hidden sm:inline">সানাই</span>
                 </button>
 
-                <button onclick="playShankhaSound()" class="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/40 text-[11px] sm:text-xs font-semibold text-solidGold flex items-center gap-1.5 transition active:scale-95" title="Play Conch Shell">
+                <button onclick="playShankhaSound()" class="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/40 text-[11px] sm:text-xs font-semibold text-solidGold flex items-center gap-1.5 transition active:scale-95">
                     <i class="fa-solid fa-bullhorn text-solidGold text-xs"></i>
                     <span class="hidden sm:inline">শঙ্খধ্বনি</span>
                 </button>
@@ -261,6 +255,7 @@
                 </div>
             </div>
 
+            <!-- COUNTDOWN -->
             <div class="mt-8 sm:mt-10">
                 <span class="text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-solidGold font-semibold block mb-3 sm:mb-4">
                     ॥ শুভ বিবাহ লগ্ন গণনা (Lagna Countdown) ॥
@@ -286,7 +281,7 @@
             </div>
         </section>
 
-        <!-- CINEMATIC VIDEO PLAYER SECTION (FIXED: 100% RESPONSIVE FOR MOBILE) -->
+        <!-- CINEMATIC VIDEO PLAYER SECTION (FIXED FOR MOBILE WITHOUT BLACK BOXES) -->
         <section class="mb-8 sm:mb-14 luxury-card rounded-3xl p-4 sm:p-8 border border-solidGold/40 text-center">
             <div class="flex items-center justify-between gap-2 mb-4 pb-2.5 border-b border-solidGold/25 text-left">
                 <div>
@@ -299,16 +294,23 @@
                 </button>
             </div>
 
-            <!-- Fully responsive 16:9 container that fixes black borders on mobile -->
+            <!-- Auto-fixing video player container -->
             <div class="relative w-full max-w-3xl mx-auto rounded-2xl overflow-hidden border-2 border-solidGold/60 shadow-2xl bg-black">
-                <div class="video-responsive-wrapper">
-                    <!-- Native MP4 player -->
-                    <video id="nativePlayer" controls playsinline class="hidden w-full h-full object-cover">
-                        <source src="" type="video/mp4">
-                        আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
+                <div class="video-player-frame">
+                    
+                    <!-- HTML5 Direct Video: Works smoothly if wedding.mp4 exists in repo or through direct source -->
+                    <video 
+                        id="nativePlayer" 
+                        controls 
+                        playsinline 
+                        preload="metadata"
+                        class="hidden w-full h-full object-contain bg-black">
+                        <source src="./wedding.mp4" type="video/mp4">
+                        <source src="https://drive.google.com/uc?export=download&id=1lE6aiehtxLQ6i3huk8ITkOmgGTfejv7G" type="video/mp4">
+                        আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
                     </video>
 
-                    <!-- Google Drive embed iframe with full width and height fit -->
+                    <!-- Google Drive Embed with zero spacing & auto full height/width -->
                     <iframe 
                         id="iframePlayer" 
                         src="https://drive.google.com/file/d/1lE6aiehtxLQ6i3huk8ITkOmgGTfejv7G/preview" 
@@ -323,7 +325,7 @@
             </p>
         </section>
 
-        <!-- CINEMATIC PHOTO REEL SHOWCASE (FIXED MOBILE RATIO & IMAGES) -->
+        <!-- CINEMATIC PHOTO REEL SHOWCASE (MOBILE IMAGE FIX) -->
         <section class="mb-8 sm:mb-14 luxury-card rounded-3xl p-4 sm:p-10 border border-solidGold/40 text-center">
             <div class="flex items-center justify-between gap-2 mb-4 pb-2.5 border-b border-solidGold/25 text-left">
                 <div>
@@ -336,7 +338,7 @@
                 </button>
             </div>
 
-            <!-- Controlled Mobile Image Height Frame -->
+            <!-- Controlled Mobile Photo Box: Never cuts off or shrinks into tiny spaces -->
             <div class="relative w-full max-w-3xl mx-auto h-[260px] sm:h-[420px] md:h-[480px] rounded-2xl overflow-hidden border-2 border-solidGold/60 shadow-[0_0_30px_rgba(243,207,101,0.25)] bg-black select-none group">
                 <img id="reelMainImg" src="" alt="Cinematic Photo Reel" class="w-full h-full object-cover ken-burns transition-opacity duration-500 ease-in-out cursor-pointer" onclick="toggleReelPlay()" onerror="handleImageError(this)">
 
@@ -750,13 +752,13 @@
             <div class="flex items-center justify-between pb-3 border-b border-solidGold/30 mb-4">
                 <h4 class="text-base sm:text-lg font-bold text-solidGold flex items-center gap-2">
                     <i class="fa-solid fa-video text-solidGold"></i>
-                    <span>ভিডিও লিংক বা ফাইল যোগ করুন</span>
+                    <span>ভিডিও পরিবর্তন</span>
                 </h4>
                 <button onclick="closeVideoModal()" class="w-7 h-7 rounded-full bg-black/60 text-solidGold flex items-center justify-center border border-solidGold/30">✕</button>
             </div>
             <div class="mb-3">
-                <label class="block text-xs font-bold uppercase text-solidGold mb-1">ভিডিও লিংক (Drive Preview / YouTube / MP4 URL):</label>
-                <input type="url" id="videoUrlInput" placeholder="https://drive.google.com/file/d/.../preview বা YouTube লিংক" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
+                <label class="block text-xs font-bold uppercase text-solidGold mb-1">ভিডিও লিংক (Drive Preview / YouTube / MP4):</label>
+                <input type="url" id="videoUrlInput" placeholder="Drive / YouTube / MP4 URL" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
             </div>
             <div class="flex justify-end gap-2 mt-4">
                 <button onclick="closeVideoModal()" class="px-3.5 py-1.5 rounded-full bg-black/60 border border-solidGold/30 text-solidGold text-xs">বাতিল</button>
@@ -777,7 +779,7 @@
             </div>
             <div class="mb-3">
                 <label class="block text-xs font-bold uppercase text-solidGold mb-1">ছবির অনলাইন লিংক (Image URL):</label>
-                <input type="url" id="photoUrlInput" placeholder="গুগল ড্রাইভ বা ওয়েব ছবির লিংক" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
+                <input type="url" id="photoUrlInput" placeholder="Image URL / Google Drive link" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
             </div>
             <div class="mb-4">
                 <label class="block text-xs font-bold uppercase text-solidGold mb-1">ক্যাপশন / বিবরণ:</label>
@@ -792,7 +794,6 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Google Drive Direct Image Helper
         function formatDriveImageUrl(rawUrl) {
             if (!rawUrl) return "";
             if (rawUrl.includes("drive.google.com") || rawUrl.includes("googleusercontent.com")) {
