@@ -266,22 +266,15 @@
             </div>
         </section>
 
-        <!-- CINEMATIC VIDEO PLAYER -->
+        <!-- CINEMATIC VIDEO PLAYER (CLEAN VIEW - NO CHANGE BUTTON) -->
         <section class="mb-8 sm:mb-14 luxury-card rounded-3xl p-4 sm:p-8 border border-solidGold/40 text-center">
-            <div class="flex items-center justify-between gap-2 mb-4 pb-2.5 border-b border-solidGold/25 text-left">
-                <div>
-                    <span class="text-[10px] sm:text-[11px] uppercase tracking-widest text-solidGold font-semibold">Cinematic Highlights</span>
-                    <h3 class="text-base sm:text-2xl font-bold solid-gold-text">আমাদের বিশেষ মুহূর্ত (Our Moments)</h3>
-                </div>
-                <button onclick="openVideoModal()" class="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/40 text-[11px] sm:text-xs font-semibold text-solidGold flex items-center gap-1.5 transition active:scale-95 shadow">
-                    <i class="fa-solid fa-video text-solidGold"></i>
-                    <span>ভিডিও পরিবর্তন</span>
-                </button>
+            <div class="mb-4 pb-2.5 border-b border-solidGold/25 text-left">
+                <span class="text-[10px] sm:text-[11px] uppercase tracking-widest text-solidGold font-semibold">Cinematic Highlights</span>
+                <h3 class="text-base sm:text-2xl font-bold solid-gold-text">আমাদের বিশেষ মুহূর্ত (Our Moments)</h3>
             </div>
 
             <!-- 16:9 Aspect Video Container -->
             <div class="relative w-full max-w-3xl mx-auto aspect-video rounded-2xl overflow-hidden border-2 border-solidGold/60 shadow-2xl bg-black">
-                <!-- HTML5 Native Player -->
                 <video 
                     id="nativePlayer" 
                     controls 
@@ -295,7 +288,6 @@
                     আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
                 </video>
 
-                <!-- Fallback iframe container -->
                 <iframe 
                     id="iframePlayer" 
                     class="hidden w-full h-full border-0 absolute inset-0"
@@ -310,17 +302,11 @@
             </p>
         </section>
 
-        <!-- CINEMATIC PHOTO REEL SHOWCASE -->
+        <!-- CINEMATIC PHOTO REEL SHOWCASE (CLEAN VIEW - NO ADD BUTTON) -->
         <section class="mb-8 sm:mb-14 luxury-card rounded-3xl p-4 sm:p-10 border border-solidGold/40 text-center">
-            <div class="flex items-center justify-between gap-2 mb-4 pb-2.5 border-b border-solidGold/25 text-left">
-                <div>
-                    <span class="text-[10px] sm:text-[11px] uppercase tracking-widest text-solidGold font-semibold">Cinematic Photo Reel</span>
-                    <h3 class="text-base sm:text-2xl font-bold solid-gold-text">চলচ্চিত্র রূপকথা ও ফটো রিল</h3>
-                </div>
-                <button onclick="openUploadModal()" class="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-gradient-to-r from-solidGold via-lightGold to-solidGold text-[#36030c] font-bold text-[11px] sm:text-xs shadow hover:brightness-110 active:scale-95 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-plus-circle"></i>
-                    <span>নতুন ছবি</span>
-                </button>
+            <div class="mb-4 pb-2.5 border-b border-solidGold/25 text-left">
+                <span class="text-[10px] sm:text-[11px] uppercase tracking-widest text-solidGold font-semibold">Cinematic Photo Reel</span>
+                <h3 class="text-base sm:text-2xl font-bold solid-gold-text">চলচ্চিত্র রূপকথা ও ফটো রিল</h3>
             </div>
 
             <div class="relative w-full max-w-3xl mx-auto h-[260px] sm:h-[420px] md:h-[480px] rounded-2xl overflow-hidden border-2 border-solidGold/60 shadow-[0_0_30px_rgba(243,207,101,0.25)] bg-black select-none group">
@@ -729,83 +715,8 @@
         <p class="font-cinzel text-[9px] sm:text-[10px] tracking-widest text-solidGold/70">© 2026 ROYAL BENGALI WEDDING • ALL RIGHTS RESERVED</p>
     </footer>
 
-    <!-- MODAL: VIDEO CHANGE -->
-    <div id="videoModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-        <div class="relative w-full max-w-lg luxury-card rounded-3xl p-5 sm:p-8 border-2 border-solidGold shadow-2xl text-left">
-            <div class="flex items-center justify-between pb-3 border-b border-solidGold/30 mb-4">
-                <h4 class="text-base sm:text-lg font-bold text-solidGold flex items-center gap-2">
-                    <i class="fa-solid fa-video text-solidGold"></i>
-                    <span>ভিডিও পরিবর্তন</span>
-                </h4>
-                <button onclick="closeVideoModal()" class="w-7 h-7 rounded-full bg-black/60 text-solidGold flex items-center justify-center border border-solidGold/30">✕</button>
-            </div>
-            <div class="mb-3">
-                <label class="block text-xs font-bold uppercase text-solidGold mb-1">ভিডিও ফাইল নেম বা অনলাইন লিঙ্ক:</label>
-                <input type="text" id="videoUrlInput" placeholder="./wedding.mp4 বা YouTube/Drive লিঙ্ক" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
-            </div>
-            <div class="flex justify-end gap-2 mt-4">
-                <button onclick="closeVideoModal()" class="px-3.5 py-1.5 rounded-full bg-black/60 border border-solidGold/30 text-solidGold text-xs">বাতিল</button>
-                <button onclick="applyNewVideo()" class="px-4 py-1.5 rounded-full bg-solidGold text-[#36030c] font-bold text-xs shadow hover:brightness-110">প্রয়োগ করুন</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: ADD PHOTO -->
-    <div id="uploadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-        <div class="relative w-full max-w-lg luxury-card rounded-3xl p-5 sm:p-8 border-2 border-solidGold shadow-2xl text-left">
-            <div class="flex items-center justify-between pb-3 border-b border-solidGold/30 mb-4">
-                <h4 class="text-base sm:text-lg font-bold text-solidGold flex items-center gap-2">
-                    <i class="fa-solid fa-camera-retro text-solidGold"></i>
-                    <span>রিল শোকেসে নতুন ছবি</span>
-                </h4>
-                <button onclick="closeUploadModal()" class="w-7 h-7 rounded-full bg-black/60 text-solidGold flex items-center justify-center border border-solidGold/30">✕</button>
-            </div>
-            
-            <div class="mb-3">
-                <label class="block text-xs font-bold uppercase text-solidGold mb-1">ডিভাইস থেকে ফটো বাছুন:</label>
-                <label class="flex flex-col items-center justify-center p-3.5 border-2 border-dashed border-solidGold/40 rounded-xl cursor-pointer bg-black/40 hover:border-solidGold transition">
-                    <i class="fa-solid fa-image text-solidGold text-xl mb-1"></i>
-                    <span id="localPhotoLabel" class="text-xs text-lightGold">ফাইল সিলেক্ট করুন (JPG, PNG)</span>
-                    <input type="file" id="localPhotoFileInput" accept="image/*" class="hidden" onchange="handleDevicePhoto(event)">
-                </label>
-            </div>
-
-            <div class="flex items-center gap-3 my-2">
-                <div class="flex-1 h-px bg-solidGold/20"></div>
-                <span class="text-[10px] uppercase text-solidGold font-bold">অথবা অনলাইন লিঙ্ক</span>
-                <div class="flex-1 h-px bg-solidGold/20"></div>
-            </div>
-
-            <div class="mb-3">
-                <label class="block text-xs font-bold uppercase text-solidGold mb-1">ছবির অনলাইন লিংক (Image URL):</label>
-                <input type="url" id="photoUrlInput" placeholder="./photo1.jpg বা ছবির ড্রাইভ/ওয়েব লিঙ্ক" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-xs font-bold uppercase text-solidGold mb-1">ক্যাপশন / বিবরণ:</label>
-                <input type="text" id="photoCaptionInput" placeholder="উদাঃ শুভদৃষ্টি ও মালাবদল" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-solidGold/40 text-solidGold text-xs focus:border-solidGold outline-none">
-            </div>
-            
-            <div class="flex justify-end gap-2">
-                <button onclick="closeUploadModal()" class="px-3.5 py-1.5 rounded-full bg-black/60 border border-solidGold/30 text-solidGold text-xs">বাতিল</button>
-                <button onclick="saveNewReelPhoto()" class="px-4 py-1.5 rounded-full bg-solidGold text-[#36030c] font-bold text-xs shadow hover:brightness-110">যোগ করুন</button>
-            </div>
-        </div>
-    </div>
-
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        function formatDriveImageUrl(rawUrl) {
-            if (!rawUrl) return "";
-            if (rawUrl.includes("drive.google.com") || rawUrl.includes("googleusercontent.com")) {
-                const match = rawUrl.match(/\/d\/([a-zA-Z0-9_-]+)/) || rawUrl.match(/id=([a-zA-Z0-9_-]+)/);
-                if (match && match[1]) {
-                    return `https://drive.google.com/uc?export=view&id=${match[1]}`;
-                }
-            }
-            return rawUrl;
-        }
-
         // ================= CINEMATIC PHOTO REEL LOGIC =================
         const defaultReelPhotos = [
             {
@@ -837,13 +748,7 @@
             }
         ];
 
-        let savedPhotos = [];
-        try {
-            const stored = localStorage.getItem('wedding_custom_photos');
-            if (stored) savedPhotos = JSON.parse(stored);
-        } catch(e) {}
-
-        let reelPhotos = [...savedPhotos, ...defaultReelPhotos];
+        let reelPhotos = defaultReelPhotos;
         let currentReelIdx = 0;
         let isReelPlaying = true;
         let reelTimer = null;
@@ -984,66 +889,6 @@
             });
         }
 
-        function openUploadModal() {
-            document.getElementById('uploadModal').classList.remove('hidden');
-        }
-        function closeUploadModal() {
-            document.getElementById('uploadModal').classList.add('hidden');
-        }
-
-        let uploadedBase64Image = null;
-        function handleDevicePhoto(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                uploadedBase64Image = evt.target.result;
-                document.getElementById('localPhotoLabel').innerText = `✓ ${file.name} সিলেক্ট করা হয়েছে`;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function saveNewReelPhoto() {
-            let url = uploadedBase64Image || document.getElementById('photoUrlInput').value.trim();
-            const caption = document.getElementById('photoCaptionInput').value.trim() || "আমাদের সুন্দর স্মৃতি";
-            if (!url) return;
-
-            url = formatDriveImageUrl(url);
-
-            const newPhoto = {
-                id: Date.now(),
-                url: url,
-                caption: caption,
-                category: "স্মৃতি",
-                date: "আজকে",
-                likes: 1
-            };
-
-            savedPhotos.unshift(newPhoto);
-            try {
-                localStorage.setItem('wedding_custom_photos', JSON.stringify(savedPhotos));
-            } catch(e) {}
-
-            reelPhotos = [...savedPhotos, ...defaultReelPhotos];
-
-            document.getElementById('photoUrlInput').value = '';
-            document.getElementById('photoCaptionInput').value = '';
-            document.getElementById('localPhotoLabel').innerText = "ফাইল সিলেক্ট করুন (JPG, PNG)";
-            uploadedBase64Image = null;
-            closeUploadModal();
-
-            renderReelProgressBars();
-            showReelSlide(0);
-
-            confetti({
-                particleCount: 40,
-                spread: 50,
-                origin: { y: 0.6 },
-                colors: ['#f3cf65', '#fff1b8', '#8f0a1b']
-            });
-        }
-
         // ================= WAX SEAL, AUDIO, COUNTDOWN & VIDEO SYNC =================
         function openWeddingInvitation() {
             const modal = document.getElementById('unboxingModal');
@@ -1063,7 +908,6 @@
             startShehnaiDirectly();
         }
 
-        // রিয়াল শঙ্খধ্বনি অডিও প্লেব্যাক
         function playShankhaSound() {
             const shankha = document.getElementById('shankhaAudio');
             if (shankha) {
@@ -1083,7 +927,6 @@
             });
         }
 
-        // অডিও ফাইল লোড না হলে সফটওয়্যার ব্যাকআপ সাউন্ড
         let audioCtx = null;
         function getAudioContext() {
             if (!audioCtx) {
@@ -1341,51 +1184,6 @@
                     tab.className = "px-3 py-1.5 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/40 text-solidGold text-[11px] sm:text-xs font-semibold transition active:scale-95 flex items-center gap-1";
                 }
             });
-        }
-
-        // ================= VIDEO MODAL LOGIC =================
-        function openVideoModal() {
-            document.getElementById('videoModal').classList.remove('hidden');
-        }
-        function closeVideoModal() {
-            document.getElementById('videoModal').classList.add('hidden');
-        }
-        function applyNewVideo() {
-            const url = document.getElementById('videoUrlInput').value.trim();
-            if (!url) return;
-
-            const native = document.getElementById('nativePlayer');
-            const iframe = document.getElementById('iframePlayer');
-
-            if (url.includes('drive.google.com')) {
-                let previewUrl = url;
-                if (url.includes('/view')) previewUrl = url.replace(/\/view(\?.*)?$/, '/preview');
-                else if (url.includes('open?id=')) {
-                    const match = url.match(/id=([^&]+)/);
-                    if (match) previewUrl = `https://drive.google.com/file/d/${match[1]}/preview`;
-                }
-                native.classList.add('hidden');
-                native.pause();
-                iframe.src = previewUrl;
-                iframe.classList.remove('hidden');
-            } else if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                let videoId = "";
-                if (url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1].split('?')[0];
-                else if (url.includes('v=')) videoId = url.split('v=')[1].split('&')[0];
-
-                native.classList.add('hidden');
-                native.pause();
-                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-                iframe.classList.remove('hidden');
-            } else {
-                iframe.classList.add('hidden');
-                iframe.src = "";
-                native.src = url;
-                native.classList.remove('hidden');
-                native.load();
-                native.play().catch(() => {});
-            }
-            closeVideoModal();
         }
 
         // ================= RSVP & PASS =================
