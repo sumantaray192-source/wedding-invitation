@@ -120,10 +120,16 @@
 </head>
 <body class="min-h-screen relative selection:bg-solidGold selection:text-maroonBg">
 
-    <!-- Audio -->
+    <!-- Sanai Audio -->
     <audio id="weddingShehnaiAudio" loop preload="auto">
         <source src="./sanai.mp3" type="audio/mpeg">
         <source src="sanai.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Shankha Audio (GitHub-hosted real sound) -->
+    <audio id="shankhaAudio" preload="auto">
+        <source src="./shankha.mp3" type="audio/mpeg">
+        <source src="shankha.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Canvas -->
@@ -328,7 +334,7 @@
                             শুভ বিবাহ
                         </span>
                         <span id="reelIndexCounter" class="text-[10px] sm:text-xs font-mono text-lightGold/80 px-2 py-0.5 rounded-full bg-black/60 border border-solidGold/30">
-                            ১ / ২
+                            ১ / ৩
                         </span>
                     </div>
 
@@ -744,7 +750,7 @@
         </div>
     </div>
 
-    <!-- MODAL: ADD PHOTO (AUTO UPDATE & LOCAL STORAGE SUPPORT) -->
+    <!-- MODAL: ADD PHOTO -->
     <div id="uploadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
         <div class="relative w-full max-w-lg luxury-card rounded-3xl p-5 sm:p-8 border-2 border-solidGold shadow-2xl text-left">
             <div class="flex items-center justify-between pb-3 border-b border-solidGold/30 mb-4">
@@ -801,7 +807,6 @@
         }
 
         // ================= CINEMATIC PHOTO REEL LOGIC =================
-        // রিপোজিটরির ছবি এবং ড্রাইভ ফলব্যাক ব্যাকআপ
         const defaultReelPhotos = [
             {
                 id: 1,
@@ -821,18 +826,17 @@
                 date: "১২ই অক্টোবর ২০২৬",
                 likes: 54
             },
-              {
+            {
                 id: 3,
                 url: "./photo3.jpg",
                 fallbackUrl: "https://drive.google.com/uc?export=view&id=1QqDTqFtZbihQXe7Mm9KKdEb440mhGnRC",
-                caption: "ভালোবাসার এক অপূর্ব মুও নবজীবনের অঙ্গীকার",
-                category: "hhh",
+                caption: "ভালোবাসার এক অপূর্ব মুহূর্ত ও নবজীবনের অঙ্গীকার",
+                category: "শুভ বিবাহ",
                 date: "১২ই অক্টোবর ২০২৬",
                 likes: 54
             }
         ];
 
-        // পূর্বে সেভ করা ছবি লোকালস্টোরেজ থেকে উদ্ধার করা
         let savedPhotos = [];
         try {
             const stored = localStorage.getItem('wedding_custom_photos');
@@ -1016,7 +1020,6 @@
                 likes: 1
             };
 
-            // লোকাল মেমরিতে নতুন ছবি যুক্ত করা
             savedPhotos.unshift(newPhoto);
             try {
                 localStorage.setItem('wedding_custom_photos', JSON.stringify(savedPhotos));
@@ -1024,7 +1027,6 @@
 
             reelPhotos = [...savedPhotos, ...defaultReelPhotos];
 
-            // ইনপুট রিসেট
             document.getElementById('photoUrlInput').value = '';
             document.getElementById('photoCaptionInput').value = '';
             document.getElementById('localPhotoLabel').innerText = "ফাইল সিলেক্ট করুন (JPG, PNG)";
@@ -1061,6 +1063,27 @@
             startShehnaiDirectly();
         }
 
+        // রিয়াল শঙ্খধ্বনি অডিও প্লেব্যাক
+        function playShankhaSound() {
+            const shankha = document.getElementById('shankhaAudio');
+            if (shankha) {
+                shankha.currentTime = 0;
+                shankha.play().catch(() => {
+                    playSyntheticShankhaFallback();
+                });
+            } else {
+                playSyntheticShankhaFallback();
+            }
+
+            confetti({
+                particleCount: 30,
+                spread: 50,
+                origin: { y: 0.4 },
+                colors: ['#fff1b8', '#f3cf65']
+            });
+        }
+
+        // অডিও ফাইল লোড না হলে সফটওয়্যার ব্যাকআপ সাউন্ড
         let audioCtx = null;
         function getAudioContext() {
             if (!audioCtx) {
@@ -1071,7 +1094,7 @@
             return audioCtx;
         }
 
-        function playShankhaSound() {
+        function playSyntheticShankhaFallback() {
             const ctx = getAudioContext();
             const now = ctx.currentTime;
             const osc = ctx.createOscillator();
