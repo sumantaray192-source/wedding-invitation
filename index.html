@@ -182,7 +182,7 @@
 
             <div class="flex items-center gap-1.5 sm:gap-2">
                 <button onclick="toggleShehnai()" id="shehnaiBtn" class="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/40 text-[11px] sm:text-xs font-semibold text-solidGold flex items-center gap-1.5 transition active:scale-95">
-                    <i id="shehnaiIcon" class="fa-solid fa-music text-solidGold text-xs"></i>
+                    <i id="shehnaiIcon" class="fa-solid fa-volume-xmark text-solidGold text-xs"></i>
                     <span class="hidden sm:inline">সানাই</span>
                 </button>
 
@@ -260,7 +260,7 @@
             </div>
         </section>
 
-        <!-- CINEMATIC VIDEO PLAYER (FIXED: GITHUB DIRECT VIDEO) -->
+        <!-- CINEMATIC VIDEO PLAYER -->
         <section class="mb-8 sm:mb-14 luxury-card rounded-3xl p-4 sm:p-8 border border-solidGold/40 text-center">
             <div class="flex items-center justify-between gap-2 mb-4 pb-2.5 border-b border-solidGold/25 text-left">
                 <div>
@@ -282,11 +282,10 @@
                     playsinline 
                     preload="metadata"
                     class="w-full h-full object-contain bg-black">
-                    <!-- GitHub Repository Video File Paths -->
                     <source src="./wedding.mp4" type="video/mp4">
                     <source src="wedding.mp4" type="video/mp4">
                     <source src="./video.mp4" type="video/mp4">
-                    আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
+                    আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
                 </video>
 
                 <!-- Fallback iframe container -->
@@ -976,7 +975,7 @@
             showReelSlide(0);
         }
 
-        // ================= WAX SEAL, AUDIO & COUNTDOWN =================
+        // ================= WAX SEAL, AUDIO, COUNTDOWN & VIDEO SYNC =================
         function openWeddingInvitation() {
             const modal = document.getElementById('unboxingModal');
             modal.style.opacity = '0';
@@ -1034,31 +1033,75 @@
             osc.stop(now + 2.4);
         }
 
+        // সানাই প্লেয়ার স্টেট এবং ভিডিও সিঙ্ক ট্র্যাকিং
         let isShehnaiPlaying = false;
+        let wasShehnaiPlayingBeforeVideo = false;
+
+        function updateShehnaiUI(playing) {
+            const icon = document.getElementById('shehnaiIcon');
+            if (!icon) return;
+            if (playing) {
+                icon.className = "fa-solid fa-volume-high text-solidGold text-xs";
+            } else {
+                icon.className = "fa-solid fa-volume-xmark text-solidGold text-xs";
+            }
+        }
+
         function startShehnaiDirectly() {
             const audio = document.getElementById('weddingShehnaiAudio');
-            const icon = document.getElementById('shehnaiIcon');
             if (audio) {
                 audio.play().then(() => {
                     isShehnaiPlaying = true;
-                    if (icon) icon.className = "fa-solid fa-volume-high text-solidGold text-xs";
+                    updateShehnaiUI(true);
                 }).catch(() => {});
             }
         }
 
-        function toggleShehnai() {
+        function pauseShehnai() {
             const audio = document.getElementById('weddingShehnaiAudio');
-            const icon = document.getElementById('shehnaiIcon');
-            if (!isShehnaiPlaying) {
-                audio.play().then(() => {
-                    isShehnaiPlaying = true;
-                    if (icon) icon.className = "fa-solid fa-volume-high text-solidGold text-xs";
-                }).catch(() => {});
-            } else {
+            if (audio) {
                 audio.pause();
                 isShehnaiPlaying = false;
-                if (icon) icon.className = "fa-solid fa-volume-xmark text-solidGold text-xs";
+                updateShehnaiUI(false);
             }
+        }
+
+        function toggleShehnai() {
+            if (!isShehnaiPlaying) {
+                startShehnaiDirectly();
+                wasShehnaiPlayingBeforeVideo = true; // ইউজার ম্যানুয়ালি অন করলে স্টেট ট্র্যাকিং আপডেট হবে
+            } else {
+                pauseShehnai();
+                wasShehnaiPlayingBeforeVideo = false; // ইউজার ম্যানুয়ালি অফ রাখলে ভিডিও বন্ধ হলেও আর অটো বাজবে না
+            }
+        }
+
+        // ভিডিওর সাথে সানাই অটো সিঙ্ক ফাংশন
+        function initVideoAudioSync() {
+            const video = document.getElementById('nativePlayer');
+            if (!video) return;
+
+            // ভিডিও প্লে হলে: সানাই চালু থাকলে মনে রেখে সানাই থামাও
+            video.addEventListener('play', () => {
+                if (isShehnaiPlaying) {
+                    wasShehnaiPlayingBeforeVideo = true;
+                    pauseShehnai();
+                }
+            });
+
+            // ভিডিও পজ হলে: ভিডিও চালু হওয়ার আগে সানাই চালু থাকলে অটো আবার চালু করো
+            video.addEventListener('pause', () => {
+                if (wasShehnaiPlayingBeforeVideo) {
+                    startShehnaiDirectly();
+                }
+            });
+
+            // ভিডিও শেষ হলে: সানাই অটো রিস্টার্ট হবে
+            video.addEventListener('ended', () => {
+                if (wasShehnaiPlayingBeforeVideo) {
+                    startShehnaiDirectly();
+                }
+            });
         }
 
         const lagnaDate = new Date("November 24, 2026 19:30:00").getTime();
@@ -1405,6 +1448,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             initPhotoReel();
             fetchWeatherData();
+            initVideoAudioSync(); // ভিডিওর সাথে সানাই অটো সিঙ্ক ইনিশিয়ালাইজ করা হলো
         });
     </script>
 </body>
