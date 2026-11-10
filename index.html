@@ -19,6 +19,9 @@
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
+    <!-- html2pdf.js for High Quality PDF Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -112,10 +115,94 @@
             border-left: 1px solid rgba(243, 207, 101, 0.5);
         }
 
+        /* 3D Realistic Gold Foil Flip Card */
+        .card-3d-wrapper {
+            perspective: 1200px;
+        }
+
+        .card-3d-inner {
+            position: relative;
+            width: 100%;
+            transition: transform 0.8s cubic-bezier(0.2, 0.85, 0.4, 1.2);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .card-3d-inner.is-flipped {
+            transform: rotateY(180deg) !important;
+        }
+
+        .card-front, .card-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 1.5rem;
+        }
+
+        .card-back {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(180deg);
+            background: linear-gradient(145deg, #1f0106 0%, #4a0512 50%, #290107 100%);
+            border: 2px solid rgba(243, 207, 101, 0.7);
+            box-shadow: 0 15px 40px -5px rgba(25, 0, 5, 0.9), inset 0 0 35px rgba(243, 207, 101, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .gold-foil-shine {
+            position: absolute;
+            inset: 0;
+            border-radius: 1.5rem;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 241, 184, 0.25) 0%, transparent 65%);
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
         ::-webkit-scrollbar { width: 7px; }
         ::-webkit-scrollbar-track { background: #2b0208; }
         ::-webkit-scrollbar-thumb { background: #8f0a1b; border-radius: 4px; border: 1px solid rgba(243, 207, 101, 0.35); }
         ::-webkit-scrollbar-thumb:hover { background: #f3cf65; }
+
+        /* PERFECT PRINT TO PDF CSS */
+        @media print {
+            body * {
+                visibility: hidden !important;
+            }
+            #luxuryPdfCard, #luxuryPdfCard * {
+                visibility: visible !important;
+            }
+            #pdfExportWrapper {
+                display: block !important;
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            #luxuryPdfCard {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                min-height: 100vh !important;
+                padding: 28px !important;
+                box-shadow: none !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen relative selection:bg-solidGold selection:text-maroonBg">
@@ -206,6 +293,11 @@
             </a>
 
             <div class="flex items-center gap-1.5 sm:gap-2">
+                <button onclick="downloadLuxuryCardPDF()" id="pdfDownloadBtn" class="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-gradient-to-r from-solidGold via-lightGold to-solidGold text-[#36030c] text-[11px] sm:text-xs font-bold shadow-md hover:brightness-110 active:scale-95 transition flex items-center gap-1.5" title="লাক্সারি কার্ড PDF ডাউনলোড">
+                    <i class="fa-solid fa-file-pdf text-[#8f0a1b]"></i>
+                    <span id="pdfBtnText" class="hidden sm:inline">PDF ডাউনলোড</span>
+                </button>
+
                 <button onclick="toggleShehnai()" id="shehnaiBtn" class="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/40 text-[11px] sm:text-xs font-semibold text-solidGold flex items-center gap-1.5 transition active:scale-95">
                     <i id="shehnaiIcon" class="fa-solid fa-volume-xmark text-solidGold text-xs"></i>
                     <span class="hidden sm:inline">সানাই</span>
@@ -227,190 +319,210 @@
     <!-- MAIN CONTENT -->
     <main class="relative z-10 max-w-6xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10 pb-20">
 
-        <!-- HERO SECTION (TRADITIONAL 100% SHOLA BOR TOPOR WITH MAYUR & KONE MUKUT) -->
-        <section class="text-center py-8 sm:py-16 luxury-card rounded-3xl p-5 sm:p-12 mb-8 sm:mb-14 border border-solidGold/40">
-            <div class="inline-block text-[10px] sm:text-xs uppercase tracking-[0.4em] text-solidGold font-bold border-b border-solidGold/40 pb-1 mb-4 sm:mb-6">
-                ॥ ওঁ শ্রী গণেশায় নমঃ ॥
-            </div>
-            
-            <p class="text-[11px] sm:text-sm text-lightGold/90 tracking-widest uppercase font-cinzel mb-4 sm:mb-6">
-                We Joyfully Invite You To Celebrate The Wedding Of
-            </p>
-
-            <!-- COUPLE NAMES WITH AUTHENTIC SHOLA BOR TOPOR & SHOLA KONE MUKUT -->
-            <div class="pt-2 pb-2 sm:pt-4 sm:pb-6 my-2 flex items-center justify-center flex-wrap gap-x-4 sm:gap-x-8 gap-y-6">
+        <!-- HERO SECTION WITH 3D GOLDEN FOIL TILT & FLIP -->
+        <div class="card-3d-wrapper max-w-4xl mx-auto mb-8 sm:mb-14 select-none">
+            <div id="hero3dCard" class="card-3d-inner" onclick="toggleHeroCardFlip()">
                 
-                <!-- বর: সুমন্ত (খাঁটি শোলার টোপর চূড়া ও ময়ূর সমেত) -->
-                <div class="inline-flex flex-col items-center">
-                    <div class="h-16 sm:h-24 flex items-end mb-1 sm:mb-2 transform hover:scale-110 transition-transform duration-300">
-                        <svg viewBox="0 0 100 135" class="h-full w-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-                            <!-- শোলার শীর্ষ ময়ূর (Peacock on top of Topor) -->
-                            <!-- ময়ূরের ডানা ও পুচ্ছ -->
-                            <path d="M44 26 C36 24 35 12 40 4 C43 14 47 18 51 22 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="0.8"/>
-                            <path d="M37 20 C30 18 30 8 36 2 C38 9 42 14 45 18 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="0.7"/>
-                            <!-- ময়ূরের শরীর ও গলা -->
-                            <path d="M47 26 C47 16 53 10 56 6 C58 9 55 16 52 26 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="0.8"/>
-                            <!-- ঠোঁট ও মাথা -->
-                            <path d="M56 6 L62 8 L57 10 Z" fill="#f3cf65"/>
-                            <circle cx="55" cy="7.5" r="0.8" fill="#d9142d"/>
-                            <!-- ময়ূরের ঝুলন্ত শোলার মালা -->
-                            <path d="M40 25 C37 32 37 40 39 46 C41 40 41 32 42 25 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="0.6"/>
+                <!-- CARD FRONT -->
+                <section class="card-front text-center py-8 sm:py-16 luxury-card rounded-3xl p-5 sm:p-12 border border-solidGold/40 relative overflow-hidden">
+                    <div id="foilShine" class="gold-foil-shine"></div>
 
-                            <!-- শোলার গোল চাকতি রিং ১ (সবচেয়ে উপরের বল) -->
-                            <ellipse cx="50" cy="30" rx="9" ry="5.5" fill="#fdfbf7" stroke="#e5dec9" stroke-width="1.2"/>
-                            <!-- শোলার গোল চাকতি রিং ২ -->
-                            <ellipse cx="50" cy="38" rx="10.5" ry="6.2" fill="#ffffff" stroke="#e5dec9" stroke-width="1.2"/>
-                            <!-- শোলার গোল চাকতি রিং ৩ -->
-                            <ellipse cx="50" cy="47" rx="12" ry="7" fill="#fdfbf7" stroke="#e5dec9" stroke-width="1.2"/>
-                            <!-- শোলার গোল চাকতি রিং ৪ -->
-                            <ellipse cx="50" cy="57" rx="14" ry="7.8" fill="#ffffff" stroke="#e5dec9" stroke-width="1.2"/>
-                            <!-- শোলার গোল চাকতি রিং ৫ -->
-                            <ellipse cx="50" cy="68" rx="17" ry="8.5" fill="#fdfbf7" stroke="#e5dec9" stroke-width="1.2"/>
-
-                            <!-- মধ্যভাগের শোলার ঘূর্ণি ফুল (Shola Circular Rosettes / Flowers) -->
-                            <path d="M28 80 Q50 76 72 80 L76 96 Q50 90 24 96 Z" fill="#ffffff" stroke="#e5dec9" stroke-width="1"/>
-                            <circle cx="34" cy="85" r="4.5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
-                            <circle cx="34" cy="85" r="2" fill="#fdfbf7"/>
-                            <circle cx="44" cy="84" r="5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
-                            <circle cx="44" cy="84" r="2.2" fill="#fdfbf7"/>
-                            <circle cx="56" cy="84" r="5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
-                            <circle cx="56" cy="84" r="2.2" fill="#fdfbf7"/>
-                            <circle cx="66" cy="85" r="4.5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
-                            <circle cx="66" cy="85" r="2" fill="#fdfbf7"/>
-
-                            <!-- টোপরের মূল চওড়া শোলার ফ্রন্ট (With 3D Conical Rosettes) -->
-                            <path d="M20 95 Q50 88 80 95 L84 116 Q50 108 16 116 Z" fill="#fdfbf7" stroke="#e0dcd3" stroke-width="1.2"/>
-                            <!-- বামের কোণ শঙ্কু -->
-                            <polygon points="21,102 28,100 28,110 21,108" fill="#ffffff" stroke="#ccc5b3" stroke-width="0.8"/>
-                            <circle cx="28" cy="105" r="5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
-                            <!-- মাঝের বড় শোলার মোটিফ ফুল -->
-                            <circle cx="40" cy="103" r="7" fill="#ffffff" stroke="#d5cdb8" stroke-width="1.2"/>
-                            <polygon points="37,103 40,97 43,103 40,109" fill="#f3cf65"/>
-                            <circle cx="60" cy="103" r="7" fill="#ffffff" stroke="#d5cdb8" stroke-width="1.2"/>
-                            <polygon points="57,103 60,97 63,103 60,109" fill="#f3cf65"/>
-                            <!-- ডানের কোণ শঙ্কু -->
-                            <polygon points="79,102 72,100 72,110 79,108" fill="#ffffff" stroke="#ccc5b3" stroke-width="0.8"/>
-                            <circle cx="72" cy="105" r="5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
-
-                            <!-- নিচের ঐতিহ্যবাহী লাল পাড় ও শোলার কারুকার্যময় বেস ব্যান্ড -->
-                            <path d="M14 116 Q50 108 86 116 L88 128 Q50 120 12 128 Z" fill="#990a1c" stroke="#f3cf65" stroke-width="1"/>
-                            <!-- লাল পাড়ের ভেতরের শোলার সাদা আলপনা -->
-                            <path d="M16 122 Q24 118 32 122 Q40 126 48 122 Q56 118 64 122 Q72 126 80 122 Q84 120 86 122" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-                            <!-- একদম নিচের সাদা শোলার বর্ডার ব্যান্ড -->
-                            <path d="M10 128 Q50 120 90 128 L91 133 Q50 125 9 133 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="1"/>
-
-                            <!-- ঝুলন্ত শোলার তুলতুলে কদম ফুল (Shola Kadamba Pom-poms) -->
-                            <!-- বামের শোলার কদম ফুল -->
-                            <path d="M13 124 Q2 120 4 114" fill="none" stroke="#ffffff" stroke-width="1.8"/>
-                            <circle cx="4" cy="113" r="4.8" fill="#ffffff" stroke="#e0dcd3" stroke-width="1"/>
-                            <circle cx="4" cy="113" r="2" fill="#fdfbf7"/>
-                            <!-- ডানের শোলার কদম ফুল -->
-                            <path d="M87 124 Q98 120 96 114" fill="none" stroke="#ffffff" stroke-width="1.8"/>
-                            <circle cx="96" cy="113" r="4.8" fill="#ffffff" stroke="#e0dcd3" stroke-width="1"/>
-                            <circle cx="96" cy="113" r="2" fill="#fdfbf7"/>
-                        </svg>
+                    <!-- Flip Guide Pill -->
+                    <div class="absolute top-3 right-3 text-[9px] uppercase tracking-wider font-mono text-solidGold bg-black/60 px-2.5 py-1 rounded-full border border-solidGold/35 flex items-center gap-1.5 shadow">
+                        <i class="fa-solid fa-arrows-rotate animate-spin" style="animation-duration: 6s;"></i>
+                        <span>ট্যাপ করে কার্ড উল্টান</span>
                     </div>
-                    <span class="text-3xl sm:text-6xl md:text-7xl font-bold font-bengali solid-gold-text tracking-wide leading-none">
-                        সুমন্ত
-                    </span>
-                </div>
 
-                <!-- & চিহ্ন -->
-                <div class="self-end mb-1 sm:mb-3">
-                    <span class="font-cursive text-lightGold text-2xl sm:text-5xl">&</span>
-                </div>
-
-                <!-- কনে: পিয়ালী (ছবিতে দেখানো আসল শোলার খাঁজকাটা কনে মুকুট) -->
-                <div class="inline-flex flex-col items-center">
-                    <div class="h-16 sm:h-24 flex items-end mb-1 sm:mb-2 transform hover:scale-110 transition-transform duration-300">
-                        <svg viewBox="0 0 110 100" class="h-full w-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-                            <!-- কনে মুকুটের শীর্ষ লাল পালক (Pinkish-Red Feather / Kalgi on Top) -->
-                            <path d="M55 2 C53 8 51 14 55 19 C58 14 57 8 55 2 Z" fill="#e6123d"/>
-                            <path d="M53 5 C49 9 49 14 53 18 Z" fill="#d9142d"/>
-                            <path d="M57 5 C61 9 61 14 57 18 Z" fill="#d9142d"/>
-
-                            <!-- কনে মুকুটের প্রধান উঁচু খাঁজকাটা চূড়া (Arched Shola Tiara) -->
-                            <path d="M55 18 C46 32 38 48 40 70 C46 64 55 62 70 70 C72 48 64 32 55 18 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="1.2"/>
-                            
-                            <!-- কনে মুকুটের মাঝের ত্রিকোণ শোলার মোটিফ ও কলকা -->
-                            <path d="M55 28 C51 38 47 48 48 58 C52 54 58 54 62 58 C63 48 59 38 55 28 Z" fill="#fdfbf7" stroke="#d5cdb8" stroke-width="0.9"/>
-                            <circle cx="55" cy="46" r="3" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
-                            <polygon points="53,46 55,40 57,46 55,52" fill="#f3cf65"/>
-                            <circle cx="55" cy="62" r="2.2" fill="#d9142d" stroke="#f3cf65" stroke-width="0.6"/>
-
-                            <!-- কনে মুকুটের অর্ধচন্দ্রাকার খিলান (Curved Shola Arch) -->
-                            <path d="M12 92 C16 68 34 50 55 48 C76 50 94 68 98 92 C88 78 72 66 55 65 C38 66 22 78 12 92 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="1.2"/>
-
-                            <!-- খিলানের বাইরের পরিধির শোলার বৃত্তাকার ফুল (Surrounding Pearl Rosettes) -->
-                            <circle cx="16" cy="85" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
-                            <circle cx="21" cy="76" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
-                            <circle cx="28" cy="68" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
-                            <circle cx="36" cy="60" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
-                            <circle cx="74" cy="60" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
-                            <circle cx="82" cy="68" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
-                            <circle cx="89" cy="76" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
-                            <circle cx="94" cy="85" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
-
-                            <!-- খিলানের প্রান্তবর্তী খাঁজকাটা শোলার পাতা (Feather Petals) -->
-                            <path d="M26 62 Q31 52 38 46" fill="none" stroke="#d5cdb8" stroke-width="1.4" stroke-linecap="round"/>
-                            <path d="M84 62 Q79 52 72 46" fill="none" stroke="#d5cdb8" stroke-width="1.4" stroke-linecap="round"/>
-                            <path d="M22 68 Q28 58 35 52" fill="none" stroke="#d5cdb8" stroke-width="1.2" stroke-linecap="round"/>
-                            <path d="M88 68 Q82 58 75 52" fill="none" stroke="#d5cdb8" stroke-width="1.2" stroke-linecap="round"/>
-
-                            <!-- খিলানের মধ্যিখানে কনের শোলার ঝুলন্ত সাদা কদম ফুল (Shola Pom-pom in Center Arch) -->
-                            <circle cx="55" cy="82" r="6.5" fill="#ffffff" stroke="#dcd6c5" stroke-width="1.2"/>
-                            <circle cx="55" cy="82" r="3" fill="#fdfbf7"/>
-                            <circle cx="55" cy="82" r="1.2" fill="#d9142d"/>
-                        </svg>
+                    <div class="inline-block text-[10px] sm:text-xs uppercase tracking-[0.4em] text-solidGold font-bold border-b border-solidGold/40 pb-1 mb-4 sm:mb-6">
+                        ॥ ওঁ শ্রী গণেশায় নমঃ ॥
                     </div>
-                    <span class="text-3xl sm:text-6xl md:text-7xl font-bold font-bengali solid-gold-text tracking-wide leading-none">
-                        পিয়ালী
-                    </span>
+                    
+                    <p class="text-[11px] sm:text-sm text-lightGold/90 tracking-widest uppercase font-cinzel mb-4 sm:mb-6">
+                        We Joyfully Invite You To Celebrate The Wedding Of
+                    </p>
+
+                    <!-- COUPLE NAMES WITH AUTHENTIC SHOLA BOR TOPOR & SHOLA KONE MUKUT -->
+                    <div class="pt-2 pb-2 sm:pt-4 sm:pb-6 my-2 flex items-center justify-center flex-wrap gap-x-4 sm:gap-x-8 gap-y-4">
+                        
+                        <!-- বর: সুমন্ত -->
+                        <div class="inline-flex flex-col items-center">
+                            <div class="h-10 sm:h-14 md:h-16 flex items-end mb-1 transform hover:scale-110 transition-transform duration-300">
+                                <svg viewBox="0 0 100 135" class="h-full w-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+                                    <path d="M44 26 C36 24 35 12 40 4 C43 14 47 18 51 22 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="0.8"/>
+                                    <path d="M37 20 C30 18 30 8 36 2 C38 9 42 14 45 18 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="0.7"/>
+                                    <path d="M47 26 C47 16 53 10 56 6 C58 9 55 16 52 26 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="0.8"/>
+                                    <path d="M56 6 L62 8 L57 10 Z" fill="#f3cf65"/>
+                                    <circle cx="55" cy="7.5" r="0.8" fill="#d9142d"/>
+                                    <path d="M40 25 C37 32 37 40 39 46 C41 40 41 32 42 25 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="0.6"/>
+                                    <ellipse cx="50" cy="30" rx="9" ry="5.5" fill="#fdfbf7" stroke="#e5dec9" stroke-width="1.2"/>
+                                    <ellipse cx="50" cy="38" rx="10.5" ry="6.2" fill="#ffffff" stroke="#e5dec9" stroke-width="1.2"/>
+                                    <ellipse cx="50" cy="47" rx="12" ry="7" fill="#fdfbf7" stroke="#e5dec9" stroke-width="1.2"/>
+                                    <ellipse cx="50" cy="57" rx="14" ry="7.8" fill="#ffffff" stroke="#e5dec9" stroke-width="1.2"/>
+                                    <ellipse cx="50" cy="68" rx="17" ry="8.5" fill="#fdfbf7" stroke="#e5dec9" stroke-width="1.2"/>
+                                    <path d="M28 80 Q50 76 72 80 L76 96 Q50 90 24 96 Z" fill="#ffffff" stroke="#e5dec9" stroke-width="1"/>
+                                    <circle cx="34" cy="85" r="4.5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
+                                    <circle cx="34" cy="85" r="2" fill="#fdfbf7"/>
+                                    <circle cx="44" cy="84" r="5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
+                                    <circle cx="44" cy="84" r="2.2" fill="#fdfbf7"/>
+                                    <circle cx="56" cy="84" r="5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
+                                    <circle cx="56" cy="84" r="2.2" fill="#fdfbf7"/>
+                                    <circle cx="66" cy="85" r="4.5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
+                                    <circle cx="66" cy="85" r="2" fill="#fdfbf7"/>
+                                    <path d="M20 95 Q50 88 80 95 L84 116 Q50 108 16 116 Z" fill="#fdfbf7" stroke="#e0dcd3" stroke-width="1.2"/>
+                                    <polygon points="21,102 28,100 28,110 21,108" fill="#ffffff" stroke="#ccc5b3" stroke-width="0.8"/>
+                                    <circle cx="28" cy="105" r="5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
+                                    <circle cx="40" cy="103" r="7" fill="#ffffff" stroke="#d5cdb8" stroke-width="1.2"/>
+                                    <polygon points="37,103 40,97 43,103 40,109" fill="#f3cf65"/>
+                                    <circle cx="60" cy="103" r="7" fill="#ffffff" stroke="#d5cdb8" stroke-width="1.2"/>
+                                    <polygon points="57,103 60,97 63,103 60,109" fill="#f3cf65"/>
+                                    <polygon points="79,102 72,100 72,110 79,108" fill="#ffffff" stroke="#ccc5b3" stroke-width="0.8"/>
+                                    <circle cx="72" cy="105" r="5" fill="#ffffff" stroke="#d5cdb8" stroke-width="1"/>
+                                    <path d="M14 116 Q50 108 86 116 L88 128 Q50 120 12 128 Z" fill="#990a1c" stroke="#f3cf65" stroke-width="1"/>
+                                    <path d="M16 122 Q24 118 32 122 Q40 126 48 122 Q56 118 64 122 Q72 126 80 122 Q84 120 86 122" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M10 128 Q50 120 90 128 L91 133 Q50 125 9 133 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="1"/>
+                                    <path d="M13 124 Q2 120 4 114" fill="none" stroke="#ffffff" stroke-width="1.8"/>
+                                    <circle cx="4" cy="113" r="4.8" fill="#ffffff" stroke="#e0dcd3" stroke-width="1"/>
+                                    <circle cx="4" cy="113" r="2" fill="#fdfbf7"/>
+                                    <path d="M87 124 Q98 120 96 114" fill="none" stroke="#ffffff" stroke-width="1.8"/>
+                                    <circle cx="96" cy="113" r="4.8" fill="#ffffff" stroke="#e0dcd3" stroke-width="1"/>
+                                    <circle cx="96" cy="113" r="2" fill="#fdfbf7"/>
+                                </svg>
+                            </div>
+                            <span class="text-3xl sm:text-6xl md:text-7xl font-bold font-bengali solid-gold-text tracking-wide leading-none">
+                                সুমন্ত
+                            </span>
+                        </div>
+
+                        <!-- & চিহ্ন -->
+                        <div class="self-end mb-1 sm:mb-2">
+                            <span class="font-cursive text-lightGold text-2xl sm:text-5xl">&</span>
+                        </div>
+
+                        <!-- কনে: পিয়ালী -->
+                        <div class="inline-flex flex-col items-center">
+                            <div class="h-10 sm:h-14 md:h-16 flex items-end mb-1 transform hover:scale-110 transition-transform duration-300">
+                                <svg viewBox="0 0 110 100" class="h-full w-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+                                    <path d="M55 2 C53 8 51 14 55 19 C58 14 57 8 55 2 Z" fill="#e6123d"/>
+                                    <path d="M53 5 C49 9 49 14 53 18 Z" fill="#d9142d"/>
+                                    <path d="M57 5 C61 9 61 14 57 18 Z" fill="#d9142d"/>
+                                    <path d="M55 18 C46 32 38 48 40 70 C46 64 55 62 70 70 C72 48 64 32 55 18 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="1.2"/>
+                                    <path d="M55 28 C51 38 47 48 48 58 C52 54 58 54 62 58 C63 48 59 38 55 28 Z" fill="#fdfbf7" stroke="#d5cdb8" stroke-width="0.9"/>
+                                    <circle cx="55" cy="46" r="3" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
+                                    <polygon points="53,46 55,40 57,46 55,52" fill="#f3cf65"/>
+                                    <circle cx="55" cy="62" r="2.2" fill="#d9142d" stroke="#f3cf65" stroke-width="0.6"/>
+                                    <path d="M12 92 C16 68 34 50 55 48 C76 50 94 68 98 92 C88 78 72 66 55 65 C38 66 22 78 12 92 Z" fill="#ffffff" stroke="#e0dcd3" stroke-width="1.2"/>
+                                    <circle cx="16" cy="85" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
+                                    <circle cx="21" cy="76" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
+                                    <circle cx="28" cy="68" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
+                                    <circle cx="36" cy="60" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
+                                    <circle cx="74" cy="60" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
+                                    <circle cx="82" cy="68" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
+                                    <circle cx="89" cy="76" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
+                                    <circle cx="94" cy="85" r="3.8" fill="#ffffff" stroke="#d5cdb8" stroke-width="0.8"/>
+                                    <path d="M26 62 Q31 52 38 46" fill="none" stroke="#d5cdb8" stroke-width="1.4" stroke-linecap="round"/>
+                                    <path d="M84 62 Q79 52 72 46" fill="none" stroke="#d5cdb8" stroke-width="1.4" stroke-linecap="round"/>
+                                    <path d="M22 68 Q28 58 35 52" fill="none" stroke="#d5cdb8" stroke-width="1.2" stroke-linecap="round"/>
+                                    <path d="M88 68 Q82 58 75 52" fill="none" stroke="#d5cdb8" stroke-width="1.2" stroke-linecap="round"/>
+                                    <circle cx="55" cy="82" r="6.5" fill="#ffffff" stroke="#dcd6c5" stroke-width="1.2"/>
+                                    <circle cx="55" cy="82" r="3" fill="#fdfbf7"/>
+                                    <circle cx="55" cy="82" r="1.2" fill="#d9142d"/>
+                                </svg>
+                            </div>
+                            <span class="text-3xl sm:text-6xl md:text-7xl font-bold font-bengali solid-gold-text tracking-wide leading-none">
+                                পিয়ালী
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <p class="text-xs sm:text-base text-lightGold/95 max-w-2xl mx-auto italic font-serif mt-3 mb-6 sm:mb-10 leading-relaxed px-2">
+                        "আকাশ ও মাটির মেলবন্ধনে রচিত হলো আমাদের নতুন পথচলা। জীবনের এই শুভ লগ্নে আপনার সস্নেহ আশীর্বাদ ও উপস্থিতি আমাদের পরম সৌভাগ্য।"
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-3xl mx-auto py-4 border-y border-solidGold/30 text-xs sm:text-sm">
+                        <div>
+                            <span class="text-solidGold uppercase font-semibold text-[10px] sm:text-[11px] tracking-wider block mb-0.5">বর (Groom)</span>
+                            <p class="font-bold text-lightGold text-sm sm:text-base">শ্রী সুমন্ত রায়</p>
+                            <p class="text-lightGold/80 text-[11px] sm:text-xs">সুযোগ্য পুত্র: শ্রী গৌতম রায় ও শ্রীমতি অর্চনা রায়</p>
+                        </div>
+                        <div>
+                            <span class="text-solidGold uppercase font-semibold text-[10px] sm:text-[11px] tracking-wider block mb-0.5">কনে (Bride)</span>
+                            <p class="font-bold text-lightGold text-sm sm:text-base">শ্রীমতি পিয়ালী পাইকার</p>
+                            <p class="text-lightGold/80 text-[11px] sm:text-xs">সুযোগ্যা কন্যা: শ্রী পিরু পাইকার ও শ্রীমতি অপর্ণা পাইকার</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 sm:mt-10">
+                        <span class="text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-solidGold font-semibold block mb-3 sm:mb-4">
+                            ॥ শুভ বিবাহ লগ্ন গণনা (Lagna Countdown) ॥
+                        </span>
+                        <div class="flex justify-center items-center gap-2 sm:gap-6 text-center">
+                            <div class="w-14 sm:w-20 p-2 sm:p-2.5 rounded-2xl bg-black/55 border border-solidGold/35">
+                                <span id="cdDays" class="block text-xl sm:text-3xl font-bold text-solidGold font-mono">00</span>
+                                <span class="text-[9px] sm:text-[10px] uppercase text-solidGold/80">দিন</span>
+                            </div>
+                            <div class="w-14 sm:w-20 p-2 sm:p-2.5 rounded-2xl bg-black/55 border border-solidGold/35">
+                                <span id="cdHours" class="block text-xl sm:text-3xl font-bold text-solidGold font-mono">00</span>
+                                <span class="text-[9px] sm:text-[10px] uppercase text-solidGold/80">ঘণ্টা</span>
+                            </div>
+                            <div class="w-14 sm:w-20 p-2 sm:p-2.5 rounded-2xl bg-black/55 border border-solidGold/35">
+                                <span id="cdMins" class="block text-xl sm:text-3xl font-bold text-solidGold font-mono">00</span>
+                                <span class="text-[9px] sm:text-[10px] uppercase text-solidGold/80">মিনিট</span>
+                            </div>
+                            <div class="w-14 sm:w-20 p-2 sm:p-2.5 rounded-2xl bg-black/55 border border-solidGold/35">
+                                <span id="cdSecs" class="block text-xl sm:text-3xl font-bold text-solidGold font-mono">00</span>
+                                <span class="text-[9px] sm:text-[10px] uppercase text-solidGold/80">সেকেন্ড</span>
+                            </div>
+                        </div>
+
+                        <!-- DIRECT CALENDAR & PDF BUTTONS -->
+                        <div class="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3" onclick="event.stopPropagation()">
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%E0%A6%B8%E0%A7%81%E0%A6%AE%E0%A6%A8%E0%A7%8D%E0%A6%A4+%E0%A6%93+%E0%A6%AA%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B2%E0%A7%80%E0%A6%B0+%E0%A6%B6%E0%A7%81%E0%A6%AD+%E0%A6%AC%E0%A6%BF%E0%A6%AC%E0%A6%BE%E0%A6%B9&dates=20270126T140000Z/20270126T183000Z&details=%E0%A6%B8%E0%A7%81%E0%A6%AE%E0%A6%A8%E0%A7%8D%E0%A6%A4+%E0%A6%93+%E0%A6%AA%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B2%E0%A7%80%E0%A6%B0+%E0%A6%B6%E0%A7%81%E0%A6%AD+%E0%A6%AA%E0%A6%B0%E0%A6%BF%E0%A6%A3%E0%A6%AF%E0%A6%BC%E0%A7%87+%E0%A6%86%E0%A6%AA%E0%A6%A8%E0%A6%BE%E0%A6%B0+%E0%A6%B8%E0%A6%AA%E0%A6%B0%E0%A6%BF%E0%A6%AC%E0%A6%BE%E0%A6%B0+%E0%A6%89%E0%A6%AA%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BF%E0%A6%A4%E0%A6%BF+%E0%A6%8F%E0%A6%95%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%A4+%E0%A6%95%E0%A6%BE%E0%A6%AE%E0%A7%8D%E0%A6%AF%E0%A7%87%E0%A5%A4&location=%E0%A6%B0%E0%A6%BE%E0%A6%AF%E0%A6%BC+%E0%A6%AD%E0%A6%AC%E0%A6%A8%2C+%E0%A6%95%E0%A7%81%E0%A6%B0%E0%A6%BE%E0%A6%A8%2C+%E0%A6%98%E0%A6%BE%E0%A6%9F%E0%A6%BE%E0%A6%B2%2C+%E0%A6%AA%E0%A6%B6%E0%A7%8D%E0%A6%9A%E0%A6%BF%E0%A6%AE+%E0%A6%AE%E0%A7%87%E0%A6%A6%E0%A6%BF%E0%A6%A8%E0%A7%80%E0%A6%AA%E0%A7%81%E0%A6%B0" target="_blank" class="px-3.5 py-1.5 rounded-full bg-black/60 hover:bg-black/90 border border-solidGold/50 text-solidGold text-[11px] sm:text-xs font-semibold flex items-center gap-1.5 transition active:scale-95 shadow">
+                                <i class="fa-brands fa-google text-solidGold"></i>
+                                <span>২৬শে জানুয়ারি Google Cal</span>
+                            </a>
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%E0%A6%B8%E0%A7%81%E0%A6%AE%E0%A6%A8%E0%A7%8D%E0%A6%A4+%E0%A6%93+%E0%A6%AA%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B2%E0%A7%80%E0%A6%B0+%E0%A6%AC%E0%A7%8C%E0%A6%AD%E0%A6%BE%E0%A6%A4+%E0%A6%93+%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A7%80%E0%A6%A4%E0%A6%BF%E0%A6%AD%E0%A7%8B%E0%A6%9C&dates=20270127T133000Z/20270127T173000Z&details=%E0%A6%B8%E0%A7%81%E0%A6%AE%E0%A6%A8%E0%A7%8D%E0%A6%A4+%E0%A6%93+%E0%A6%AA%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B2%E0%A7%80%E0%A6%B0+%E0%A6%AC%E0%A7%8C%E0%A6%AD%E0%A6%BE%E0%A6%A4+%E0%A6%B8%E0%A6%AD%E0%A6%BE%E0%A6%AF%E0%A6%BC+%E0%A6%B8%E0%A6%AA%E0%A6%B0%E0%A6%BF%E0%A6%AC%E0%A6%BE%E0%A6%B0+%E0%A6%89%E0%A6%AA%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BF%E0%A6%A4%E0%A6%BF+%E0%A6%8F%E0%A6%95%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%A4+%E0%A6%95%E0%A6%BE%E0%A6%AE%E0%A7%8D%E0%A6%AF%E0%A7%87%E0%A5%A4&location=%E0%A6%B0%E0%A6%BE%E0%A6%AF%E0%A6%BC+%E0%A6%AD%E0%A6%AC%E0%A6%A8%2C+%E0%A6%95%E0%A7%81%E0%A6%B0%E0%A6%BE%E0%A6%A8%2C+%E0%A6%98%E0%A6%BE%E0%A6%9F%E0%A6%BE%E0%A6%B2%2C+%E0%A6%AA%E0%A6%B6%E0%A7%8D%E0%A6%9A%E0%A6%BF%E0%A6%AE+%E0%A6%AE%E0%A7%87%E0%A6%A6%E0%A6%BF%E0%A6%A8%E0%A7%80%E0%A6%AA%E0%A7%81%E0%A6%B0" target="_blank" class="px-3.5 py-1.5 rounded-full bg-black/60 hover:bg-black/90 border border-solidGold/50 text-solidGold text-[11px] sm:text-xs font-semibold flex items-center gap-1.5 transition active:scale-95 shadow">
+                                <i class="fa-brands fa-google text-solidGold"></i>
+                                <span>২৭শে জানুয়ারি Google Cal</span>
+                            </a>
+                            <button onclick="downloadCombinedICalFile()" class="px-3.5 py-1.5 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/50 text-solidGold font-semibold text-[11px] sm:text-xs flex items-center gap-1.5 transition active:scale-95 shadow">
+                                <i class="fa-brands fa-apple text-base"></i>
+                                <span>Apple / iCal</span>
+                            </button>
+                            <button onclick="downloadLuxuryCardPDF()" class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-solidGold via-lightGold to-solidGold text-[#36030c] font-bold text-[11px] sm:text-xs flex items-center gap-1.5 transition active:scale-95 shadow hover:brightness-110">
+                                <i class="fa-solid fa-file-pdf text-[#8f0a1b] text-sm"></i>
+                                <span>PDF কার্ড সেভ করুন</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CARD BACK (গোল্ডেন ফয়েল রাজকীয় ব্যাক সাইড) -->
+                <div class="card-back">
+                    <div class="border-2 border-dashed border-solidGold/50 rounded-2xl p-6 sm:p-10 w-full h-full flex flex-col items-center justify-center relative">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-solidGold flex items-center justify-center bg-[#8f0a1b] text-solidGold text-2xl sm:text-3xl shadow-[0_0_25px_rgba(243,207,101,0.5)] mb-4">
+                            <i class="fa-solid fa-om"></i>
+                        </div>
+                        <span class="text-xs sm:text-sm uppercase tracking-[0.3em] text-solidGold font-bold mb-2">
+                            ॥ মাঙ্গলিক আশীর্বাদ ॥
+                        </span>
+                        <h3 class="text-lg sm:text-2xl font-bold solid-gold-text font-serif mb-3">
+                            যদেতদ্ধৃদয়ং তব তদেতদ্ধৃদয়ং মম
+                        </h3>
+                        <p class="text-xs sm:text-sm text-lightGold/90 italic font-bengali max-w-md leading-relaxed mb-6">
+                            "তোমার হৃদয় আমার হোক, আমার হৃদয় হোক তোমার — পবিত্র সপ্তপদীর প্রতিটি পদক্ষেপে একাত্ম হোক আমাদের অন্তরাত্মা।"
+                        </p>
+                        <div class="text-[10px] sm:text-xs font-mono text-solidGold/80 tracking-widest uppercase border-t border-solidGold/30 pt-3">
+                            সুমন্ত ও পিয়ালী • শুভ পরিণয় • ২০২৭
+                        </div>
+                        <span class="text-[10px] text-solidGold/70 mt-4 animate-pulse">
+                            (পুনরায় ট্যাপ করে সামনের পৃষ্ঠা দেখুন)
+                        </span>
+                    </div>
                 </div>
 
             </div>
-
-            <p class="text-xs sm:text-base text-lightGold/95 max-w-2xl mx-auto italic font-serif mt-3 mb-6 sm:mb-10 leading-relaxed px-2">
-                "আকাশ ও মাটির মেলবন্ধনে রচিত হলো আমাদের নতুন পথচলা। জীবনের এই শুভ লগ্নে আপনার সস্নেহ আশীর্বাদ ও উপস্থিতি আমাদের পরম সৌভাগ্য।"
-            </p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-3xl mx-auto py-4 border-y border-solidGold/30 text-xs sm:text-sm">
-                <div>
-                    <span class="text-solidGold uppercase font-semibold text-[10px] sm:text-[11px] tracking-wider block mb-0.5">বর (Groom)</span>
-                    <p class="font-bold text-lightGold text-sm sm:text-base">শ্রী সুমন্ত রায়</p>
-                    <p class="text-lightGold/80 text-[11px] sm:text-xs">সুযোগ্য পুত্র: শ্রী গৌতম রায় ও শ্রীমতি অর্চনা রায়</p>
-                </div>
-                <div>
-                    <span class="text-solidGold uppercase font-semibold text-[10px] sm:text-[11px] tracking-wider block mb-0.5">কনে (Bride)</span>
-                    <p class="font-bold text-lightGold text-sm sm:text-base">শ্রীমতি পিয়ালী পাইকার</p>
-                    <p class="text-lightGold/80 text-[11px] sm:text-xs">সুযোগ্যা কন্যা: শ্রী পিরু পাইকার ও শ্রীমতি অপর্ণা পাইকার</p>
-                </div>
-            </div>
-
-            <div class="mt-8 sm:mt-10">
-                <span class="text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-solidGold font-semibold block mb-3 sm:mb-4">
-                    ॥ শুভ বিবাহ লগ্ন গণনা (Lagna Countdown) ॥
-                </span>
-                <div class="flex justify-center items-center gap-2 sm:gap-6 text-center">
-                    <div class="w-14 sm:w-20 p-2 sm:p-2.5 rounded-2xl bg-black/55 border border-solidGold/35">
-                        <span id="cdDays" class="block text-xl sm:text-3xl font-bold text-solidGold font-mono">00</span>
-                        <span class="text-[9px] sm:text-[10px] uppercase text-solidGold/80">দিন</span>
-                    </div>
-                    <div class="w-14 sm:w-20 p-2 sm:p-2.5 rounded-2xl bg-black/55 border border-solidGold/35">
-                        <span id="cdHours" class="block text-xl sm:text-3xl font-bold text-solidGold font-mono">00</span>
-                        <span class="text-[9px] sm:text-[10px] uppercase text-solidGold/80">ঘণ্টা</span>
-                    </div>
-                    <div class="w-14 sm:w-20 p-2 sm:p-2.5 rounded-2xl bg-black/55 border border-solidGold/35">
-                        <span id="cdMins" class="block text-xl sm:text-3xl font-bold text-solidGold font-mono">00</span>
-                        <span class="text-[9px] sm:text-[10px] uppercase text-solidGold/80">মিনিট</span>
-                    </div>
-                    <div class="w-14 sm:w-20 p-2 sm:p-2.5 rounded-2xl bg-black/55 border border-solidGold/35">
-                        <span id="cdSecs" class="block text-xl sm:text-3xl font-bold text-solidGold font-mono">00</span>
-                        <span class="text-[9px] sm:text-[10px] uppercase text-solidGold/80">সেকেন্ড</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
 
         <!-- CINEMATIC VIDEO PLAYER -->
         <section class="mb-8 sm:mb-14 luxury-card rounded-3xl p-4 sm:p-8 border border-solidGold/40 text-center">
@@ -424,18 +536,18 @@
                     id="nativePlayer" 
                     controls 
                     playsinline 
-                    preload="metadata"
+                    preload="metadata" 
                     class="w-full h-full object-contain bg-black">
                     <source src="./wedding.mp4" type="video/mp4">
                     <source src="wedding.mp4" type="video/mp4">
                     <source src="./video.mp4" type="video/mp4">
                     <source src="https://drive.google.com/uc?export=download&id=1lE6aiehtxLQ6i3huk8ITkOmgGTfejv7G" type="video/mp4">
-                    আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
+                    আপনার ব্রাউজারে ভিডিও সমর্থিত নয়।
                 </video>
 
                 <iframe 
                     id="iframePlayer" 
-                    class="hidden w-full h-full border-0 absolute inset-0"
+                    class="hidden w-full h-full border-0 absolute inset-0" 
                     src="" 
                     allow="autoplay; fullscreen" 
                     allowfullscreen>
@@ -573,7 +685,34 @@
             </div>
         </section>
 
-        <!-- CEREMONIAL ITINERARY -->
+        <!-- শুধুমাত্র পরিবারের জরুরি যোগাযোগ ও হেল্পলাইন -->
+        <section class="mb-8 sm:mb-14 luxury-card rounded-3xl p-5 sm:p-8 border border-solidGold/40 text-center">
+            <div class="mb-5 pb-2.5 border-b border-solidGold/25 text-left">
+                <span class="text-[10px] sm:text-[11px] uppercase tracking-widest text-solidGold font-semibold">Host Support & Helpline</span>
+                <h3 class="text-base sm:text-2xl font-bold solid-gold-text">জরুরি যোগাযোগ ও পারিবারিক হেল্পলাইন</h3>
+                <p class="text-xs text-lightGold/80 italic mt-0.5 font-serif">যাতায়াত, ভেন্যু বা যেকোনো প্রয়োজনে বরের পরিবারের সাথে সরাসরি যোগাযোগ করুন</p>
+            </div>
+
+            <div class="max-w-md mx-auto">
+                <div class="p-4 rounded-2xl bg-black/55 border border-solidGold/40 text-left flex items-center justify-between gap-3 shadow-lg">
+                    <div>
+                        <span class="text-[10px] uppercase font-bold tracking-wider text-solidGold block">বরপক্ষ সহায়তা (রায় পরিবার)</span>
+                        <h4 class="text-sm sm:text-base font-bold text-lightGold mt-0.5 font-bengali">পারিবারিক হেল্পডেস্ক</h4>
+                        <p class="text-xs text-lightGold/85 font-mono mt-0.5">+91 98300 XXXXX</p>
+                    </div>
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        <a href="tel:+919830000000" class="w-10 h-10 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/50 text-solidGold flex items-center justify-center text-sm shadow active:scale-95 transition" title="সরাসরি ফোন করুন">
+                            <i class="fa-solid fa-phone"></i>
+                        </a>
+                        <a href="https://api.whatsapp.com/send?phone=919830000000&text=%E0%A6%A8%E0%A6%AE%E0%A6%B8%E0%A7%8D%E0%A6%95%E0%A6%BE%E0%A6%B0%2C+%E0%A6%B8%E0%A7%81%E0%A6%AE%E0%A6%A8%E0%A7%8D%E0%A6%A4+%E0%A6%93+%E0%A6%AA%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B2%E0%A7%80%E0%A6%B0+%E0%A6%AC%E0%A6%BF%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A7%87%E0%A6%B0+%E0%A6%B2%E0%A7%8B%E0%A6%95%E0%A7%87%E0%A6%B6%E0%A6%A8%2F%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%E0%A6%B0+%E0%A6%9C%E0%A6%A8%E0%A7%8D%E0%A6%AF+%E0%A6%AF%E0%A7%8B%E0%A6%97%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A7%8B%E0%A6%97+%E0%A6%95%E0%A6%B0%E0%A6%9B%E0%A6%BF%E0%A5%A4" target="_blank" class="w-10 h-10 rounded-full bg-emerald-700 hover:bg-emerald-600 border border-emerald-400 text-white flex items-center justify-center text-base shadow active:scale-95 transition" title="হোয়াটসঅ্যাপে মেসেজ পাঠান">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CEREMONIAL ITINERARY WITH TRADITIONAL BENGALI ICONS -->
         <section class="mb-8 sm:mb-14">
             <div class="text-center mb-6 sm:mb-8">
                 <span class="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-solidGold font-semibold">Wedding Schedule</span>
@@ -582,11 +721,23 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                
                 <!-- 1. Gaye Holud -->
-                <div class="luxury-card rounded-2xl p-5 border border-solidGold/35 hover:border-solidGold transition duration-300 flex flex-col justify-between">
+                <div class="luxury-card rounded-2xl p-5 border border-solidGold/35 hover:border-solidGold transition duration-300 flex flex-col justify-between group">
                     <div>
-                        <div class="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-solidGold text-lg mb-3">
-                            <i class="fa-solid fa-sun"></i>
+                        <div class="w-12 h-12 rounded-full bg-amber-500/15 border border-amber-400/60 p-2 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(243,207,101,0.25)] group-hover:scale-110 transition-transform">
+                            <svg viewBox="0 0 64 64" class="w-full h-full drop-shadow">
+                                <path d="M12 20 C12 10, 52 10, 52 20 L48 54 C48 58, 16 58, 16 54 Z" fill="#990a1c" stroke="#f3cf65" stroke-width="2"/>
+                                <path d="M16 22 Q32 16 48 22" fill="none" stroke="#fff1b8" stroke-width="1.8" stroke-dasharray="2 2"/>
+                                <ellipse cx="32" cy="42" rx="13" ry="6" fill="#f59e0b" stroke="#f3cf65" stroke-width="1.2"/>
+                                <ellipse cx="32" cy="40" rx="9" ry="3.5" fill="#fef08a"/>
+                                <path d="M25 36 C25 32, 39 32, 39 36 Z" fill="#b45309" stroke="#f3cf65" stroke-width="0.8"/>
+                                <path d="M32 24 C34 27, 35 30, 32 33 C29 30, 30 27, 32 24 Z" fill="#ef4444"/>
+                                <path d="M32 26 C33 28, 33.5 30, 32 32 C30.5 30, 31 28, 32 26 Z" fill="#fde047"/>
+                                <circle cx="23" cy="28" r="1.5" fill="#f3cf65"/>
+                                <circle cx="41" cy="28" r="1.5" fill="#f3cf65"/>
+                                <circle cx="32" cy="49" r="2" fill="#dc2626"/>
+                            </svg>
                         </div>
                         <span class="text-[10px] uppercase font-bold tracking-widest text-solidGold">প্রথম পর্ব</span>
                         <h4 class="text-lg font-bold text-lightGold mt-1">গায়ে হলুদ ও আশীর্বাদ</h4>
@@ -605,14 +756,26 @@
                     </a>
                 </div>
 
-                <!-- 2. Subho Bibaho (Saat Paak) -->
-                <div class="luxury-card rounded-2xl p-5 border-2 border-solidGold shadow-[0_0_30px_rgba(243,207,101,0.25)] flex flex-col justify-between relative">
+                <!-- 2. Subho Bibaho -->
+                <div class="luxury-card rounded-2xl p-5 border-2 border-solidGold shadow-[0_0_30px_rgba(243,207,101,0.25)] flex flex-col justify-between relative group">
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-solidGold text-[#36030c] font-bold text-[9px] uppercase tracking-wider">
                         মূল আকর্ষণ • শুভ লগ্ন
                     </div>
                     <div>
-                        <div class="w-10 h-10 rounded-full bg-rose-600/20 border border-rose-400/50 flex items-center justify-center text-rose-300 text-lg mb-3 mt-1">
-                            <i class="fa-solid fa-heart"></i>
+                        <div class="w-12 h-12 rounded-full bg-rose-600/20 border border-solidGold p-2 flex items-center justify-center mb-3 mt-1 shadow-[0_0_15px_rgba(243,207,101,0.35)] group-hover:scale-110 transition-transform">
+                            <svg viewBox="0 0 64 64" class="w-full h-full drop-shadow">
+                                <path d="M32 58 C32 55, 34 52, 32 48" fill="none" stroke="#f3cf65" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M32 48 C20 42, 10 32, 10 20 C10 11, 20 8, 32 17 C44 8, 54 11, 54 20 C54 32, 44 42, 32 48 Z" fill="#15803d" stroke="#f3cf65" stroke-width="1.8"/>
+                                <path d="M32 17 Q32 33 32 47" fill="none" stroke="#86efac" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M32 24 Q24 22 18 20" fill="none" stroke="#86efac" stroke-width="1" stroke-linecap="round"/>
+                                <path d="M32 24 Q40 22 46 20" fill="none" stroke="#86efac" stroke-width="1" stroke-linecap="round"/>
+                                <path d="M32 32 Q24 30 18 30" fill="none" stroke="#86efac" stroke-width="1" stroke-linecap="round"/>
+                                <path d="M32 32 Q40 30 46 30" fill="none" stroke="#86efac" stroke-width="1" stroke-linecap="round"/>
+                                <path d="M32 40 Q25 40 21 38" fill="none" stroke="#86efac" stroke-width="0.9" stroke-linecap="round"/>
+                                <path d="M32 40 Q39 40 43 38" fill="none" stroke="#86efac" stroke-width="0.9" stroke-linecap="round"/>
+                                <circle cx="32" cy="27" r="4.5" fill="#dc2626" stroke="#f3cf65" stroke-width="1.2"/>
+                                <circle cx="32" cy="27" r="1.8" fill="#fde047"/>
+                            </svg>
                         </div>
                         <span class="text-[10px] uppercase font-bold tracking-widest text-solidGold">দ্বিতীয় পর্ব</span>
                         <h4 class="text-lg font-bold text-lightGold mt-1">শুভ বিবাহ ও সাতপাক</h4>
@@ -632,10 +795,20 @@
                 </div>
 
                 <!-- 3. Bou Bhaat -->
-                <div class="luxury-card rounded-2xl p-5 border border-solidGold/35 hover:border-solidGold transition duration-300 flex flex-col justify-between">
+                <div class="luxury-card rounded-2xl p-5 border border-solidGold/35 hover:border-solidGold transition duration-300 flex flex-col justify-between group">
                     <div>
-                        <div class="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-400/50 flex items-center justify-center text-purple-300 text-lg mb-3">
-                            <i class="fa-solid fa-champagne-glasses"></i>
+                        <div class="w-12 h-12 rounded-full bg-amber-500/15 border border-amber-400/60 p-2 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(243,207,101,0.25)] group-hover:scale-110 transition-transform">
+                            <svg viewBox="0 0 64 64" class="w-full h-full drop-shadow">
+                                <circle cx="32" cy="32" r="23" fill="#854d0e" stroke="#f3cf65" stroke-width="2"/>
+                                <circle cx="32" cy="32" r="19" fill="#a16207" stroke="#fff1b8" stroke-width="0.8" stroke-dasharray="2 2"/>
+                                <ellipse cx="32" cy="33" rx="9" ry="7" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+                                <circle cx="32" cy="30" r="1.5" fill="#f59e0b"/>
+                                <circle cx="21" cy="23" r="3.6" fill="#fde047" stroke="#ca8a04" stroke-width="1"/>
+                                <circle cx="32" cy="18" r="3.6" fill="#f87171" stroke="#ca8a04" stroke-width="1"/>
+                                <circle cx="43" cy="23" r="3.6" fill="#fde047" stroke="#ca8a04" stroke-width="1"/>
+                                <circle cx="44" cy="39" r="3.6" fill="#ca8a04" stroke="#f3cf65" stroke-width="1"/>
+                                <circle cx="20" cy="39" r="3.6" fill="#22c55e" stroke="#ca8a04" stroke-width="1"/>
+                            </svg>
                         </div>
                         <span class="text-[10px] uppercase font-bold tracking-widest text-solidGold">তৃতীয় পর্ব</span>
                         <h4 class="text-lg font-bold text-lightGold mt-1">বৌভাত ও প্রীতিভোজ</h4>
@@ -683,11 +856,11 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
                 <div class="lg:col-span-8 relative w-full h-[260px] sm:h-[400px] rounded-2xl overflow-hidden border-2 border-solidGold/50 shadow-2xl bg-black">
                     <iframe 
-                        id="embeddedGoogleMap"
-                        class="w-full h-full border-0"
-                        loading="lazy"
-                        allowfullscreen
-                        referrerpolicy="no-referrer-when-downgrade"
+                        id="embeddedGoogleMap" 
+                        class="w-full h-full border-0" 
+                        loading="lazy" 
+                        allowfullscreen 
+                        referrerpolicy="no-referrer-when-downgrade" 
                         src="https://maps.google.com/maps?q=22.738329,87.67395&t=&z=16&ie=UTF8&iwloc=&output=embed">
                     </iframe>
 
@@ -859,6 +1032,104 @@
         <p class="font-bengali text-xs sm:text-sm text-solidGold mb-1">॥ শুভ পরিণয় • সুমন্ত ও পিয়ালী ॥</p>
         <p class="font-cinzel text-[9px] sm:text-[10px] tracking-widest text-solidGold/70">© 2027 ROYAL BENGALI WEDDING • ALL RIGHTS RESERVED</p>
     </footer>
+
+    <!-- EXCLUSIVE TEMPLATE CONTAINER (DISPLAYS ONLY IN BACKGROUND OFF-FLOW FOR PDF EXPORT) -->
+    <div id="pdfExportWrapper" style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 99999; background: #36030c; pointer-events: none; opacity: 0;">
+        <div id="luxuryPdfCard" style="width: 794px; min-height: 1120px; margin: 0 auto; padding: 36px; background-color: #36030c; background-image: radial-gradient(circle at 50% 20%, #520514 0%, #290107 100%); color: #fff6e0; font-family: 'Noto Serif Bengali', serif; box-sizing: border-box; position: relative;">
+            
+            <div style="border: 2px solid #f3cf65; padding: 22px; min-height: 1044px; box-sizing: border-box; position: relative; display: flex; flex-direction: column; justify-content: space-between; text-align: center;">
+                <div style="position: absolute; inset: 6px; border: 1px dashed rgba(243, 207, 101, 0.45); pointer-events: none;"></div>
+
+                <!-- Header Mantra -->
+                <div>
+                    <p style="color: #f3cf65; font-size: 14px; letter-spacing: 5px; font-weight: bold; margin-bottom: 6px;">
+                        ॥ শ্রী শ্রী প্রজাপতয়ে নমঃ ॥
+                    </p>
+                    <p style="color: #fff1b8; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px;">
+                        ॥ ওঁ শ্রী গণেশায় নমঃ ॥
+                    </p>
+
+                    <div style="display: inline-block; padding: 4px 22px; border-radius: 9999px; background: rgba(243, 207, 101, 0.12); border: 1px solid #f3cf65; color: #f3cf65; font-size: 14px; font-weight: bold; margin-bottom: 10px;">
+                        শুভ পরিণয় নিমন্ত্রণপত্র
+                    </div>
+
+                    <p style="font-size: 13px; font-style: italic; color: #fff1b8; max-width: 580px; margin: 0 auto 18px auto; line-height: 1.6;">
+                        "আকাশ ও মাটির মেলবন্ধনে রচিত হলো আমাদের নতুন পথচলা। জীবনের এই শুভ লগ্নে আপনার সপরিবার উপস্থিতি ও আশীর্বাদ একান্ত কাম্য।"
+                    </p>
+                </div>
+
+                <!-- Couple Names -->
+                <div style="margin: 8px 0;">
+                    <div style="color: #f3cf65; font-size: 46px; font-weight: bold; letter-spacing: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); line-height: 1.1;">
+                        শ্রী সুমন্ত
+                    </div>
+                    <div style="color: #fff1b8; font-size: 26px; font-family: 'Great Vibes', cursive; margin: 4px 0;">
+                        &
+                    </div>
+                    <div style="color: #f3cf65; font-size: 46px; font-weight: bold; letter-spacing: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); line-height: 1.1;">
+                        শ্রীমতি পিয়ালী
+                    </div>
+                </div>
+
+                <!-- Parents' Details -->
+                <div style="display: flex; justify-content: space-around; border-top: 1px solid rgba(243, 207, 101, 0.35); border-bottom: 1px solid rgba(243, 207, 101, 0.35); padding: 12px 0; margin: 10px 0; text-align: center;">
+                    <div style="width: 45%;">
+                        <span style="color: #f3cf65; font-size: 11px; text-transform: uppercase; font-weight: bold; display: block;">বর</span>
+                        <strong style="color: #fff1b8; font-size: 15px; display: block; margin-top: 2px;">শ্রী সুমন্ত রায়</strong>
+                        <span style="color: rgba(255,241,184,0.85); font-size: 11px; display: block; margin-top: 2px;">সুযোগ্য পুত্র: শ্রী গৌতম রায় ও শ্রীমতি অর্চনা রায়</span>
+                    </div>
+                    <div style="width: 1px; background: rgba(243, 207, 101, 0.35);"></div>
+                    <div style="width: 45%;">
+                        <span style="color: #f3cf65; font-size: 11px; text-transform: uppercase; font-weight: bold; display: block;">কনে</span>
+                        <strong style="color: #fff1b8; font-size: 15px; display: block; margin-top: 2px;">শ্রীমতি পিয়ালী পাইকার</strong>
+                        <span style="color: rgba(255,241,184,0.85); font-size: 11px; display: block; margin-top: 2px;">সুযোগ্যা কন্যা: শ্রী পিরু পাইকার ও শ্রীমতি অপর্ণা পাইকার</span>
+                    </div>
+                </div>
+
+                <!-- Schedule / Events -->
+                <div style="margin: 10px 0;">
+                    <h4 style="color: #f3cf65; font-size: 15px; font-weight: bold; margin-bottom: 8px; letter-spacing: 2px;">
+                        ॥ মাঙ্গলিক অনুষ্ঠানের নির্ঘণ্ট ॥
+                    </h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; text-align: center;">
+                        <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(243,207,101,0.3); border-radius: 10px; padding: 10px;">
+                            <span style="color: #f3cf65; font-weight: bold; font-size: 12px; display: block;">গায়ে হলুদ</span>
+                            <p style="color: #fff1b8; font-size: 10px; margin-top: 3px;">২৬শে জানুয়ারি ২০২৭</p>
+                            <p style="color: rgba(255,241,184,0.8); font-size: 10px;">সকাল ৯:০০ ঘটিকায়</p>
+                        </div>
+                        <div style="background: rgba(143,10,27,0.55); border: 1px solid #f3cf65; border-radius: 10px; padding: 10px;">
+                            <span style="color: #f3cf65; font-weight: bold; font-size: 12px; display: block;">শুভ বিবাহ</span>
+                            <p style="color: #fff1b8; font-size: 10px; margin-top: 3px;">২৬শে জানুয়ারি ২০২৭</p>
+                            <p style="color: rgba(255,241,184,0.8); font-size: 10px;">সন্ধ্যা ৭:৩০ ঘটিকায়</p>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(243,207,101,0.3); border-radius: 10px; padding: 10px;">
+                            <span style="color: #f3cf65; font-weight: bold; font-size: 12px; display: block;">বৌভাত ও প্রীতিভোজ</span>
+                            <p style="color: #fff1b8; font-size: 10px; margin-top: 3px;">২৭শে জানুয়ারি ২০২৭</p>
+                            <p style="color: rgba(255,241,184,0.8); font-size: 10px;">সন্ধ্যা ৭:০০ ঘটিকায়</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Venue -->
+                <div style="margin-top: 4px; background: rgba(0,0,0,0.45); border: 1px solid rgba(243,207,101,0.4); border-radius: 12px; padding: 10px;">
+                    <span style="color: #f3cf65; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold;">অনুষ্ঠান বাসর</span>
+                    <h5 style="color: #fff1b8; font-size: 15px; font-weight: bold; margin: 2px 0;">রায় ভবন, কুরান</h5>
+                    <p style="color: rgba(255,241,184,0.85); font-size: 11px; margin: 0;">ঘাটাল, পশ্চিম মেদিনীপুর — ৭২১২২২</p>
+                </div>
+
+                <!-- Footer Blessings -->
+                <div style="margin-top: 12px; border-top: 1px dashed rgba(243, 207, 101, 0.4); padding-top: 8px;">
+                    <p style="color: #f3cf65; font-size: 12px; font-style: italic;">
+                        "যদেতদ্ধৃদয়ং তব তদেতদ্ধৃদয়ং মম"
+                    </p>
+                    <p style="color: rgba(255,241,184,0.6); font-size: 9px; letter-spacing: 2px; margin-top: 4px; text-transform: uppercase;">
+                        বিনীত — রায় ও পাইকার পরিবার
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
@@ -1034,6 +1305,46 @@
             });
         }
 
+        // ================= 3D CARD TILT & FLIP LOGIC =================
+        const heroWrapper = document.querySelector('.card-3d-wrapper');
+        const heroCard = document.getElementById('hero3dCard');
+        const foilShine = document.getElementById('foilShine');
+
+        function toggleHeroCardFlip() {
+            if (heroCard) {
+                heroCard.classList.toggle('is-flipped');
+            }
+        }
+
+        if (heroWrapper && heroCard) {
+            heroWrapper.addEventListener('mousemove', (e) => {
+                if (heroCard.classList.contains('is-flipped')) return;
+                const rect = heroWrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                heroCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+                if (foilShine) {
+                    foilShine.style.opacity = '1';
+                    foilShine.style.background = `radial-gradient(circle at ${(x / rect.width) * 100}% ${(y / rect.height) * 100}%, rgba(255, 241, 184, 0.4) 0%, transparent 60%)`;
+                }
+            });
+
+            heroWrapper.addEventListener('mouseleave', () => {
+                if (!heroCard.classList.contains('is-flipped')) {
+                    heroCard.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                }
+                if (foilShine) foilShine.style.opacity = '0';
+            });
+        }
+
         // ================= WAX SEAL, AUDIO, COUNTDOWN & VIDEO SYNC =================
         function openWeddingInvitation() {
             const modal = document.getElementById('unboxingModal');
@@ -1042,7 +1353,6 @@
                 modal.classList.add('hidden');
             }, 600);
 
-            // কনফেটি
             confetti({
                 particleCount: 70,
                 spread: 80,
@@ -1050,9 +1360,7 @@
                 colors: ['#f3cf65', '#fff1b8', '#d9142d']
             });
 
-            // লাল গোলাপের পাপড়ি পড়ার অ্যানিমেশন
             triggerRosePetals(5000);
-
             playShankhaSound();
             startShehnaiDirectly();
         }
@@ -1575,6 +1883,119 @@
                 cancelAnimationFrame(petalAnimId);
                 petalAnimId = null;
             }
+        }
+
+        // ================= DUAL ENGINE (DIRECT SAVE + PRINT FALLBACK) =================
+        async function downloadLuxuryCardPDF() {
+            const btn = document.getElementById('pdfDownloadBtn');
+            const btnText = document.getElementById('pdfBtnText');
+            const wrapper = document.getElementById('pdfExportWrapper');
+            const element = document.getElementById('luxuryPdfCard');
+
+            if (!element || !wrapper) return;
+
+            if (btnText) btnText.innerText = "প্রসেসিং...";
+            if (btn) btn.classList.add('opacity-75');
+
+            let directDownloadSucceeded = false;
+
+            // ইঞ্জিন ১: ডাইরেক্ট ক্যানভাস রেন্ডারিং
+            try {
+                wrapper.style.display = 'block';
+                wrapper.style.opacity = '0.01'; // ইউজারের কাছে দৃশ্যমান হবে না কিন্তু DOM ফ্লো বজায় থাকবে
+
+                await new Promise(res => setTimeout(res, 250));
+
+                if (typeof html2pdf !== 'undefined') {
+                    const opt = {
+                        margin:       0,
+                        filename:     'Sumanta_Piyali_Wedding_Invitation.pdf',
+                        image:        { type: 'jpeg', quality: 0.98 },
+                        html2canvas:  { 
+                            scale: 2, 
+                            useCORS: true, 
+                            logging: false,
+                            scrollX: 0, 
+                            scrollY: 0
+                        },
+                        jsPDF:        { unit: 'pt', format: 'a4', orientation: 'portrait' }
+                    };
+
+                    await html2pdf().set(opt).from(element).save();
+                    directDownloadSucceeded = true;
+                }
+            } catch (err) {
+                console.warn("Direct HTML2PDF engine failed, switching to native browser print:", err);
+            } finally {
+                wrapper.style.display = 'none';
+                wrapper.style.opacity = '0';
+            }
+
+            // ইঞ্জিন ২: ব্রাউজার নেটিভ A4 সেভ ডায়ালগ (যদি লাইব্রেরি ব্লক বা ফেল করে)
+            if (!directDownloadSucceeded) {
+                wrapper.style.display = 'block';
+                setTimeout(() => {
+                    window.print();
+                    wrapper.style.display = 'none';
+                }, 100);
+            }
+
+            if (btnText) btnText.innerText = "PDF ডাউনলোড";
+            if (btn) btn.classList.remove('opacity-75');
+        }
+
+        // Apple / iCal Calendar Download
+        function downloadCombinedICalFile() {
+            const icsContent = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sumanta & Piyali Wedding//BN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:sp-wedding-day1-2027@sumanta-piyali.com
+DTSTAMP:20261101T000000Z
+DTSTART:20270126T140000Z
+DTEND:20270126T183000Z
+SUMMARY:সুমন্ত ও পিয়ালীর শুভ বিবাহ (Subho Bibaho)
+DESCRIPTION:সুমন্ত ও পিয়ালীর শুভ পরিণয়ে আপনার সপরিবার সানন্দ উপস্থিতি একান্ত কাম্য।
+LOCATION:রায় ভবন, কুরান, ঘাটাল, পশ্চিম মেদিনীপুর
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-PT2H
+ACTION:DISPLAY
+DESCRIPTION:সুমন্ত ও পিয়ালীর শুভ বিবাহের লগ্ন আর মাত্র ২ ঘণ্টা পর!
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:আগামীকাল সুমন্ত ও পিয়ালীর শুভ বিবাহ!
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:sp-wedding-day2-2027@sumanta-piyali.com
+DTSTAMP:20261101T000000Z
+DTSTART:20270127T133000Z
+DTEND:20270127T173000Z
+SUMMARY:সুমন্ত ও পিয়ালীর বৌভাত ও প্রীতিভোজ (Bou Bhaat)
+DESCRIPTION:সুমন্ত ও পিয়ালীর শুভ বৌভাত ও প্রীতিভোজ সভায় আপনার সপরিবার সানন্দ উপস্থিতি একান্ত কাম্য।
+LOCATION:রায় ভবন, কুরান, ঘাটাল, পশ্চিম মেদিনীপুর
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-PT2H
+ACTION:DISPLAY
+DESCRIPTION:আজ সন্ধ্যায় সুমন্ত ও পিয়ালীর বৌভাত ও প্রীতিভোজ সভা!
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'Sumanta_Piyali_Wedding.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
