@@ -296,9 +296,9 @@
                     <span class="hidden sm:inline">শঙ্খধ্বনি</span>
                 </button>
 
-                <a href="#rsvpSection" class="px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-gradient-to-r from-solidGold via-lightGold to-solidGold text-[#36030c] text-[11px] sm:text-xs font-bold shadow-md hover:brightness-110 active:scale-95 transition flex items-center gap-1">
+                <a href="#VPSection" class="px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-gradient-to-r from-solidGold via-lightGold to-solidGold text-[#36030c] text-[11px] sm:text-xs font-bold shadow-md hover:brightness-110 active:scale-95 transition flex items-center gap-1">
                     <i class="fa-solid fa-id-card"></i>
-                    <span>RSVP</span>
+                    <span>VP</span>
                 </a>
             </div>
         </div>
@@ -689,7 +689,7 @@
                         <p class="text-xs text-lightGold/85 font-mono mt-0.5">+91 9932588323</p>
                     </div>
                     <div class="flex items-center gap-2 flex-shrink-0">
-                        <a href="tel:+919830000000" class="w-10 h-10 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/50 text-solidGold flex items-center justify-center text-sm shadow active:scale-95 transition" title="সরাসরি ফোন করুন">
+                        <a href="tel:+919932588323" class="w-10 h-10 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/50 text-solidGold flex items-center justify-center text-sm shadow active:scale-95 transition" title="সরাসরি ফোন করুন">
                             <i class="fa-solid fa-phone"></i>
                         </a>
                         <a href="https://api.whatsapp.com/send?phone=919830000000&text=%E0%A6%A8%E0%A6%AE%E0%A6%B8%E0%A7%8D%E0%A6%95%E0%A6%BE%E0%A6%B0%2C+%E0%A6%B8%E0%A7%81%E0%A6%AE%E0%A6%A8%E0%A7%8D%E0%A6%A4+%E0%A6%93+%E0%A6%AA%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B2%E0%A7%80%E0%A6%B0+%E0%A6%AC%E0%A6%BF%E0%A6%AC%E0%A6%BE%E0%A6%B9%E0%A7%87%E0%A6%B0+%E0%A6%B2%E0%A7%8B%E0%A6%95%E0%A7%87%E0%A6%B6%E0%A6%A8%2F%E0%A6%B8%E0%A6%B9%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%E0%A6%B0+%E0%A6%9C%E0%A6%A8%E0%A7%8D%E0%A6%AF+%E0%A6%AF%E0%A7%8B%E0%A6%97%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A7%8B%E0%A6%97+%E0%A6%95%E0%A6%B0%E0%A6%9B%E0%A6%BF%E0%A5%A4" target="_blank" class="w-10 h-10 rounded-full bg-emerald-700 hover:bg-emerald-600 border border-emerald-400 text-white flex items-center justify-center text-base shadow active:scale-95 transition" title="হোয়াটসঅ্যাপে মেসেজ পাঠান">
@@ -885,17 +885,17 @@
             </div>
         </section>
 
-        <!-- RSVP REGISTRATION FORM -->
-        <section id="rsvpSection" class="mb-8 sm:mb-14 luxury-card rounded-3xl p-5 sm:p-10 border-2 border-solidGold shadow-2xl">
+        <!-- VP REGISTRATION FORM -->
+        <section id="VPSection" class="mb-8 sm:mb-14 luxury-card rounded-3xl p-5 sm:p-10 border-2 border-solidGold shadow-2xl">
             <div class="text-center mb-6">
-                <span class="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-solidGold font-bold">Online RSVP</span>
-                <h3 class="text-xl sm:text-4xl font-bold solid-gold-text mt-1">উপস্থিতি নিশ্চিতকরণ (RSVP)</h3>
+                <span class="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-solidGold font-bold">Online VP</span>
+                <h3 class="text-xl sm:text-4xl font-bold solid-gold-text mt-1">উপস্থিতি নিশ্চিতকরণ (VP)</h3>
                 <p class="text-xs text-lightGold/90 max-w-xl mx-auto italic mt-1 font-serif">
                     অনুগ্রহ করে ফর্মটি পূরণ করে সরাসরি আপনার নামের কিউআর (QR) কোডযুক্ত ডিজিটাল ভিআইপি ইনভিটেশন পাস সংগ্রহ করুন।
                 </p>
             </div>
 
-            <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)" class="max-w-2xl mx-auto space-y-4">
+            <form id="VPForm" onsubmit="handleVPSubmit(event)" class="max-w-2xl mx-auto space-y-4">
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-solidGold mb-1" for="guestName">
                         আপনার নাম (Full Name) <span class="text-rose-300">*</span>
@@ -1634,7 +1634,7 @@
 
         // =================  PASS =================
         let activePassData = null;
-        function handleRsvpSubmit(e) {
+        function handleVPSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('guestName').value.trim();
             const phone = document.getElementById('guestPhone').value.trim();
