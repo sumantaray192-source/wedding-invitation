@@ -19,9 +19,6 @@
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <!-- html2pdf.js for High Quality PDF Export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
     <script>
         tailwind.config = {
             theme: {
@@ -169,32 +166,23 @@
         ::-webkit-scrollbar-thumb { background: #8f0a1b; border-radius: 4px; border: 1px solid rgba(243, 207, 101, 0.35); }
         ::-webkit-scrollbar-thumb:hover { background: #f3cf65; }
 
-        /* PERFECT PRINT TO PDF CSS */
+        /* Print Media Styles */
         @media print {
             body * {
                 visibility: hidden !important;
             }
-            #luxuryPdfCard, #luxuryPdfCard * {
+            #printModalCard, #printModalCard * {
                 visibility: visible !important;
             }
-            #pdfExportWrapper {
-                display: block !important;
-                position: absolute !important;
+            #printModalCard {
+                position: fixed !important;
                 left: 0 !important;
                 top: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-                padding: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
                 margin: 0 !important;
-            }
-            #luxuryPdfCard {
-                position: absolute !important;
-                left: 0 !important;
-                top: 0 !important;
-                width: 100% !important;
-                min-height: 100vh !important;
-                padding: 28px !important;
-                box-shadow: none !important;
+                padding: 20px !important;
+                background: #36030c !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
@@ -698,7 +686,7 @@
                     <div>
                         <span class="text-[10px] uppercase font-bold tracking-wider text-solidGold block">বরপক্ষ সহায়তা (রায় পরিবার)</span>
                         <h4 class="text-sm sm:text-base font-bold text-lightGold mt-0.5 font-bengali">পারিবারিক হেল্পডেস্ক</h4>
-                        <p class="text-xs text-lightGold/85 font-mono mt-0.5">+91 98300 XXXXX</p>
+                        <p class="text-xs text-lightGold/85 font-mono mt-0.5">+91 9932588323</p>
                     </div>
                     <div class="flex items-center gap-2 flex-shrink-0">
                         <a href="tel:+919830000000" class="w-10 h-10 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/50 text-solidGold flex items-center justify-center text-sm shadow active:scale-95 transition" title="সরাসরি ফোন করুন">
@@ -967,7 +955,7 @@
             <div id="passDisplayContainer" class="hidden mt-8 pt-8 border-t border-solidGold/35">
                 <div class="text-center mb-4">
                     <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block">
-                        ✓ আপনার RSVP সফল হয়েছে!
+                        ✓ আপনার PASS সফল হয়েছে!
                     </span>
                     <h4 class="text-lg font-bold solid-gold-text">আপনার ডিজিটাল ইনভিটেশন পাস</h4>
                 </div>
@@ -1033,101 +1021,109 @@
         <p class="font-cinzel text-[9px] sm:text-[10px] tracking-widest text-solidGold/70">© 2027 ROYAL BENGALI WEDDING • ALL RIGHTS RESERVED</p>
     </footer>
 
-    <!-- EXCLUSIVE TEMPLATE CONTAINER (DISPLAYS ONLY IN BACKGROUND OFF-FLOW FOR PDF EXPORT) -->
-    <div id="pdfExportWrapper" style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 99999; background: #36030c; pointer-events: none; opacity: 0;">
-        <div id="luxuryPdfCard" style="width: 794px; min-height: 1120px; margin: 0 auto; padding: 36px; background-color: #36030c; background-image: radial-gradient(circle at 50% 20%, #520514 0%, #290107 100%); color: #fff6e0; font-family: 'Noto Serif Bengali', serif; box-sizing: border-box; position: relative;">
+    <!-- POPUP PREVIEW & HIGH RESOLUTION VECTOR CARD MODAL -->
+    <div id="luxuryCardModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md transition-all duration-300">
+        <div class="relative w-full max-w-2xl bg-[#36030c] border-2 border-solidGold rounded-3xl p-4 sm:p-8 max-h-[92vh] overflow-y-auto shadow-2xl flex flex-col items-center">
             
-            <div style="border: 2px solid #f3cf65; padding: 22px; min-height: 1044px; box-sizing: border-box; position: relative; display: flex; flex-direction: column; justify-content: space-between; text-align: center;">
-                <div style="position: absolute; inset: 6px; border: 1px dashed rgba(243, 207, 101, 0.45); pointer-events: none;"></div>
+            <!-- Close Modal -->
+            <button onclick="closeLuxuryCardModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 border border-solidGold/50 text-solidGold hover:scale-110 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
 
-                <!-- Header Mantra -->
-                <div>
-                    <p style="color: #f3cf65; font-size: 14px; letter-spacing: 5px; font-weight: bold; margin-bottom: 6px;">
-                        ॥ শ্রী শ্রী প্রজাপতয়ে নমঃ ॥
-                    </p>
-                    <p style="color: #fff1b8; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px;">
-                        ॥ ওঁ শ্রী গণেশায় নমঃ ॥
-                    </p>
+            <!-- Card Content (Vector Styled, Anti-Blur, Never Breaks Font) -->
+            <div id="printModalCard" class="w-full bg-gradient-to-b from-[#400410] via-[#2d020a] to-[#200106] border-2 border-solidGold rounded-2xl p-5 sm:p-8 text-center relative select-text">
+                <div class="absolute inset-1.5 border border-dashed border-solidGold/40 pointer-events-none rounded-xl"></div>
+                
+                <p class="text-xs sm:text-sm uppercase tracking-[0.3em] text-solidGold font-bold mb-1">
+                    ॥ শ্রী শ্রী প্রজাপতয়ে নমঃ ॥
+                </p>
+                <p class="text-[10px] sm:text-xs uppercase tracking-widest text-lightGold/80 font-cinzel mb-3">
+                    ॥ ওঁ শ্রী গণেশায় নমঃ ॥
+                </p>
 
-                    <div style="display: inline-block; padding: 4px 22px; border-radius: 9999px; background: rgba(243, 207, 101, 0.12); border: 1px solid #f3cf65; color: #f3cf65; font-size: 14px; font-weight: bold; margin-bottom: 10px;">
-                        শুভ পরিণয় নিমন্ত্রণপত্র
-                    </div>
-
-                    <p style="font-size: 13px; font-style: italic; color: #fff1b8; max-width: 580px; margin: 0 auto 18px auto; line-height: 1.6;">
-                        "আকাশ ও মাটির মেলবন্ধনে রচিত হলো আমাদের নতুন পথচলা। জীবনের এই শুভ লগ্নে আপনার সপরিবার উপস্থিতি ও আশীর্বাদ একান্ত কাম্য।"
-                    </p>
+                <div class="inline-block px-4 py-1 rounded-full bg-solidGold/15 border border-solidGold text-solidGold text-xs sm:text-sm font-bold mb-3">
+                    শুভ পরিণয় নিমন্ত্রণপত্র
                 </div>
+
+                <p class="text-xs sm:text-sm text-lightGold/90 italic font-serif max-w-lg mx-auto mb-6 leading-relaxed">
+                    "আকাশ ও মাটির মেলবন্ধনে রচিত হলো আমাদের নতুন পথচলা। জীবনের এই শুভ লগ্নে আপনার সপরিবার উপস্থিতি ও আশীর্বাদ একান্ত কাম্য।"
+                </p>
 
                 <!-- Couple Names -->
-                <div style="margin: 8px 0;">
-                    <div style="color: #f3cf65; font-size: 46px; font-weight: bold; letter-spacing: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); line-height: 1.1;">
+                <div class="my-4">
+                    <h2 class="text-3xl sm:text-5xl font-bold text-solidGold font-bengali tracking-wide drop-shadow-md">
                         শ্রী সুমন্ত
-                    </div>
-                    <div style="color: #fff1b8; font-size: 26px; font-family: 'Great Vibes', cursive; margin: 4px 0;">
-                        &
-                    </div>
-                    <div style="color: #f3cf65; font-size: 46px; font-weight: bold; letter-spacing: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); line-height: 1.1;">
+                    </h2>
+                    <span class="text-xl sm:text-3xl font-cursive text-lightGold block my-1">&</span>
+                    <h2 class="text-3xl sm:text-5xl font-bold text-solidGold font-bengali tracking-wide drop-shadow-md">
                         শ্রীমতি পিয়ালী
+                    </h2>
+                </div>
+
+                <!-- Parents Info -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-3 border-y border-solidGold/30 max-w-xl mx-auto my-4 text-xs sm:text-sm">
+                    <div class="text-center">
+                        <span class="text-solidGold font-bold block text-[10px] uppercase">বর</span>
+                        <strong class="text-lightGold block text-sm sm:text-base font-bold">শ্রী সুমন্ত রায়</strong>
+                        <span class="text-lightGold/80 text-[11px] block">সুযোগ্য পুত্র: শ্রী গৌতম রায় ও শ্রীমতি অর্চনা রায়</span>
+                    </div>
+                    <div class="text-center sm:border-l sm:border-solidGold/30">
+                        <span class="text-solidGold font-bold block text-[10px] uppercase">কনে</span>
+                        <strong class="text-lightGold block text-sm sm:text-base font-bold">শ্রীমতি পিয়ালী পাইকার</strong>
+                        <span class="text-lightGold/80 text-[11px] block">সুযোগ্যা কন্যা: শ্রী পিরু পাইকার ও শ্রীমতি অপর্ণা পাইকার</span>
                     </div>
                 </div>
 
-                <!-- Parents' Details -->
-                <div style="display: flex; justify-content: space-around; border-top: 1px solid rgba(243, 207, 101, 0.35); border-bottom: 1px solid rgba(243, 207, 101, 0.35); padding: 12px 0; margin: 10px 0; text-align: center;">
-                    <div style="width: 45%;">
-                        <span style="color: #f3cf65; font-size: 11px; text-transform: uppercase; font-weight: bold; display: block;">বর</span>
-                        <strong style="color: #fff1b8; font-size: 15px; display: block; margin-top: 2px;">শ্রী সুমন্ত রায়</strong>
-                        <span style="color: rgba(255,241,184,0.85); font-size: 11px; display: block; margin-top: 2px;">সুযোগ্য পুত্র: শ্রী গৌতম রায় ও শ্রীমতি অর্চনা রায়</span>
-                    </div>
-                    <div style="width: 1px; background: rgba(243, 207, 101, 0.35);"></div>
-                    <div style="width: 45%;">
-                        <span style="color: #f3cf65; font-size: 11px; text-transform: uppercase; font-weight: bold; display: block;">কনে</span>
-                        <strong style="color: #fff1b8; font-size: 15px; display: block; margin-top: 2px;">শ্রীমতি পিয়ালী পাইকার</strong>
-                        <span style="color: rgba(255,241,184,0.85); font-size: 11px; display: block; margin-top: 2px;">সুযোগ্যা কন্যা: শ্রী পিরু পাইকার ও শ্রীমতি অপর্ণা পাইকার</span>
-                    </div>
-                </div>
-
-                <!-- Schedule / Events -->
-                <div style="margin: 10px 0;">
-                    <h4 style="color: #f3cf65; font-size: 15px; font-weight: bold; margin-bottom: 8px; letter-spacing: 2px;">
+                <!-- Schedule Grid -->
+                <div class="my-4">
+                    <span class="text-xs uppercase tracking-widest text-solidGold font-bold block mb-2">
                         ॥ মাঙ্গলিক অনুষ্ঠানের নির্ঘণ্ট ॥
-                    </h4>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; text-align: center;">
-                        <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(243,207,101,0.3); border-radius: 10px; padding: 10px;">
-                            <span style="color: #f3cf65; font-weight: bold; font-size: 12px; display: block;">গায়ে হলুদ</span>
-                            <p style="color: #fff1b8; font-size: 10px; margin-top: 3px;">২৬শে জানুয়ারি ২০২৭</p>
-                            <p style="color: rgba(255,241,184,0.8); font-size: 10px;">সকাল ৯:০০ ঘটিকায়</p>
+                    </span>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 max-w-xl mx-auto">
+                        <div class="p-2.5 rounded-xl bg-black/40 border border-solidGold/30">
+                            <span class="text-solidGold text-xs font-bold block">গায়ে হলুদ</span>
+                            <p class="text-lightGold text-[11px]">২৬শে জানুয়ারি ২০২৭</p>
+                            <p class="text-lightGold/80 text-[10px]">সকাল ৯:০০ ঘটিকায়</p>
                         </div>
-                        <div style="background: rgba(143,10,27,0.55); border: 1px solid #f3cf65; border-radius: 10px; padding: 10px;">
-                            <span style="color: #f3cf65; font-weight: bold; font-size: 12px; display: block;">শুভ বিবাহ</span>
-                            <p style="color: #fff1b8; font-size: 10px; margin-top: 3px;">২৬শে জানুয়ারি ২০২৭</p>
-                            <p style="color: rgba(255,241,184,0.8); font-size: 10px;">সন্ধ্যা ৭:৩০ ঘটিকায়</p>
+                        <div class="p-2.5 rounded-xl bg-[#8f0a1b]/60 border border-solidGold">
+                            <span class="text-solidGold text-xs font-bold block">শুভ বিবাহ</span>
+                            <p class="text-lightGold text-[11px]">২৬শে জানুয়ারি ২০২৭</p>
+                            <p class="text-lightGold/80 text-[10px]">সন্ধ্যা ৭:৩০ ঘটিকায়</p>
                         </div>
-                        <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(243,207,101,0.3); border-radius: 10px; padding: 10px;">
-                            <span style="color: #f3cf65; font-weight: bold; font-size: 12px; display: block;">বৌভাত ও প্রীতিভোজ</span>
-                            <p style="color: #fff1b8; font-size: 10px; margin-top: 3px;">২৭শে জানুয়ারি ২০২৭</p>
-                            <p style="color: rgba(255,241,184,0.8); font-size: 10px;">সন্ধ্যা ৭:০০ ঘটিকায়</p>
+                        <div class="p-2.5 rounded-xl bg-black/40 border border-solidGold/30">
+                            <span class="text-solidGold text-xs font-bold block">বৌভাত ও প্রীতিভোজ</span>
+                            <p class="text-lightGold text-[11px]">২৭শে জানুয়ারি ২০২৭</p>
+                            <p class="text-lightGold/80 text-[10px]">সন্ধ্যা ৭:০০ ঘটিকায়</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Venue -->
-                <div style="margin-top: 4px; background: rgba(0,0,0,0.45); border: 1px solid rgba(243,207,101,0.4); border-radius: 12px; padding: 10px;">
-                    <span style="color: #f3cf65; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold;">অনুষ্ঠান বাসর</span>
-                    <h5 style="color: #fff1b8; font-size: 15px; font-weight: bold; margin: 2px 0;">রায় ভবন, কুরান</h5>
-                    <p style="color: rgba(255,241,184,0.85); font-size: 11px; margin: 0;">ঘাটাল, পশ্চিম মেদিনীপুর — ৭২১২২২</p>
+                <div class="mt-4 p-2.5 rounded-xl bg-black/40 border border-solidGold/40 max-w-xl mx-auto">
+                    <span class="text-[10px] uppercase tracking-wider text-solidGold font-bold">অনুষ্ঠান বাসর</span>
+                    <h4 class="text-sm sm:text-base font-bold text-lightGold font-bengali">রায় ভবন, কুরান</h4>
+                    <p class="text-xs text-lightGold/80">ঘাটাল, পশ্চিম মেদিনীপুর — ৭২১২২২</p>
                 </div>
 
-                <!-- Footer Blessings -->
-                <div style="margin-top: 12px; border-top: 1px dashed rgba(243, 207, 101, 0.4); padding-top: 8px;">
-                    <p style="color: #f3cf65; font-size: 12px; font-style: italic;">
-                        "যদেতদ্ধৃদয়ং তব তদেতদ্ধৃদয়ং মম"
-                    </p>
-                    <p style="color: rgba(255,241,184,0.6); font-size: 9px; letter-spacing: 2px; margin-top: 4px; text-transform: uppercase;">
-                        বিনীত — রায় ও পাইকার পরিবার
-                    </p>
-                </div>
-
+                <p class="text-xs text-solidGold italic mt-4 font-serif">"যদেতদ্ধৃদয়ং তব তদেতদ্ধৃদয়ং মম"</p>
+                <p class="text-[10px] text-lightGold/60 uppercase tracking-widest mt-1">বিনীত — রায় ও পাইকার পরিবার</p>
             </div>
+
+            <!-- Action Controls -->
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-3 w-full">
+                <button onclick="triggerCleanPdfPrint()" class="px-5 py-2 rounded-full bg-gradient-to-r from-solidGold via-lightGold to-solidGold text-[#36030c] font-bold text-xs sm:text-sm flex items-center gap-1.5 shadow-lg active:scale-95 transition hover:brightness-110">
+                    <i class="fa-solid fa-file-arrow-down text-base"></i>
+                    <span>PDF হিসেবে সংরক্ষণ করুন (Save as PDF)</span>
+                </button>
+                <button onclick="downloadCardAsHighResImage()" class="px-4 py-2 rounded-full bg-[#8f0a1b] hover:bg-[#a60f22] border border-solidGold/50 text-solidGold font-semibold text-xs sm:text-sm flex items-center gap-1.5 active:scale-95 transition">
+                    <i class="fa-solid fa-image"></i>
+                    <span>রয়্যাল ইমেজ ডাউনলোড (HD Image)</span>
+                </button>
+            </div>
+            
+            <p class="text-[10px] text-solidGold/70 mt-2 text-center">
+                * মোবাইল ও ল্যাপটপে বাংলা ফন্ট ১০০% স্পষ্ট ও অবিকৃত রাখতে এই রয়্যাল মোড কার্যকর।
+            </p>
         </div>
     </div>
 
@@ -1636,7 +1632,7 @@
             });
         }
 
-        // ================= RSVP & PASS =================
+        // =================  PASS =================
         let activePassData = null;
         function handleRsvpSubmit(e) {
             e.preventDefault();
@@ -1885,63 +1881,185 @@
             }
         }
 
-        // ================= DUAL ENGINE (DIRECT SAVE + PRINT FALLBACK) =================
-        async function downloadLuxuryCardPDF() {
-            const btn = document.getElementById('pdfDownloadBtn');
-            const btnText = document.getElementById('pdfBtnText');
-            const wrapper = document.getElementById('pdfExportWrapper');
-            const element = document.getElementById('luxuryPdfCard');
-
-            if (!element || !wrapper) return;
-
-            if (btnText) btnText.innerText = "প্রসেসিং...";
-            if (btn) btn.classList.add('opacity-75');
-
-            let directDownloadSucceeded = false;
-
-            // ইঞ্জিন ১: ডাইরেক্ট ক্যানভাস রেন্ডারিং
-            try {
-                wrapper.style.display = 'block';
-                wrapper.style.opacity = '0.01'; // ইউজারের কাছে দৃশ্যমান হবে না কিন্তু DOM ফ্লো বজায় থাকবে
-
-                await new Promise(res => setTimeout(res, 250));
-
-                if (typeof html2pdf !== 'undefined') {
-                    const opt = {
-                        margin:       0,
-                        filename:     'Sumanta_Piyali_Wedding_Invitation.pdf',
-                        image:        { type: 'jpeg', quality: 0.98 },
-                        html2canvas:  { 
-                            scale: 2, 
-                            useCORS: true, 
-                            logging: false,
-                            scrollX: 0, 
-                            scrollY: 0
-                        },
-                        jsPDF:        { unit: 'pt', format: 'a4', orientation: 'portrait' }
-                    };
-
-                    await html2pdf().set(opt).from(element).save();
-                    directDownloadSucceeded = true;
-                }
-            } catch (err) {
-                console.warn("Direct HTML2PDF engine failed, switching to native browser print:", err);
-            } finally {
-                wrapper.style.display = 'none';
-                wrapper.style.opacity = '0';
+        // ================= BULLETPROOF LUXURY CARD ENGINE (NO FONT BREAKAGE) =================
+        function downloadLuxuryCardPDF() {
+            const modal = document.getElementById('luxuryCardModal');
+            if (modal) {
+                modal.classList.remove('hidden');
             }
+        }
 
-            // ইঞ্জিন ২: ব্রাউজার নেটিভ A4 সেভ ডায়ালগ (যদি লাইব্রেরি ব্লক বা ফেল করে)
-            if (!directDownloadSucceeded) {
-                wrapper.style.display = 'block';
-                setTimeout(() => {
-                    window.print();
-                    wrapper.style.display = 'none';
-                }, 100);
+        function closeLuxuryCardModal() {
+            const modal = document.getElementById('luxuryCardModal');
+            if (modal) {
+                modal.classList.add('hidden');
             }
+        }
 
-            if (btnText) btnText.innerText = "PDF ডাউনলোড";
-            if (btn) btn.classList.remove('opacity-75');
+        function triggerCleanPdfPrint() {
+            // মোবাইল এবং ডেস্কটপ ব্রাউজারে টাইপোগ্রাফি অবিকৃত রেখে সরাসরি PDF সেভ
+            window.print();
+        }
+
+        function downloadCardAsHighResImage() {
+            // হাই রেজোলিউশন ক্যানভাসে বাংলা অক্ষরের নিখুঁত ড্রয়িং
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200;
+            canvas.height = 1700;
+            const ctx = canvas.getContext('2d');
+
+            // গোল্ডেন মেরুন গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড
+            const grad = ctx.createRadialGradient(600, 350, 50, 600, 850, 900);
+            grad.addColorStop(0, '#520514');
+            grad.addColorStop(0.6, '#36030c');
+            grad.addColorStop(1, '#1f0106');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 1200, 1700);
+
+            // ফ্রেম বর্ডার
+            ctx.strokeStyle = '#f3cf65';
+            ctx.lineWidth = 6;
+            ctx.strokeRect(40, 40, 1120, 1620);
+
+            ctx.strokeStyle = 'rgba(243, 207, 101, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([8, 6]);
+            ctx.strokeRect(55, 55, 1090, 1590);
+            ctx.setLineDash([]);
+
+            // টেক্সট ড্রয়িং
+            ctx.fillStyle = '#f3cf65';
+            ctx.textAlign = 'center';
+            
+            ctx.font = 'bold 24px "Noto Serif Bengali", serif';
+            ctx.fillText('॥ শ্রী শ্রী প্রজাপতয়ে নমঃ ॥', 600, 130);
+
+            ctx.font = '18px "Cinzel", serif';
+            ctx.fillStyle = '#fff1b8';
+            ctx.fillText('॥ ওঁ শ্রী গণেশায় নমঃ ॥', 600, 170);
+
+            ctx.fillStyle = '#f3cf65';
+            ctx.font = 'bold 26px "Noto Serif Bengali", serif';
+            ctx.fillText('শুভ পরিণয় নিমন্ত্রণপত্র', 600, 230);
+
+            ctx.font = 'italic 20px "Noto Serif Bengali", serif';
+            ctx.fillStyle = '#fff1b8';
+            ctx.fillText('"আকাশ ও মাটির মেলবন্ধনে রচিত হলো আমাদের নতুন পথচলা। জীবনের এই শুভ লগ্নে', 600, 290);
+            ctx.fillText('আপনার সপরিবার উপস্থিতি ও আশীর্বাদ একান্ত কাম্য।"', 600, 325);
+
+            // বর ও কনের নাম
+            ctx.font = 'bold 64px "Noto Serif Bengali", serif';
+            ctx.fillStyle = '#f3cf65';
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+            ctx.shadowBlur = 12;
+            ctx.fillText('শ্রী সুমন্ত', 600, 460);
+
+            ctx.font = '45px "Great Vibes", cursive';
+            ctx.fillStyle = '#fff1b8';
+            ctx.shadowBlur = 0;
+            ctx.fillText('&', 600, 520);
+
+            ctx.font = 'bold 64px "Noto Serif Bengali", serif';
+            ctx.fillStyle = '#f3cf65';
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+            ctx.shadowBlur = 12;
+            ctx.fillText('শ্রীমতি পিয়ালী', 600, 600);
+            ctx.shadowBlur = 0;
+
+            // লাইন ডিভাইডার
+            ctx.strokeStyle = 'rgba(243, 207, 101, 0.4)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(150, 670);
+            ctx.lineTo(1050, 670);
+            ctx.stroke();
+
+            // অভিভাবক বিবরণ
+            ctx.font = 'bold 22px "Noto Serif Bengali", serif';
+            ctx.fillStyle = '#f3cf65';
+            ctx.fillText('বর', 380, 715);
+            ctx.fillText('কনে', 820, 715);
+
+            ctx.font = 'bold 26px "Noto Serif Bengali", serif';
+            ctx.fillStyle = '#fff1b8';
+            ctx.fillText('শ্রী সুমন্ত রায়', 380, 755);
+            ctx.fillText('শ্রীমতি পিয়ালী পাইকার', 820, 755);
+
+            ctx.font = '18px "Noto Serif Bengali", serif';
+            ctx.fillStyle = 'rgba(255, 241, 184, 0.85)';
+            ctx.fillText('পুত্র: শ্রী গৌতম রায় ও শ্রীমতি অর্চনা রায়', 380, 795);
+            ctx.fillText('কন্যা: শ্রী পিরু পাইকার ও শ্রীমতি অপর্ণা পাইকার', 820, 795);
+
+            ctx.beginPath();
+            ctx.moveTo(150, 840);
+            ctx.lineTo(1050, 840);
+            ctx.stroke();
+
+            // নির্ঘণ্ট
+            ctx.font = 'bold 24px "Noto Serif Bengali", serif';
+            ctx.fillStyle = '#f3cf65';
+            ctx.fillText('॥ মাঙ্গলিক অনুষ্ঠানের নির্ঘণ্ট ॥', 600, 910);
+
+            ctx.fillStyle = 'rgba(0,0,0,0.5)';
+            ctx.fillRect(150, 950, 270, 160);
+            ctx.fillRect(465, 950, 270, 160);
+            ctx.fillRect(780, 950, 270, 160);
+
+            ctx.strokeStyle = '#f3cf65';
+            ctx.strokeRect(150, 950, 270, 160);
+            ctx.strokeRect(465, 950, 270, 160);
+            ctx.strokeRect(780, 950, 270, 160);
+
+            ctx.fillStyle = '#f3cf65';
+            ctx.font = 'bold 22px "Noto Serif Bengali", serif';
+            ctx.fillText('গায়ে হলুদ', 285, 1000);
+            ctx.fillText('শুভ বিবাহ', 600, 1000);
+            ctx.fillText('বৌভাত ও প্রীতিভোজ', 915, 1000);
+
+            ctx.fillStyle = '#fff1b8';
+            ctx.font = '18px "Noto Serif Bengali", serif';
+            ctx.fillText('২৬শে জানুয়ারি ২০২৭', 285, 1045);
+            ctx.fillText('২৬শে জানুয়ারি ২০২৭', 600, 1045);
+            ctx.fillText('২৭শে জানুয়ারি ২০২৭', 915, 1045);
+
+            ctx.fillStyle = 'rgba(255, 241, 184, 0.8)';
+            ctx.font = '17px "Noto Serif Bengali", serif';
+            ctx.fillText('সকাল ৯:০০ ঘটিকায়', 285, 1080);
+            ctx.fillText('সন্ধ্যা ৭:৩০ ঘটিকায়', 600, 1080);
+            ctx.fillText('সন্ধ্যা ৭:০০ ঘটিকায়', 915, 1080);
+
+            // ভেন্যু
+            ctx.fillStyle = 'rgba(0,0,0,0.5)';
+            ctx.fillRect(200, 1160, 800, 150);
+            ctx.strokeStyle = '#f3cf65';
+            ctx.strokeRect(200, 1160, 800, 150);
+
+            ctx.fillStyle = '#f3cf65';
+            ctx.font = 'bold 20px "Noto Serif Bengali", serif';
+            ctx.fillText('অনুষ্ঠান বাসর', 600, 1205);
+
+            ctx.fillStyle = '#fff1b8';
+            ctx.font = 'bold 28px "Noto Serif Bengali", serif';
+            ctx.fillText('রায় ভবন, কুরান', 600, 1250);
+
+            ctx.font = '18px "Noto Serif Bengali", serif';
+            ctx.fillStyle = 'rgba(255, 241, 184, 0.85)';
+            ctx.fillText('ঘাটাল, পশ্চিম মেদিনীপুর — ৭২১২২২', 600, 1285);
+
+            // শ্লোক
+            ctx.fillStyle = '#f3cf65';
+            ctx.font = 'italic 22px "Noto Serif Bengali", serif';
+            ctx.fillText('"যদেতদ্ধৃদয়ং তব তদেতদ্ধৃদয়ং মম"', 600, 1420);
+
+            ctx.fillStyle = 'rgba(255, 241, 184, 0.7)';
+            ctx.font = '16px "Noto Serif Bengali", serif';
+            ctx.fillText('বিনীত — রায় ও পাইকার পরিবার', 600, 1460);
+
+            // ফাইল ডাউনলোড
+            const link = document.createElement('a');
+            link.download = 'Sumanta_Piyali_Wedding_Royal_Card.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.95);
+            link.click();
         }
 
         // Apple / iCal Calendar Download
